@@ -45,8 +45,7 @@ class StartActivity : AppCompatActivity() {
 
         } else {
             Log.d("Permission", "Allowed")
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+            startMainActivity()
         }
 
 
@@ -62,8 +61,7 @@ class StartActivity : AppCompatActivity() {
 
         if (mode == AppOpsManager.MODE_ALLOWED) {
             Log.d("Permission", "Allowed")
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+            startMainActivity()
         }
 
     }
@@ -75,5 +73,11 @@ class StartActivity : AppCompatActivity() {
                 Log.d("Permission", "Allowed ok")
             }
         })
+
+    private fun startMainActivity(){
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+        finish();
+    }
 
 }

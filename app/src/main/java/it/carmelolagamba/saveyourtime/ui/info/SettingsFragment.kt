@@ -16,7 +16,9 @@ import it.carmelolagamba.saveyourtime.R
 import it.carmelolagamba.saveyourtime.databinding.FragmentSettingsBinding
 import it.carmelolagamba.saveyourtime.persistence.App
 import it.carmelolagamba.saveyourtime.service.AppService
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 
@@ -42,10 +44,22 @@ class SettingsFragment : Fragment() {
         _binding = FragmentSettingsBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val view = inflater.inflate(R.layout.activity_main, container, false)
-        val progressBar = view.findViewById<ProgressBar>(R.id.progressbar) //_binding!!.progressbar
+        val progressBar = requireActivity().findViewById<ProgressBar>(R.id.progressbar)
 
-        progressBar.visibility = View.VISIBLE
+        lifecycleScope.launch {
+            val applications = retrieveApps()
+            adapter = AppDataAdapter(applications!!, appService, requireContext())
+
+            val gridView: GridView = binding.gridList
+            gridView.adapter = adapter
+
+            progressBar.visibility = View.INVISIBLE
+        }
+
+        return root
+    }
+
+    private suspend fun retrieveApps():  MutableList<AppDataModel> = withContext(Dispatchers.IO) {
 
         val applications: MutableList<AppDataModel> = mutableListOf()
         val pm: PackageManager = requireContext().packageManager
@@ -57,17 +71,18 @@ class SettingsFragment : Fragment() {
             val icon = pm.getApplicationIcon(packageInfo.packageName)
 
             if (app != null) {
-                applications += AppDataModel(icon, app.name, app.packageName, app.selected)
+                applications += AppDataModel(icon, app.name, app.packageName, app.selected, 0)
             } else {
                 val appInfo: ApplicationInfo = pm.getApplicationInfo(packageInfo.packageName, 0)
                 val appName: String = pm.getApplicationLabel(appInfo).toString()
-                applications.add(AppDataModel(icon, appName, packageInfo.packageName, false))
+                applications.add(AppDataModel(icon, appName, packageInfo.packageName, false, 0))
                 viewLifecycleOwner.lifecycleScope.launch {
                     appService.insert(
                         App(
                             appName,
                             packageInfo.packageName,
-                            false
+                            false,
+                            0
                         )
                     )
                 }
@@ -75,17 +90,8 @@ class SettingsFragment : Fragment() {
         }
 
         applications.sortWith(compareBy<AppDataModel> {it.checked}.reversed().thenBy { it.name })
-        adapter = AppDataAdapter(applications!!, appService, requireContext())
-
-        val gridView: GridView = binding.gridList
-        gridView.adapter = adapter
-
-
-        progressBar.visibility = View.GONE
-
-        return root
+        return@withContext applications
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()

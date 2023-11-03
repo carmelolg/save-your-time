@@ -3,9 +3,10 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifiche</string>
-    <string name="title_settings">Impostazioni</string>
+    <string name="title_settings">Pannello di controllo</string>
     <string name="allow_button">Permetti</string>
     <string name="start_disclaimer">L\'applicazione richiede il tuo permesso per visualizzare le statistiche di utilizzo dello smartphone</string>
     <string name="list_of_permission">La lista dei permessi richiesti:\n\n<li>Utilizzo accesso dati</li></string>
+    <string name="close_app_message">Premi ancora indietro per chiudere l\'app.</string>
 
 </resources>

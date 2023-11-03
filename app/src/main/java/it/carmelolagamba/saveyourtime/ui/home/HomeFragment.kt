@@ -55,7 +55,7 @@ class HomeFragment : Fragment() {
         val txt: TextView = binding.textHome
         //txt.text = "Ciao"
         var status: String = ""
-        statsUsageMap.forEach { _, value ->  status += " " + appService.findNameByPackageName(value.packageName) + " seconds: " + value.totalTimeInForeground / (1000*60) + " \n"}
+        statsUsageMap.forEach { _, value ->  status += " " + appService.findNameByPackageName(value.packageName) + " seconds: " + value.totalTimeInForeground / (1000) + " \n"}
 
         txt.text = status
 

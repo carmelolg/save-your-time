@@ -8,11 +8,12 @@ import androidx.room.PrimaryKey
 data class App (
     @ColumnInfo(name = "name") val name: String,
     @PrimaryKey @ColumnInfo(name = "package") val packageName: String,
-    @ColumnInfo(name = "selected") val selected: Boolean
+    @ColumnInfo(name = "selected") val selected: Boolean,
+    @ColumnInfo(name = "time") val notifyTime: Int,
 ) {
 
     override fun toString(): String {
-        return "NAME: $name LASTNAME: $packageName SELECTED $selected"
+        return "NAME: $name LASTNAME: $packageName SELECTED $selected TIME $notifyTime"
     }
 
 }

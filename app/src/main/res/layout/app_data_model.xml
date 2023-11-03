@@ -31,6 +31,14 @@
         android:clickable="false"
         />
 
+    <!--Spinner
+        android:id="@+id/notify_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/app_checked"
+        android:background="@android:drawable/editbox_dropdown_light_frame"
+        android:spinnerMode="dropdown"/ -->
+
     <CheckBox
         android:id="@+id/app_checked"
         android:layout_width="wrap_content"

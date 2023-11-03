@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.CheckBox
 import android.widget.ImageView
+import android.widget.Spinner
 import android.widget.TextView
 import it.carmelolagamba.saveyourtime.R
 import it.carmelolagamba.saveyourtime.persistence.App
@@ -18,6 +19,7 @@ class AppDataAdapter (private val applications: List<AppDataModel>, private val 
     private class ViewHolder {
         lateinit var appIcon: ImageView
         lateinit var appName: TextView
+        lateinit var appNotifyTime: Spinner
         lateinit var appChecked: CheckBox
         lateinit var packageName: String
     }
@@ -47,6 +49,7 @@ class AppDataAdapter (private val applications: List<AppDataModel>, private val 
                 convertView.findViewById(R.id.app_name)
             viewHolder.appChecked =
                 convertView.findViewById(R.id.app_checked)
+            //viewHolder.appNotifyTime = convertView.findViewById(R.id.notify_time)
             result = convertView
             convertView.tag = viewHolder
         } else {
@@ -61,8 +64,22 @@ class AppDataAdapter (private val applications: List<AppDataModel>, private val 
         viewHolder.packageName = item.packageName
 
         viewHolder.appChecked.setOnClickListener {
-            appService.upsert(App(viewHolder.appName.text.toString(), viewHolder.packageName, viewHolder.appChecked.isChecked))
+            appService.upsert(App(viewHolder.appName.text.toString(), viewHolder.packageName, viewHolder.appChecked.isChecked, item.notifyTime))
         }
+
+        /**
+        viewHolder.appNotifyTime.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                Log.i("spinner position", position.toString())
+                Log.i("spinner id", id.toString())
+                //appService.upsert(App(viewHolder.appName.text.toString(), viewHolder.packageName, viewHolder.appChecked.isChecked, item.notifyTime))
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                TODO("Not yet implemented")
+            }
+        }
+        */
 
         return result
     }

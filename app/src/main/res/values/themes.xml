@@ -15,7 +15,13 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimary</item>
         <!-- Customize your theme here. -->
+
     </style>
+
+    <style name="Theme.SaveYourTime.ProgressBar">
+        <item name="colorAccent">@color/secondary</item>
+    </style>
+
 
     <style name="Theme.SaveYourTime.Toolbar">
         <item name="titleTextColor">@color/text_primary</item>
