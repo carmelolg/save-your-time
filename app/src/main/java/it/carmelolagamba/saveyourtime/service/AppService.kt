@@ -15,6 +15,10 @@ class AppService @Inject constructor() {
         return DBFactory.getDatabase(SaveYourTimeApplication.context).applicationDao().getByPackageName(packageName)
     }
 
+    fun findIdByPackageName(packageName: String): Float {
+        return DBFactory.getDatabase(SaveYourTimeApplication.context).applicationDao().getByPackageName(packageName).id
+    }
+
     fun insert(app: App) {
         DBFactory.getDatabase(SaveYourTimeApplication.context).applicationDao().insertAll(app)
     }

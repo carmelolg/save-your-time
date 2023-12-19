@@ -15,7 +15,7 @@
         android:textSize="@dimen/text_size_default"
         android:scrollbarStyle="insideInset"
         android:scrollIndicators="right"
-        android:fastScrollEnabled="true"
+        android:fastScrollEnabled="false"
         android:fastScrollStyle="@style/Theme.SaveYourTime">
 
     </GridView>

@@ -20,6 +20,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
+import kotlin.random.Random
 
 
 @AndroidEntryPoint
@@ -79,6 +80,7 @@ class SettingsFragment : Fragment() {
                 viewLifecycleOwner.lifecycleScope.launch {
                     appService.insert(
                         App(
+                            Random.nextFloat(),
                             appName,
                             packageInfo.packageName,
                             false,

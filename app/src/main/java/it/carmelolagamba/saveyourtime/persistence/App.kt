@@ -6,6 +6,7 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "application")
 data class App (
+    @ColumnInfo(name = "id") val id: Float,
     @ColumnInfo(name = "name") val name: String,
     @PrimaryKey @ColumnInfo(name = "package") val packageName: String,
     @ColumnInfo(name = "selected") val selected: Boolean,

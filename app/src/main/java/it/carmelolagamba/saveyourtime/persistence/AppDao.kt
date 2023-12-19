@@ -17,6 +17,9 @@ interface AppDao {
     @Query("SELECT * FROM application WHERE package = :packageName")
     fun getByPackageName(packageName: String): App
 
+    @Query("SELECT * FROM application WHERE name = :name")
+    fun getByName(name: String): App
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(vararg apps: App)
 

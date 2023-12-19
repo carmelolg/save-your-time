@@ -14,12 +14,17 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import dagger.hilt.android.AndroidEntryPoint
 import it.carmelolagamba.saveyourtime.databinding.ActivityStartBinding
+import it.carmelolagamba.saveyourtime.service.AppService
+import javax.inject.Inject
 
 
 @AndroidEntryPoint
 class StartActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityStartBinding
+
+    @Inject
+    lateinit var appService: AppService
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,6 +50,28 @@ class StartActivity : AppCompatActivity() {
 
         } else {
             Log.d("Permission", "Allowed")
+            /*
+            val applications: MutableList<AppDataModel> = mutableListOf()
+            val pm: PackageManager = this.packageManager
+            val packages = pm.getInstalledApplications(PackageManager.GET_META_DATA)
+
+            for (packageInfo in packages) {
+                val appInfo: ApplicationInfo = pm.getApplicationInfo(packageInfo.packageName, 0)
+                val appName: String = pm.getApplicationLabel(appInfo).toString()
+                applications.add(AppDataModel(null, appName, packageInfo.packageName, false, 0))
+                appService.insert(
+                    App(
+                        Random.nextLong(),
+                        appName,
+                        packageInfo.packageName,
+                        false,
+                        0
+                    )
+                )
+            }
+            */
+
+
             startMainActivity()
         }
 
@@ -74,7 +101,7 @@ class StartActivity : AppCompatActivity() {
             }
         })
 
-    private fun startMainActivity(){
+    private fun startMainActivity() {
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
         finish();
