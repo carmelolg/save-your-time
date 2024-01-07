@@ -38,14 +38,12 @@ class MainActivity : AppCompatActivity() {
         )
 
         navView.findViewById<View>(R.id.navigation_home).setOnClickListener {
-            Log.i("", "Home clicked")
             val navController = this.findNavController(R.id.nav_host_fragment_activity_main)
             navController.navigate(R.id.navigation_home)
 
         }
 
         navView.findViewById<View>(R.id.navigation_info).setOnClickListener {
-            Log.i("", "Info clicked")
             binding.progressbar.visibility = View.VISIBLE
             val navController = this.findNavController(R.id.nav_host_fragment_activity_main)
             navController.navigate(R.id.navigation_info)
@@ -86,12 +84,6 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    /**
-    override fun onSupportNavigateUp(): Boolean {
-        val navController = this.findNavController(R.id.nav_host_fragment_activity_main)
-        return navController.navigateUp()
-    }
-*/
 
 }
 

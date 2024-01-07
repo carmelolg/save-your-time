@@ -9,12 +9,4 @@ import javax.inject.Inject
 class SettingsViewModel @Inject constructor(private var appService: AppService) :
     ViewModel() {
 
-    /**
-    private val _allInstalledApp = MutableLiveData<List<Application>>().apply {
-    value = applicationService.findAll()
-    }
-
-    val allInstalledApp: LiveData<List<Application>> = _allInstalledApp
-     */
-
 }

@@ -64,57 +64,47 @@ class HomeFragment : Fragment() {
             .toMap()
 
 
-
         var apps: List<App> = appService.findAllChecked()
 
-        if (apps.isEmpty()) {
-
-        } else {
-
+        if (apps.isNotEmpty()) {
             val usageTable: TableLayout = binding.usageTable
             usageTable.addView(homeService.createTableHeader(requireContext(), resources), 0)
 
-            val chartData = mutableMapOf<Float, Float>()
+            val chartData = mutableMapOf<Float, Pair<Float, String>>()
 
+            var index: Float = 1F
             statsUsageMap.forEach { (_, value) ->
                 usageTable.addView(homeService.createTableRow(requireContext(), resources, value))
-                chartData[appService.findIdByPackageName(value.packageName).toFloat()] =
-                    (value.totalTimeInForeground / 1000 / 60).toFloat()
+                if (value.totalTimeInForeground > 0) {
+                    chartData[index] = Pair(
+                        (value.totalTimeInForeground / 1000 / 60).toFloat(),
+                        apps.find { it.packageName == value.packageName }!!.name
+                    )
+                    index++
+                }
             }
-
-            /*
-            val data = listOf("2022-07-01" to 2f, "2022-07-02" to 6f, "2022-07-04" to 4f).associate { (dateString, yValue) ->
-                LocalDate.parse(dateString) to yValue
-            }
-
-            val xValuesToDates = data.keys.associateBy { it.toEpochDay().toFloat() }
-            val chartEntryModel = entryModelOf(xValuesToDates.keys.zip(data.values) { k, v -> entryOf(k, v) })
-            val dateTimeFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("d MMM")
-            val horizontalAxisValueFormatter = AxisValueFormatter<AxisPosition.Horizontal.Bottom> { value, _ ->
-                (xValuesToDates[value] ?: LocalDate.ofEpochDay(value.toLong())).format(dateTimeFormatter)
-            }
-
-            (binding.chartView.bottomAxis as? HorizontalAxis<AxisPosition.Horizontal.Bottom>)?.valueFormatter = horizontalAxisValueFormatter
-    */
 
             val xChartValues = chartData.keys.associateBy { it }
             val chartEntryModel =
-                entryModelOf(xChartValues.keys.zip(chartData.values) { k, v -> entryOf(k, v) })
+                entryModelOf(xChartValues.keys.zip(chartData.values) { k, v ->
+                    entryOf(
+                        k,
+                        v.first
+                    )
+                })
 
-            val mapApp: Map<Float, CharSequence> = apps.associate { Pair(it.id, it.name) }
             val yAxisValueFormatter =
                 AxisValueFormatter<AxisPosition.Horizontal.Bottom> { value, _ ->
 
-                    if (mapApp[value] == null) {
+                    if (chartData[value] == null) {
                         ""
                     } else {
-                        mapApp[value]!!
+                        chartData[value]!!.second
                     }
                 }
 
-                    //apps.find { app -> app.id == value }!!.name                }
-
-            (binding.chartView.bottomAxis as? HorizontalAxis<AxisPosition.Horizontal.Bottom>)?.valueFormatter = yAxisValueFormatter
+            (binding.chartView.bottomAxis as? HorizontalAxis<AxisPosition.Horizontal.Bottom>)?.valueFormatter =
+                yAxisValueFormatter
 
             binding.chartView.setModel(chartEntryModel)
 

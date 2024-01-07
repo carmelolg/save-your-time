@@ -12,7 +12,6 @@ import android.widget.TextView
 import it.carmelolagamba.saveyourtime.R
 import it.carmelolagamba.saveyourtime.persistence.App
 import it.carmelolagamba.saveyourtime.service.AppService
-import kotlin.random.Random
 
 class AppDataAdapter (private val applications: List<AppDataModel>, private val appService: AppService, context: Context) :
     ArrayAdapter<Any?>(context, R.layout.app_data_model, applications) {
@@ -65,7 +64,7 @@ class AppDataAdapter (private val applications: List<AppDataModel>, private val 
         viewHolder.packageName = item.packageName
 
         viewHolder.appChecked.setOnClickListener {
-            appService.upsert(App(Random.nextFloat(), viewHolder.appName.text.toString(), viewHolder.packageName, viewHolder.appChecked.isChecked, item.notifyTime))
+            appService.upsert(App(viewHolder.appName.text.toString(), viewHolder.packageName, viewHolder.appChecked.isChecked, item.notifyTime))
         }
 
         /**

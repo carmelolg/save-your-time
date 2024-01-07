@@ -20,7 +20,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
-import kotlin.random.Random
 
 
 @AndroidEntryPoint
@@ -77,10 +76,12 @@ class SettingsFragment : Fragment() {
                 val appInfo: ApplicationInfo = pm.getApplicationInfo(packageInfo.packageName, 0)
                 val appName: String = pm.getApplicationLabel(appInfo).toString()
                 applications.add(AppDataModel(icon, appName, packageInfo.packageName, false, 0))
+
+
+
                 viewLifecycleOwner.lifecycleScope.launch {
                     appService.insert(
                         App(
-                            Random.nextFloat(),
                             appName,
                             packageInfo.packageName,
                             false,

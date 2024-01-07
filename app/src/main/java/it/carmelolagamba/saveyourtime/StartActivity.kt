@@ -50,28 +50,6 @@ class StartActivity : AppCompatActivity() {
 
         } else {
             Log.d("Permission", "Allowed")
-            /*
-            val applications: MutableList<AppDataModel> = mutableListOf()
-            val pm: PackageManager = this.packageManager
-            val packages = pm.getInstalledApplications(PackageManager.GET_META_DATA)
-
-            for (packageInfo in packages) {
-                val appInfo: ApplicationInfo = pm.getApplicationInfo(packageInfo.packageName, 0)
-                val appName: String = pm.getApplicationLabel(appInfo).toString()
-                applications.add(AppDataModel(null, appName, packageInfo.packageName, false, 0))
-                appService.insert(
-                    App(
-                        Random.nextLong(),
-                        appName,
-                        packageInfo.packageName,
-                        false,
-                        0
-                    )
-                )
-            }
-            */
-
-
             startMainActivity()
         }
 
