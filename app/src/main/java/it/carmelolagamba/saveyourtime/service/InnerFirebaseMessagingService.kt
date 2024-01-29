@@ -4,11 +4,12 @@ import android.util.Log
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 
-class MyFirebaseMessagingService : FirebaseMessagingService() {
+class InnerFirebaseMessagingService : FirebaseMessagingService() {
 
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         super.onMessageReceived(remoteMessage)
 
+        Log.i("firebase", remoteMessage.toString())
         // Handle data payload of FCM messages.
         if (remoteMessage.data.isNotEmpty()) {
             // Handle the data message here.

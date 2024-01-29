@@ -12,4 +12,8 @@
     <string name="application_label">Application</string>
     <string name="time_usage_label">Usage in minutes</string>
     <string name="time_remaining_label">Remaining</string>
+    <string name="default_notification_channel_id" translatable="false">default_channel_id</string>
+    <string name="notification_channel_id" translatable="false">channel_id</string>
+    <string name="notification_channel_name" translatable="false">channel_name</string>
+    <string name="notification_channel_description" translatable="false">channel_description</string>
 </resources>
