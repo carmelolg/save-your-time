@@ -32,8 +32,4 @@ class UtilService @Inject constructor(){
         return tomorrow.timeInMillis
     }
 
-    fun appListPackageName(): List<String> {
-        return appService.findAllChecked().map { it.packageName }
-    }
-
 }

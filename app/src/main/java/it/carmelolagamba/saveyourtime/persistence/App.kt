@@ -10,10 +10,11 @@ data class App (
     @PrimaryKey @ColumnInfo(name = "package") val packageName: String,
     @ColumnInfo(name = "selected") val selected: Boolean,
     @ColumnInfo(name = "time") val notifyTime: Int,
+    @ColumnInfo(name = "timeToday") var todayUsage: Int
 ) {
 
     override fun toString(): String {
-        return "NAME: $name LASTNAME: $packageName SELECTED $selected TIME $notifyTime"
+        return "NAME: $name LASTNAME: $packageName SELECTED $selected TIME $notifyTime TODAY $todayUsage"
     }
 
 }

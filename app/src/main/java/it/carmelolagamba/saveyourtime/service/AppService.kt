@@ -37,4 +37,8 @@ class AppService @Inject constructor() {
     fun findNameByPackageName(packageName: String): String{
         return findByPackageName(packageName).name
     }
+
+    fun appListPackageName(): List<String> {
+        return findAllChecked().map { it.packageName }
+    }
 }

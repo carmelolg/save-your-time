@@ -10,7 +10,11 @@
     <string name="close_app_message">Premi ancora indietro per chiudere l\'app.</string>
     <string name="time_exceeded">Tempo limite superato</string>
     <string name="application_label">App</string>
-    <string name="time_usage_label">Minuti usati</string>
-    <string name="time_remaining_label">Tempo rimasto</string>
-
+    <string name="time_usage_label">Usati</string>
+    <string name="time_remaining_label">Rimasti</string>
+    <string name="warn_title_notify_app">È ora di spegnere</string>
+    <string name="warn_description_notify_app">Limite giornaliero superato su</string>
+    <string name="apps_empty_caring_message">"Visualizzerai qui le tue statistiche. Clicca su pannello di controllo per aggiungere le app al monitoraggio."</string>
+    <string name="label_table">Tabella</string>
+    <string name="label_chart">Grafico</string>
 </resources>

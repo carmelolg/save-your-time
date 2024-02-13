@@ -6,9 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.CheckBox
+import android.widget.EditText
 import android.widget.ImageView
-import android.widget.Spinner
 import android.widget.TextView
+import com.patrykandpatrick.vico.core.extension.setFieldValue
 import it.carmelolagamba.saveyourtime.R
 import it.carmelolagamba.saveyourtime.persistence.App
 import it.carmelolagamba.saveyourtime.service.AppService
@@ -19,7 +20,7 @@ class AppDataAdapter (private val applications: List<AppDataModel>, private val 
     private class ViewHolder {
         lateinit var appIcon: ImageView
         lateinit var appName: TextView
-        lateinit var appNotifyTime: Spinner
+        lateinit var appNotifyTime: EditText
         lateinit var appChecked: CheckBox
         lateinit var packageName: String
     }
@@ -49,7 +50,7 @@ class AppDataAdapter (private val applications: List<AppDataModel>, private val 
                 convertView.findViewById(R.id.app_name)
             viewHolder.appChecked =
                 convertView.findViewById(R.id.app_checked)
-            //viewHolder.appNotifyTime = convertView.findViewById(R.id.notify_time)
+            viewHolder.appNotifyTime = convertView.findViewById(R.id.notify_time)
             result = convertView
             convertView.tag = viewHolder
         } else {
@@ -62,26 +63,28 @@ class AppDataAdapter (private val applications: List<AppDataModel>, private val 
         viewHolder.appName.text = item.name
         viewHolder.appChecked.isChecked = item.checked
         viewHolder.packageName = item.packageName
+        if(item.notifyTime != null && item.notifyTime > 0) {
+            viewHolder.appNotifyTime.setText(item.notifyTime.toString())
+        }
+
+        viewHolder.appNotifyTime.setOnClickListener {
+            item.setFieldValue("notifyTime", getMinutesFromText(viewHolder.appNotifyTime.text.toString()))
+            appService.upsert(App(viewHolder.appName.text.toString(), viewHolder.packageName, viewHolder.appChecked.isChecked, getMinutesFromText(viewHolder.appNotifyTime.text.toString()), item.todayUsage))
+        }
 
         viewHolder.appChecked.setOnClickListener {
-            appService.upsert(App(viewHolder.appName.text.toString(), viewHolder.packageName, viewHolder.appChecked.isChecked, item.notifyTime))
-        }
+            item.setFieldValue("notifyTime", getMinutesFromText(viewHolder.appNotifyTime.text.toString()))
+            item.setFieldValue("checked", viewHolder.appChecked.isChecked)
 
-        /**
-        viewHolder.appNotifyTime.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                Log.i("spinner position", position.toString())
-                Log.i("spinner id", id.toString())
-                //appService.upsert(App(viewHolder.appName.text.toString(), viewHolder.packageName, viewHolder.appChecked.isChecked, item.notifyTime))
-            }
-
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-                TODO("Not yet implemented")
-            }
+            var minutes: Int = if (viewHolder.appChecked.isChecked) getMinutesFromText(viewHolder.appNotifyTime.text.toString()) else 60
+            appService.upsert(App(viewHolder.appName.text.toString(), viewHolder.packageName, viewHolder.appChecked.isChecked, minutes, item.todayUsage))
         }
-        */
 
         return result
+    }
+
+    private fun getMinutesFromText(text: String): Int {
+        return text.filter { it.isDigit() }.toInt()
     }
 }
 

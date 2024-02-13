@@ -10,7 +10,8 @@
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/start_text_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical">
 
         <TextView
             android:id="@+id/disclaimer"
@@ -45,9 +46,7 @@
             android:backgroundTint="@color/secondary"
             android:padding="@dimen/margin_default"
             android:text="@string/allow_button"
-            android:textColor="@color/text_primary"
-            tools:layout_editor_absoluteX="159dp"
-            tools:layout_editor_absoluteY="390dp" />
+            android:textColor="@color/text_primary"/>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 

@@ -11,32 +11,57 @@
         android:layout_height="match_parent"
         tools:context=".ui.home.HomeFragment">
 
-        <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/usage_table"
+
+        <TextView
+            android:id="@+id/chart_label"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@id/chart_view"
-            >
-        </TableLayout>
+            android:layout_height="wrap_content"
+            android:layout_marginStart="1dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginEnd="1dp"
+            android:textAlignment="center"
+            android:textSize="@dimen/text_size_medium"
+            android:padding="@dimen/padding_default"
+            android:textColor="@color/primary"/>
 
         <com.patrykandpatrick.vico.views.chart.ChartView
             android:id="@+id/chart_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:padding="15dp"
             android:clickable="true"
             app:chart="column"
             app:columnChartStyle="@style/Theme.SaveYourTime.Chart"
             app:showBottomAxis="true"
             app:showStartAxis="true"
+            android:layout_below="@id/chart_label"
             />
 
-
-
-
-        <!--
         <TextView
-            android:id="@+id/text_home"
+            android:id="@+id/table_label"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:textAlignment="center"
+            android:textSize="@dimen/text_size_medium"
+            android:padding="@dimen/padding_default"
+            android:textColor="@color/primary"
+            android:layout_below="@id/chart_view"/>
+
+        <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/usage_table"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="15dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/table_label"
+            android:stretchColumns="*">
+        </TableLayout>
+
+        <TextView
+            android:id="@+id/caringMessage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -45,10 +70,11 @@
             android:layout_marginBottom="348dp"
             android:textAlignment="center"
             android:textSize="20sp"
+            android:padding="@dimen/margin_default"
+            android:textColor="@color/primary"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/usage_table" />
-        -->
+            app:layout_constraintStart_toStartOf="parent"/>
+
     </RelativeLayout>
 </ScrollView>

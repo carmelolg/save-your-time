@@ -14,4 +14,6 @@ class SaveYourTimeApplication : Application() {
     companion object {
         lateinit var context: Context
     }
+
 }
+

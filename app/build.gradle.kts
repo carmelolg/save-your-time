@@ -60,6 +60,7 @@ dependencies {
     implementation("androidx.navigation:navigation-ui-ktx:2.5.3")
     implementation("com.google.android.material:material:1.10.0")
     implementation("com.google.firebase:firebase-messaging-ktx:23.3.1")
+    implementation("androidx.hilt:hilt-common:1.1.0")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
@@ -71,6 +72,10 @@ dependencies {
     kaptAndroidTest("com.google.dagger:hilt-compiler:2.48.1")
     testImplementation("com.google.dagger:hilt-android-testing:2.48.1")
     kaptTest("com.google.dagger:hilt-compiler:2.48.1")
+    //kapt("androidx.hilt:hilt-compiler:1.0.0")
+    //kapt("androidx.hilt:hilt-work:1.0.0")
+    //implementation("androidx.hilt:hilt-compiler:1.0.0")
+    //implementation("androidx.hilt:hilt-work:1.0.0")
 
     // SQL Lite & Room
     val roomVersion = "2.6.0"

@@ -1,6 +1,5 @@
 package it.carmelolagamba.saveyourtime.ui.home
 
-import android.app.usage.UsageStats
 import android.content.Context
 import android.content.res.Resources
 import android.util.TypedValue
@@ -8,6 +7,7 @@ import android.view.Gravity
 import android.widget.TableRow
 import android.widget.TextView
 import it.carmelolagamba.saveyourtime.R
+import it.carmelolagamba.saveyourtime.persistence.App
 import it.carmelolagamba.saveyourtime.service.AppService
 import javax.inject.Inject
 
@@ -25,10 +25,11 @@ class HomeService @Inject constructor(){
 
         val secondCol = TextView(context)
         secondCol.text = resources.getText(R.string.time_usage_label)
+        secondCol.gravity = Gravity.RIGHT
 
         val thirdCol = TextView(context)
         thirdCol.text = resources.getText(R.string.time_remaining_label)
-        thirdCol.gravity = Gravity.CENTER
+        thirdCol.gravity = Gravity.RIGHT
 
         // Set text color
         val primaryColor = context.getColor(R.color.primary)
@@ -49,14 +50,14 @@ class HomeService @Inject constructor(){
         return header
     }
 
-    fun createTableRow(context: Context, resources: Resources, value: UsageStats): TableRow {
+    fun createTableRow(context: Context, resources: Resources, app: App): TableRow {
         val row = TableRow(context)
 
         val firstCol = TextView(context)
-        firstCol.text = appService.findNameByPackageName(value.packageName)
+        firstCol.text = appService.findNameByPackageName(app.packageName)
 
         val secondCol = TextView(context)
-        val time = value.totalTimeInForeground / 1000 / 60
+        val time = app.todayUsage / 1000 / 60
         secondCol.text = "$time min"
 
         val thirdCol = TextView(context)
@@ -66,7 +67,7 @@ class HomeService @Inject constructor(){
         var secondaryColor = context.getColor(R.color.secondary)
         firstCol.setTextColor(secondaryColor)
         secondCol.setTextColor(secondaryColor)
-        val timeRemaining = 60 - time
+        val timeRemaining = app.notifyTime - time
         if (timeRemaining < 0) {
             context?.let { thirdCol.setTextColor(it.getColor(R.color.tertiary)) }
         } else {
@@ -81,8 +82,8 @@ class HomeService @Inject constructor(){
         thirdCol.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize)
 
         // Set options on cols
-        secondCol.gravity = Gravity.CENTER
-        thirdCol.gravity = Gravity.CENTER
+        secondCol.gravity = Gravity.RIGHT
+        thirdCol.gravity = Gravity.RIGHT
 
         // Add views to row
         row.addView(firstCol)

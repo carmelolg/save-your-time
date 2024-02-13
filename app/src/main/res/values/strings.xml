@@ -10,10 +10,15 @@
     <string name="close_app_message">Press back again to leave the app.</string>
     <string name="time_exceeded">Time exceeded</string>
     <string name="application_label">Application</string>
-    <string name="time_usage_label">Usage in minutes</string>
+    <string name="time_usage_label">Usage</string>
     <string name="time_remaining_label">Remaining</string>
     <string name="default_notification_channel_id" translatable="false">default_channel_id</string>
     <string name="notification_channel_id" translatable="false">channel_id</string>
     <string name="notification_channel_name" translatable="false">channel_name</string>
     <string name="notification_channel_description" translatable="false">channel_description</string>
+    <string name="warn_title_notify_app">Turn off warning</string>
+    <string name="warn_description_notify_app">You have exceeded your day limit for </string>
+    <string name="apps_empty_caring_message">"You'll visualize here some statistics about your current usages. Click on control plane for adding apps on monitoring "</string>
+    <string name="label_table">Table</string>
+    <string name="label_chart">Chart</string>
 </resources>

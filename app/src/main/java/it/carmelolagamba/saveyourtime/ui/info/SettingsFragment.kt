@@ -71,11 +71,11 @@ class SettingsFragment : Fragment() {
             val icon = pm.getApplicationIcon(packageInfo.packageName)
 
             if (app != null) {
-                applications += AppDataModel(icon, app.name, app.packageName, app.selected, 0)
+                applications += AppDataModel(icon, app.name, app.packageName, app.selected, app.notifyTime, app.todayUsage)
             } else {
                 val appInfo: ApplicationInfo = pm.getApplicationInfo(packageInfo.packageName, 0)
                 val appName: String = pm.getApplicationLabel(appInfo).toString()
-                applications.add(AppDataModel(icon, appName, packageInfo.packageName, false, 0))
+                applications.add(AppDataModel(icon, appName, packageInfo.packageName, false, 60, 0))
 
 
 
@@ -85,6 +85,7 @@ class SettingsFragment : Fragment() {
                             appName,
                             packageInfo.packageName,
                             false,
+                            60,
                             0
                         )
                     )
