@@ -8,8 +8,8 @@ import androidx.room.PrimaryKey
 data class App (
     @ColumnInfo(name = "name") val name: String,
     @PrimaryKey @ColumnInfo(name = "package") val packageName: String,
-    @ColumnInfo(name = "selected") val selected: Boolean,
-    @ColumnInfo(name = "time") val notifyTime: Int,
+    @ColumnInfo(name = "selected") var selected: Boolean,
+    @ColumnInfo(name = "time") var notifyTime: Int,
     @ColumnInfo(name = "timeToday") var todayUsage: Int
 ) {
 

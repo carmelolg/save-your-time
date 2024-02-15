@@ -1,16 +1,16 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.SaveYourTime" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.SaveYourTime" parent="Theme.MaterialComponents.DayNight.NoActionBar">
 
         <item name="toolbarStyle">@style/Theme.SaveYourTime.Toolbar</item>
 
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/primary</item>
-        <item name="colorPrimaryVariant">@color/primary</item>
+        <item name="colorPrimary">@color/first</item>
+        <item name="colorPrimaryVariant">@color/first</item>
         <item name="colorOnPrimary">@color/text_primary</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/secondary</item>
-        <item name="colorSecondaryVariant">@color/secondary</item>
+        <item name="colorSecondary">@color/second</item>
+        <item name="colorSecondaryVariant">@color/second</item>
         <item name="colorOnSecondary">@color/text_primary</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimary</item>
@@ -27,13 +27,13 @@
     </style>
 
     <style name="Theme.SaveYourTime.Chart.Column1" parent="@style/Theme.SaveYourTime.Chart.ColumnStyle">
-        <item name="color">@color/tertiary</item>
+        <item name="color">@color/fourth</item>
         <item name="thickness">12dp</item>
     </style>
 
 
     <style name="Theme.SaveYourTime.Chart.Column2" parent="@style/Theme.SaveYourTime.Chart.ColumnStyle">
-        <item name="color">@color/secondary</item>
+        <item name="color">@color/third</item>
         <item name="thickness">12dp</item>
     </style>
 
@@ -43,7 +43,7 @@
     </style>
 
     <style name="Theme.SaveYourTime.ProgressBar">
-        <item name="colorAccent">@color/secondary</item>
+        <item name="colorAccent">@color/fourth</item>
     </style>
 
 

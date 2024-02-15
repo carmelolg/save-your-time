@@ -25,7 +25,7 @@ class InnerNotificationWorker @Inject constructor(val context: Context,
     }
 
     private fun innerDoWork() {
-        Log.i("Worker X", "Entro")
+        Log.i("Worker X", "Enter worker")
         Log.i("Worker X", inputData.keyValueMap.keys.toString())
         createNotificationChannel(context)
 

@@ -13,20 +13,22 @@
         android:layout_height="@dimen/image_size_default"
         android:focusable="false"
         android:focusableInTouchMode="false"
+        android:layout_centerVertical="true"
         android:clickable="false"
         />
 
     <TextView
         android:id="@+id/app_name"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_width="220dp"
+        android:scrollHorizontally="false"
         android:layout_alignParentStart="true"
-        android:layout_centerHorizontal="true"
-        android:textColor="@color/primary"
+        android:layout_centerVertical="true"
+        android:textColor="@color/first"
         android:textSize="@dimen/text_size_default"
         android:layout_toEndOf="@id/app_icon"
+        android:layout_toLeftOf="@id/notify_time"
         android:layout_marginLeft="@dimen/margin_from_image_default"
-        android:layout_marginRight="@dimen/margin_from_image_default"
         />
 
     <EditText
@@ -34,6 +36,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toLeftOf="@id/min_label"
+        android:textColor="@color/second"
         android:ems="2"
         android:inputType="time" />
 
@@ -41,10 +44,10 @@
         android:id="@+id/min_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
         android:focusable="false"
         android:focusableInTouchMode="false"
         android:clickable="false"
-        android:layout_marginTop="12dp"
         android:textSize="@dimen/text_size_default"
         android:layout_toLeftOf="@id/app_checked"
         android:text=" min"

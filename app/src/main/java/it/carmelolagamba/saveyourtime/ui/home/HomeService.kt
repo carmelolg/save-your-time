@@ -11,7 +11,7 @@ import it.carmelolagamba.saveyourtime.persistence.App
 import it.carmelolagamba.saveyourtime.service.AppService
 import javax.inject.Inject
 
-class HomeService @Inject constructor(){
+class HomeService @Inject constructor() {
 
 
     @Inject
@@ -27,12 +27,13 @@ class HomeService @Inject constructor(){
         secondCol.text = resources.getText(R.string.time_usage_label)
         secondCol.gravity = Gravity.RIGHT
 
+
         val thirdCol = TextView(context)
         thirdCol.text = resources.getText(R.string.time_remaining_label)
         thirdCol.gravity = Gravity.RIGHT
 
         // Set text color
-        val primaryColor = context.getColor(R.color.primary)
+        val primaryColor = context.getColor(R.color.first)
         firstCol.setTextColor(primaryColor)
         secondCol.setTextColor(primaryColor)
         thirdCol.setTextColor(primaryColor)
@@ -64,12 +65,12 @@ class HomeService @Inject constructor(){
         thirdCol.text = resources.getText(R.string.time_exceeded)
 
         // Set text color
-        var secondaryColor = context.getColor(R.color.secondary)
+        var secondaryColor = context.getColor(R.color.second)
         firstCol.setTextColor(secondaryColor)
         secondCol.setTextColor(secondaryColor)
         val timeRemaining = app.notifyTime - time
         if (timeRemaining < 0) {
-            context?.let { thirdCol.setTextColor(it.getColor(R.color.tertiary)) }
+            context?.let { thirdCol.setTextColor(it.getColor(R.color.fifth)) }
         } else {
             thirdCol.text = "$timeRemaining min"
             thirdCol.setTextColor(secondaryColor)

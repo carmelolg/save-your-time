@@ -11,7 +11,6 @@ import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
@@ -46,13 +45,12 @@ class MainActivity : AppCompatActivity() {
         }
 
         navView.findViewById<View>(R.id.navigation_info).setOnClickListener {
-            binding.progressbar.visibility = View.VISIBLE
             val navController = this.findNavController(R.id.nav_host_fragment_activity_main)
             navController.navigate(R.id.navigation_info)
 
         }
 
-        setupActionBarWithNavController(navController, appBarConfiguration)
+        //setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
         onBackPressedDispatcher.addCallback(this, object: OnBackPressedCallback(true) {
@@ -89,7 +87,6 @@ class MainActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
     }
-
 
 }
 

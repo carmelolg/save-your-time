@@ -8,7 +8,7 @@
     <string name="start_disclaimer">If you want to use this app you must permit us to get the phone usages statistics</string>
     <string name="list_of_permission">Permission list is the following:\n\n<li>Component usage statistics</li></string>
     <string name="close_app_message">Press back again to leave the app.</string>
-    <string name="time_exceeded">Time exceeded</string>
+    <string name="time_exceeded">Exc.</string>
     <string name="application_label">Application</string>
     <string name="time_usage_label">Usage</string>
     <string name="time_remaining_label">Remaining</string>
@@ -21,4 +21,6 @@
     <string name="apps_empty_caring_message">"You'll visualize here some statistics about your current usages. Click on control plane for adding apps on monitoring "</string>
     <string name="label_table">Table</string>
     <string name="label_chart">Chart</string>
+    <string name="dialog_reset_title">Are you sure?</string>
+    <string name="dialog_reset_description">This action will reset all preferences</string>
 </resources>

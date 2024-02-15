@@ -10,6 +10,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TableLayout
 import androidx.fragment.app.Fragment
+import androidx.work.Data
+import androidx.work.PeriodicWorkRequestBuilder
+import androidx.work.WorkManager
+import androidx.work.WorkRequest
 import com.patrykandpatrick.vico.core.axis.AxisPosition
 import com.patrykandpatrick.vico.core.axis.formatter.AxisValueFormatter
 import com.patrykandpatrick.vico.core.axis.horizontal.HorizontalAxis
@@ -20,7 +24,9 @@ import it.carmelolagamba.saveyourtime.R
 import it.carmelolagamba.saveyourtime.databinding.FragmentHomeBinding
 import it.carmelolagamba.saveyourtime.persistence.App
 import it.carmelolagamba.saveyourtime.service.AppService
+import it.carmelolagamba.saveyourtime.service.InnerNotificationWorker
 import it.carmelolagamba.saveyourtime.service.UtilService
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 
@@ -47,26 +53,36 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        _binding = _binding ?: FragmentHomeBinding.inflate(inflater!!, container, false)
         val root: View = binding.root
 
+        return root
+    }
 
-        binding.tableLabel.text = resources.getText(R.string.label_table)
-        binding.chartLabel.text = resources.getText(R.string.label_chart)
+    override fun onStart() {
+        super.onStart()
+        refreshData()
+    }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    private fun refreshData() {
         val statsManager =
             requireContext().getSystemService(Context.USAGE_STATS_SERVICE) as UsageStatsManager
 
         /** Get today app usages */
-        var statsUsageMap = statsManager.queryAndAggregateUsageStats(
+        var statsUsageMap = statsManager.queryUsageStats(
+            UsageStatsManager.INTERVAL_DAILY,
             utilService.todayMidnightMillis(),
             utilService.tomorrowMidnightMillis()
         )
 
         /** Sort application for usage in DESC mode */
-        statsUsageMap = statsUsageMap.toList()
-            .sortedByDescending { (_, value) -> value.totalTimeInForeground }
-            .toMap()
+        statsUsageMap = statsUsageMap
+            .sortedByDescending { value -> value.totalTimeInForeground }
 
         /** Get all checked apps from local DB. A checked app is selected by the final user on the control plane */
         var apps: List<App> = appService.findAllChecked()
@@ -81,7 +97,8 @@ class HomeFragment : Fragment() {
             val usageTable: TableLayout = binding.usageTable
 
             //apps = apps.sortedByDescending { value -> value.todayUsage }.sortedBy { value -> value.name }.toList()
-            apps = apps.sortedWith(compareBy<App> {it.todayUsage}.reversed().thenBy { it.name }).toList()
+            apps = apps.sortedWith(compareBy<App> { it.todayUsage }.reversed().thenBy { it.name })
+                .toList()
 
             /** Add header to the table */
             usageTable.addView(homeService.createTableHeader(requireContext(), resources), 0)
@@ -101,8 +118,8 @@ class HomeFragment : Fragment() {
                  * We use statsUsageMap to get the total usage time for a single application (in the selected range)
                  * */
                 try {
-                    statsUsageMapValue = statsUsageMap.toList()
-                        .last { (application, _) -> app.packageName == application }.second
+                    statsUsageMapValue =
+                        statsUsageMap.last { application -> app.packageName == application.packageName }
                     app.todayUsage = statsUsageMapValue.totalTimeInForeground.toInt()
                 } catch (ex: NoSuchElementException) {
                     app.todayUsage = 0
@@ -119,7 +136,7 @@ class HomeFragment : Fragment() {
                 )
 
                 /** If the app usage exceeded the max time, notify the final user by a notify worker */
-                if (app.todayUsage >= app.notifyTime) {
+                if ((app.todayUsage / 1000 / 60) >= app.notifyTime) {
                     notifyApps.add(app)
                 }
 
@@ -135,7 +152,8 @@ class HomeFragment : Fragment() {
             }
 
             /** Build the custom axis formatter */
-            chartData = chartData.toList().sortedByDescending { it.second.first }.toMap() as MutableMap<Float, Pair<Float, String>>
+            chartData = chartData.toList().sortedByDescending { it.second.first }
+                .toMap() as MutableMap<Float, Pair<Float, String>>
             val xChartValues = chartData.keys.associateBy { it }
             val chartEntryModel =
                 entryModelOf(xChartValues.keys.zip(chartData.values) { k, v ->
@@ -163,22 +181,18 @@ class HomeFragment : Fragment() {
             /** Set VICO graph view */
             binding.chartView.setModel(chartEntryModel)
 
-            // TODO startWorker(notifyApps)
+            startWorker(notifyApps)
 
         } else {
             binding.caringMessage.text = resources.getText(R.string.apps_empty_caring_message)
+            binding.chartLabel.visibility = View.INVISIBLE
+            binding.tableLabel.visibility = View.INVISIBLE
         }
-
-        return root
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 
     private fun startWorker(apps: List<App>) {
-        /**
+
+        WorkManager.getInstance(requireContext()).cancelAllWork()
         val inputData = Data.Builder()
         apps.forEach { app ->
             inputData.putBoolean(app.name, true)
@@ -191,6 +205,6 @@ class HomeFragment : Fragment() {
             .setInputData(inputData.build())
             .build()
         WorkManager.getInstance(requireContext()).enqueue(myWorker)
-        */
+
     }
 }

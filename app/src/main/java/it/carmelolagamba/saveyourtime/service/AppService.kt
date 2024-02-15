@@ -34,6 +34,24 @@ class AppService @Inject constructor() {
         }
     }
 
+    fun resetAll() {
+        var apps: List<App> = DBFactory.getDatabase(SaveYourTimeApplication.context).applicationDao().getAll()
+        apps.forEach { app ->
+            app.notifyTime = 60
+            app.todayUsage = 0
+            app.selected = false
+            upsert(app)
+        }
+    }
+
+    fun resetAllUsages() {
+        var apps: List<App> = DBFactory.getDatabase(SaveYourTimeApplication.context).applicationDao().getAll()
+        apps.forEach { app ->
+            app.todayUsage = 0
+            upsert(app)
+        }
+    }
+
     fun findNameByPackageName(packageName: String): String{
         return findByPackageName(packageName).name
     }

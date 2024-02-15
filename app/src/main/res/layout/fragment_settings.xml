@@ -6,19 +6,29 @@
     android:layout_height="wrap_content"
     tools:context=".ui.info.SettingsFragment">
 
-    <GridView
-        android:id="@+id/grid_list"
-        style="@android:style/Widget.Material.GridView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:textAlignment="center"
-        android:textSize="@dimen/text_size_default"
-        android:scrollbarStyle="insideInset"
-        android:scrollIndicators="right"
-        android:fastScrollEnabled="false"
-        android:fastScrollStyle="@style/Theme.SaveYourTime">
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/resetFab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:clickable="true"
+        android:src="@android:drawable/ic_delete"
+        app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
+        app:useCompatPadding="true" />
 
-    </GridView>
+        <GridView
+            android:id="@+id/grid_list"
+            style="@android:style/Widget.Material.GridView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fastScrollEnabled="false"
+            android:fastScrollStyle="@style/Theme.SaveYourTime"
+            android:scrollIndicators="right"
+            android:scrollbarStyle="insideInset"
+            android:textAlignment="center"
+            android:textSize="@dimen/text_size_default">
 
+        </GridView>
 
 </RelativeLayout>

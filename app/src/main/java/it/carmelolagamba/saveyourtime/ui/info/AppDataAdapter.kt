@@ -1,9 +1,12 @@
 package it.carmelolagamba.saveyourtime.ui.info
 
+import android.app.Activity
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
 import android.widget.CheckBox
 import android.widget.EditText
@@ -14,7 +17,11 @@ import it.carmelolagamba.saveyourtime.R
 import it.carmelolagamba.saveyourtime.persistence.App
 import it.carmelolagamba.saveyourtime.service.AppService
 
-class AppDataAdapter (private val applications: List<AppDataModel>, private val appService: AppService, context: Context) :
+class AppDataAdapter(
+    private val applications: List<AppDataModel>,
+    private val appService: AppService,
+    context: Context
+) :
     ArrayAdapter<Any?>(context, R.layout.app_data_model, applications) {
 
     private class ViewHolder {
@@ -63,26 +70,60 @@ class AppDataAdapter (private val applications: List<AppDataModel>, private val 
         viewHolder.appName.text = item.name
         viewHolder.appChecked.isChecked = item.checked
         viewHolder.packageName = item.packageName
-        if(item.notifyTime != null && item.notifyTime > 0) {
+        if (item.notifyTime != null && item.notifyTime > 0) {
             viewHolder.appNotifyTime.setText(item.notifyTime.toString())
         }
 
+        viewHolder.appNotifyTime.imeOptions = EditorInfo.IME_ACTION_DONE
+        viewHolder.appNotifyTime.setSelection(viewHolder.appNotifyTime.length())
+        viewHolder.appNotifyTime.setOnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                updateItem(item, viewHolder)
+                if (convertView != null) {
+                    context.hideKeyboard(convertView)
+                }
+                true
+            } else {
+                false
+            }
+        }
+
         viewHolder.appNotifyTime.setOnClickListener {
-            item.setFieldValue("notifyTime", getMinutesFromText(viewHolder.appNotifyTime.text.toString()))
-            appService.upsert(App(viewHolder.appName.text.toString(), viewHolder.packageName, viewHolder.appChecked.isChecked, getMinutesFromText(viewHolder.appNotifyTime.text.toString()), item.todayUsage))
+            updateItem(item, viewHolder)
         }
 
         viewHolder.appChecked.setOnClickListener {
-            item.setFieldValue("notifyTime", getMinutesFromText(viewHolder.appNotifyTime.text.toString()))
             item.setFieldValue("checked", viewHolder.appChecked.isChecked)
-
-            var minutes: Int = if (viewHolder.appChecked.isChecked) getMinutesFromText(viewHolder.appNotifyTime.text.toString()) else 60
-            appService.upsert(App(viewHolder.appName.text.toString(), viewHolder.packageName, viewHolder.appChecked.isChecked, minutes, item.todayUsage))
+            updateItem(item, viewHolder)
         }
 
         return result
     }
 
+    private fun updateItem(
+        item: AppDataModel,
+        viewHolder: ViewHolder
+    ) {
+
+        var minutes: Int = getMinutesFromText(viewHolder.appNotifyTime.text.toString())
+            //if (viewHolder.appChecked.isChecked) getMinutesFromText(viewHolder.appNotifyTime.text.toString()) else 60
+
+        item.setFieldValue("notifyTime", minutes)
+        appService.upsert(
+            App(
+                viewHolder.appName.text.toString(),
+                viewHolder.packageName,
+                viewHolder.appChecked.isChecked,
+                minutes,
+                item.todayUsage
+            )
+        )
+    }
+
+    private fun Context.hideKeyboard(view: View) {
+        val inputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
+    }
     private fun getMinutesFromText(text: String): Int {
         return text.filter { it.isDigit() }.toInt()
     }

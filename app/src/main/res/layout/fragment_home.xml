@@ -1,80 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.home.HomeFragment">
 
-
         <TextView
             android:id="@+id/chart_label"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="1dp"
-            android:layout_marginTop="1dp"
-            android:layout_marginEnd="1dp"
-            android:textAlignment="center"
-            android:textSize="@dimen/text_size_medium"
+            android:layout_height="match_parent"
             android:padding="@dimen/padding_default"
-            android:textColor="@color/primary"/>
+            android:textAlignment="center"
+            android:text="@string/label_chart"
+            android:textColor="@color/first"
+            android:textSize="@dimen/text_size_default" />
 
         <com.patrykandpatrick.vico.views.chart.ChartView
             android:id="@+id/chart_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="15dp"
+            android:layout_below="@id/chart_label"
             android:clickable="true"
+            android:padding="15dp"
             app:chart="column"
             app:columnChartStyle="@style/Theme.SaveYourTime.Chart"
             app:showBottomAxis="true"
-            app:showStartAxis="true"
-            android:layout_below="@id/chart_label"
-            />
+            app:showStartAxis="true" />
 
         <TextView
             android:id="@+id/table_label"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:textAlignment="center"
-            android:textSize="@dimen/text_size_medium"
+            android:layout_below="@id/chart_view"
             android:padding="@dimen/padding_default"
-            android:textColor="@color/primary"
-            android:layout_below="@id/chart_view"/>
+            android:textAlignment="center"
+            android:textColor="@color/first"
+            android:text="@string/label_table"
+            android:textSize="@dimen/text_size_default" />
 
         <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/usage_table"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="15dp"
-            android:layout_centerHorizontal="true"
             android:layout_below="@id/table_label"
-            android:stretchColumns="*">
-        </TableLayout>
+            android:layout_centerHorizontal="true"
+            android:padding="15dp"
+            android:stretchColumns="*"></TableLayout>
 
         <TextView
             android:id="@+id/caringMessage"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="348dp"
-            android:textAlignment="center"
-            android:textSize="20sp"
             android:padding="@dimen/margin_default"
+            android:textAlignment="center"
             android:textColor="@color/primary"
+            android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent" />
 
     </RelativeLayout>
+
 </ScrollView>
