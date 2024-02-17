@@ -23,4 +23,5 @@
     <string name="label_chart">Chart</string>
     <string name="dialog_reset_title">Are you sure?</string>
     <string name="dialog_reset_description">This action will reset all preferences</string>
+    <string name="check_notifiy" translatable="false">check_notify</string>
 </resources>

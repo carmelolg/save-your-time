@@ -11,12 +11,20 @@ import it.carmelolagamba.saveyourtime.persistence.App
 import it.carmelolagamba.saveyourtime.service.AppService
 import javax.inject.Inject
 
+/**
+ * @author carmelolg
+ * @since version 1.0
+ */
 class HomeService @Inject constructor() {
-
 
     @Inject
     lateinit var appService: AppService
 
+    /**
+     * @param context the application Context
+     * @param resources the Resources object
+     * @return the header of the table with all headers set
+     */
     fun createTableHeader(context: Context, resources: Resources): TableRow {
         val header = TableRow(context)
 
@@ -51,6 +59,12 @@ class HomeService @Inject constructor() {
         return header
     }
 
+    /**
+     * @param context the application Context
+     * @param resources the Resources object
+     * @param app the current app to show on table
+     * @return the TableRow object to add on table
+     */
     fun createTableRow(context: Context, resources: Resources, app: App): TableRow {
         val row = TableRow(context)
 
@@ -58,7 +72,7 @@ class HomeService @Inject constructor() {
         firstCol.text = appService.findNameByPackageName(app.packageName)
 
         val secondCol = TextView(context)
-        val time = app.todayUsage / 1000 / 60
+        val time = app.todayUsage
         secondCol.text = "$time min"
 
         val thirdCol = TextView(context)

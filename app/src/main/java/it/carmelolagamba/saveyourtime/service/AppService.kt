@@ -5,37 +5,56 @@ import it.carmelolagamba.saveyourtime.persistence.App
 import it.carmelolagamba.saveyourtime.persistence.DBFactory
 import javax.inject.Inject
 
+/**
+ * @author carmelolg
+ * @since version 1.0
+ */
 class AppService @Inject constructor() {
 
+    /**
+     *
+     * @return all applications (in List) checked by the user
+     */
     fun findAllChecked(): List<App> {
-        return DBFactory.getDatabase(SaveYourTimeApplication.context).applicationDao().getAllActive()
+        return DBFactory.getDatabase(SaveYourTimeApplication.context).applicationDao()
+            .getAllActive()
     }
 
+    /**
+     * @param packageName the app package
+     * @return the App object with the package = packageName
+     */
     fun findByPackageName(packageName: String): App {
-        return DBFactory.getDatabase(SaveYourTimeApplication.context).applicationDao().getByPackageName(packageName)
+        return DBFactory.getDatabase(SaveYourTimeApplication.context).applicationDao()
+            .getByPackageName(packageName)
     }
 
-/*    fun findIdByPackageName(packageName: String): Float {
-        return DBFactory.getDatabase(SaveYourTimeApplication.context).applicationDao().getByPackageName(packageName).id
-    }
-*/
+    /**
+     * Insert a new app on DB
+     * @param app the App to insert
+     */
     fun insert(app: App) {
         DBFactory.getDatabase(SaveYourTimeApplication.context).applicationDao().insertAll(app)
     }
 
+    /**
+     * @param app the application to update
+     * @return the app updated
+     */
     fun upsert(app: App): App {
-        val entity : App = this.findByPackageName(app.packageName!!)
-        return if(entity != null) {
+        return run {
             DBFactory.getDatabase(SaveYourTimeApplication.context).applicationDao().update(app)
-            app
-        }else {
-            this.insert(app)
             app
         }
     }
 
+    /**
+     * Reset all data on table "application"
+     * This method doesn't remove all data from DB but it's only a logical deletion
+     */
     fun resetAll() {
-        var apps: List<App> = DBFactory.getDatabase(SaveYourTimeApplication.context).applicationDao().getAll()
+        val apps: List<App> =
+            DBFactory.getDatabase(SaveYourTimeApplication.context).applicationDao().getAll()
         apps.forEach { app ->
             app.notifyTime = 60
             app.todayUsage = 0
@@ -44,19 +63,31 @@ class AppService @Inject constructor() {
         }
     }
 
+    /**
+     * Reset all current app usage from the DB
+     */
     fun resetAllUsages() {
-        var apps: List<App> = DBFactory.getDatabase(SaveYourTimeApplication.context).applicationDao().getAll()
+        val apps: List<App> =
+            DBFactory.getDatabase(SaveYourTimeApplication.context).applicationDao().getAll()
         apps.forEach { app ->
             app.todayUsage = 0
             upsert(app)
         }
     }
 
-    fun findNameByPackageName(packageName: String): String{
+    /**
+     * @param packageName the package name
+     * @return the application name
+     */
+    fun findNameByPackageName(packageName: String): String {
         return findByPackageName(packageName).name
     }
 
-    fun appListPackageName(): List<String> {
-        return findAllChecked().map { it.packageName }
+    /**
+     * @return a List of applications that exceeded the time usage chose by the user
+     */
+    fun findExceededApplication(): List<App> {
+        return findAllChecked().filter { app -> app.todayUsage >= app.notifyTime }
     }
+
 }

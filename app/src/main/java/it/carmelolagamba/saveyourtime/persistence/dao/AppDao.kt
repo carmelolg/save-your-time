@@ -1,11 +1,16 @@
-package it.carmelolagamba.saveyourtime.persistence
+package it.carmelolagamba.saveyourtime.persistence.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
+import it.carmelolagamba.saveyourtime.persistence.App
 
+/**
+ * @author carmelolg
+ * @since version 1.0
+ */
 @Dao
 interface AppDao {
     @Query("SELECT * FROM application")

@@ -14,7 +14,7 @@
 
     <fragment
         android:id="@+id/navigation_info"
-        android:name="it.carmelolagamba.saveyourtime.ui.info.SettingsFragment"
+        android:name="it.carmelolagamba.saveyourtime.ui.settings.SettingsFragment"
         android:label="@string/title_settings"
         tools:layout="@layout/fragment_settings" >
         <action

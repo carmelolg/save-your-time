@@ -1,4 +1,4 @@
-package it.carmelolagamba.saveyourtime.ui.info
+package it.carmelolagamba.saveyourtime.ui.settings
 
 import android.app.Activity
 import android.content.Context
@@ -17,6 +17,10 @@ import it.carmelolagamba.saveyourtime.R
 import it.carmelolagamba.saveyourtime.persistence.App
 import it.carmelolagamba.saveyourtime.service.AppService
 
+/**
+ * @author carmelolg
+ * @since version 1.0
+ */
 class AppDataAdapter(
     private val applications: List<AppDataModel>,
     private val appService: AppService,
@@ -37,7 +41,7 @@ class AppDataAdapter(
     }
 
     override fun getItem(position: Int): AppDataModel {
-        return applications[position] as AppDataModel
+        return applications[position]
     }
 
     override fun getView(
@@ -45,24 +49,24 @@ class AppDataAdapter(
         convertView: View?,
         parent: ViewGroup
     ): View {
-        var convertView = convertView
+        var view = convertView
         val viewHolder: ViewHolder
         val result: View
-        if (convertView == null) {
+        if (view == null) {
             viewHolder = ViewHolder()
-            convertView =
+            view =
                 LayoutInflater.from(parent.context).inflate(R.layout.app_data_model, parent, false)
-            viewHolder.appIcon = convertView.findViewById(R.id.app_icon)
+            viewHolder.appIcon = view.findViewById(R.id.app_icon)
             viewHolder.appName =
-                convertView.findViewById(R.id.app_name)
+                view.findViewById(R.id.app_name)
             viewHolder.appChecked =
-                convertView.findViewById(R.id.app_checked)
-            viewHolder.appNotifyTime = convertView.findViewById(R.id.notify_time)
-            result = convertView
-            convertView.tag = viewHolder
+                view.findViewById(R.id.app_checked)
+            viewHolder.appNotifyTime = view.findViewById(R.id.notify_time)
+            result = view
+            view.tag = viewHolder
         } else {
-            viewHolder = convertView.tag as ViewHolder
-            result = convertView
+            viewHolder = view.tag as ViewHolder
+            result = view
         }
 
         val item: AppDataModel = getItem(position)
@@ -70,7 +74,7 @@ class AppDataAdapter(
         viewHolder.appName.text = item.name
         viewHolder.appChecked.isChecked = item.checked
         viewHolder.packageName = item.packageName
-        if (item.notifyTime != null && item.notifyTime > 0) {
+        if (item.notifyTime > 0) {
             viewHolder.appNotifyTime.setText(item.notifyTime.toString())
         }
 
@@ -79,8 +83,8 @@ class AppDataAdapter(
         viewHolder.appNotifyTime.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 updateItem(item, viewHolder)
-                if (convertView != null) {
-                    context.hideKeyboard(convertView)
+                if (view != null) {
+                    context.hideKeyboard(view)
                 }
                 true
             } else {
@@ -105,8 +109,7 @@ class AppDataAdapter(
         viewHolder: ViewHolder
     ) {
 
-        var minutes: Int = getMinutesFromText(viewHolder.appNotifyTime.text.toString())
-            //if (viewHolder.appChecked.isChecked) getMinutesFromText(viewHolder.appNotifyTime.text.toString()) else 60
+        val minutes: Int = getMinutesFromText(viewHolder.appNotifyTime.text.toString())
 
         item.setFieldValue("notifyTime", minutes)
         appService.upsert(
@@ -121,9 +124,11 @@ class AppDataAdapter(
     }
 
     private fun Context.hideKeyboard(view: View) {
-        val inputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        val inputMethodManager =
+            getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
         inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
     }
+
     private fun getMinutesFromText(text: String): Int {
         return text.filter { it.isDigit() }.toInt()
     }

@@ -17,7 +17,10 @@ import it.carmelolagamba.saveyourtime.databinding.ActivityStartBinding
 import it.carmelolagamba.saveyourtime.service.AppService
 import javax.inject.Inject
 
-
+/**
+ * @author carmelolg
+ * @since version 1.0
+ */
 @AndroidEntryPoint
 class StartActivity : AppCompatActivity() {
 
@@ -74,7 +77,7 @@ class StartActivity : AppCompatActivity() {
     private val launcher: ActivityResultLauncher<Intent> = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult(),
         ActivityResultCallback<ActivityResult> { result ->
-            if (result.getResultCode() === RESULT_OK) {
+            if (result.resultCode === RESULT_OK) {
                 Log.d("Permission", "Allowed ok")
             }
         })
@@ -82,7 +85,7 @@ class StartActivity : AppCompatActivity() {
     private fun startMainActivity() {
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
-        finish();
+        finish()
     }
 
 }

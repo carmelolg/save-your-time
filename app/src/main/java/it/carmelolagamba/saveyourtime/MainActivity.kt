@@ -10,12 +10,15 @@ import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import it.carmelolagamba.saveyourtime.databinding.ActivityMainBinding
 
+/**
+ * @author carmelolg
+ * @since version 1.0
+ */
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
@@ -32,11 +35,14 @@ class MainActivity : AppCompatActivity() {
         val navView: BottomNavigationView = binding.navView
 
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
+
+        /** Appbar not used
         val appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.navigation_home, R.id.navigation_info
-            )
+        setOf(
+        R.id.navigation_home, R.id.navigation_info
         )
+        )
+         */
 
         navView.findViewById<View>(R.id.navigation_home).setOnClickListener {
             val navController = this.findNavController(R.id.nav_host_fragment_activity_main)
@@ -50,15 +56,19 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-        //setupActionBarWithNavController(navController, appBarConfiguration)
+        /** Appbar not used setupActionBarWithNavController(navController, appBarConfiguration) */
         navView.setupWithNavController(navController)
 
-        onBackPressedDispatcher.addCallback(this, object: OnBackPressedCallback(true) {
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 if (backPressedTime + 3000 > System.currentTimeMillis()) {
                     finishAndRemoveTask()
                 } else {
-                    Toast.makeText(applicationContext, getString(R.string.close_app_message), Toast.LENGTH_LONG).show()
+                    Toast.makeText(
+                        applicationContext,
+                        getString(R.string.close_app_message),
+                        Toast.LENGTH_LONG
+                    ).show()
                 }
                 backPressedTime = System.currentTimeMillis()
             }
@@ -82,10 +92,6 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-    }
-
-    override fun onStart() {
-        super.onStart()
     }
 
 }
