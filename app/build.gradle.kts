@@ -16,7 +16,7 @@ android {
     defaultConfig {
         applicationId = "it.carmelolagamba.saveyourtime"
         minSdk = 28
-        targetSdk = 31
+        targetSdk = 33
         versionCode = 1
         versionName = "1.0"
 
