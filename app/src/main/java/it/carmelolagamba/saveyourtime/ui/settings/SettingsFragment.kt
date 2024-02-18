@@ -1,6 +1,7 @@
 package it.carmelolagamba.saveyourtime.ui.settings
 
 import android.app.AlertDialog
+import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -15,6 +16,7 @@ import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
 import it.carmelolagamba.saveyourtime.R
 import it.carmelolagamba.saveyourtime.databinding.FragmentSettingsBinding
+import it.carmelolagamba.saveyourtime.persistence.App
 import it.carmelolagamba.saveyourtime.service.AppService
 import it.carmelolagamba.saveyourtime.service.EventService
 import kotlinx.coroutines.Dispatchers
@@ -137,16 +139,44 @@ class SettingsFragment : Fragment() {
                 val app = appService.findByPackageName(packageInfo.packageName)
                 val icon = pm.getApplicationIcon(packageInfo.packageName)
 
-                applications += AppDataModel(
-                    icon,
-                    app.name,
-                    app.packageName,
-                    app.selected,
-                    app.notifyTime,
-                    app.todayUsage
-                )
-            }
+                if (app != null) {
+                    applications += AppDataModel(
+                        icon,
+                        app.name,
+                        app.packageName,
+                        app.selected,
+                        app.notifyTime,
+                        app.todayUsage
+                    )
+                } else {
+                    val appInfo: ApplicationInfo = pm.getApplicationInfo(packageInfo.packageName, 0)
+                    val appName: String = pm.getApplicationLabel(appInfo).toString()
+                    applications.add(
+                        AppDataModel(
+                            icon,
+                            appName,
+                            packageInfo.packageName,
+                            false,
+                            60,
+                            0
+                        )
+                    )
 
+
+
+                    viewLifecycleOwner.lifecycleScope.launch {
+                        appService.insert(
+                            App(
+                                appName,
+                                packageInfo.packageName,
+                                false,
+                                60,
+                                0
+                            )
+                        )
+                    }
+                }
+            }
         }
 
         applications.sortWith(compareBy<AppDataModel> { it.checked }.reversed().thenBy { it.name })

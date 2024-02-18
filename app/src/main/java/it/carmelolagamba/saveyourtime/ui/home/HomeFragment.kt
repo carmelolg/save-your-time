@@ -203,7 +203,7 @@ class HomeFragment : Fragment(), EventListener {
         Log.d("SYT", channel)
 
         /** Step 0 If it's midnight, reset all and clean DB */
-        if(utilService.isNearMidnight()){
+        if (utilService.isNearMidnight()) {
             eventService.cleanDB()
             appService.resetAllUsages()
         }
@@ -242,17 +242,20 @@ class HomeFragment : Fragment(), EventListener {
         val startActivityIntent = Intent(context, StartActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }
-        val startActivityPendingIntent = PendingIntent.getActivity(
-            context, 0, startActivityIntent,
-            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
-        )
 
+
+        val startActivityPendingIntent = PendingIntent.getActivity(
+            context,
+            Random.nextInt(),
+            startActivityIntent,
+            PendingIntent.FLAG_MUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
+        )
 
         val builder = NotificationCompat.Builder(
             context,
             ContextCompat.getString(context, R.string.notification_channel_id)
         )
-            .setSmallIcon(R.drawable.ic_launcher_background)
+            .setSmallIcon(R.drawable.ic_launcher_foreground)
             .setContentTitle(title)
             .setContentText(description)
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
