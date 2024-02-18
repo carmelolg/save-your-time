@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -135,7 +136,9 @@ class SettingsFragment : Fragment() {
 
         for (packageInfo in packages) {
 
-            if (pm.getLaunchIntentForPackage(packageInfo.packageName) != null) {
+            if ((packageInfo.flags and (ApplicationInfo.FLAG_UPDATED_SYSTEM_APP or ApplicationInfo.FLAG_SYSTEM)) > 0) {
+                Log.d("SYT", "System app skipped")
+            } else {
                 val app = appService.findByPackageName(packageInfo.packageName)
                 val icon = pm.getApplicationIcon(packageInfo.packageName)
 

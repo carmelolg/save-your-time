@@ -91,6 +91,8 @@ class HomeFragment : Fragment(), EventListener {
         val statsManager =
             requireContext().getSystemService(Context.USAGE_STATS_SERVICE) as UsageStatsManager
 
+        binding.usageTable.removeAllViews()
+
         /** Get today app usages */
         var statsUsageMap = statsManager.queryUsageStats(
             UsageStatsManager.INTERVAL_DAILY,

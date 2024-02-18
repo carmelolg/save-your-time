@@ -1,16 +1,54 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Theme.SaveYourTime" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+
+        <item name="toolbarStyle">@style/Theme.SaveYourTime.Toolbar</item>
+
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/first</item>
+        <item name="colorPrimary">@color/third</item>
         <item name="colorPrimaryVariant">@color/third</item>
-        <item name="colorOnPrimary">@color/black</item>
+        <item name="colorOnPrimary">@color/text_primary</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/second</item>
-        <item name="colorSecondaryVariant">@color/fourth</item>
-        <item name="colorOnSecondary">@color/black</item>
+        <item name="colorSecondary">@color/white</item>
+        <item name="colorSecondaryVariant">@color/white</item>
+        <item name="colorOnSecondary">@color/text_primary</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <item name="android:statusBarColor">?attr/colorPrimary</item>
         <!-- Customize your theme here. -->
+
     </style>
+
+    <style name="Theme.SaveYourTime.Chart.ColumnStyle.ShapeStyle">
+        <item name="cornerSize">5dp</item>
+    </style>
+
+    <style name="Theme.SaveYourTime.Chart.ColumnStyle">
+        <item name="shapeStyle">@style/Theme.SaveYourTime.Chart.ColumnStyle.ShapeStyle</item>
+    </style>
+
+    <style name="Theme.SaveYourTime.Chart.Column1" parent="@style/Theme.SaveYourTime.Chart.ColumnStyle">
+        <item name="color">@color/fourth</item>
+        <item name="thickness">12dp</item>
+    </style>
+
+
+    <style name="Theme.SaveYourTime.Chart.Column2" parent="@style/Theme.SaveYourTime.Chart.ColumnStyle">
+        <item name="color">@color/third</item>
+        <item name="thickness">12dp</item>
+    </style>
+
+    <style name="Theme.SaveYourTime.Chart">
+        <item name="column1">@style/Theme.SaveYourTime.Chart.Column1</item>
+        <item name="column2">@style/Theme.SaveYourTime.Chart.Column2</item>
+    </style>
+
+    <style name="Theme.SaveYourTime.ProgressBar">
+        <item name="colorAccent">@color/fourth</item>
+    </style>
+
+
+    <style name="Theme.SaveYourTime.Toolbar">
+        <item name="titleTextColor">@color/text_primary</item>
+    </style>
+
 </resources>
