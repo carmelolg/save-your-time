@@ -118,7 +118,8 @@ class AppDataAdapter(
                 viewHolder.packageName,
                 viewHolder.appChecked.isChecked,
                 minutes,
-                item.todayUsage
+                item.todayUsage,
+                item.lastUpdate
             )
         )
     }

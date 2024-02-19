@@ -146,7 +146,8 @@ class SettingsFragment : Fragment() {
                         app.packageName,
                         app.selected,
                         app.notifyTime,
-                        app.todayUsage
+                        app.todayUsage,
+                        app.lastUpdate
                     )
                 } else {
                     val appInfo: ApplicationInfo = pm.getApplicationInfo(packageInfo.packageName, 0)
@@ -158,7 +159,8 @@ class SettingsFragment : Fragment() {
                             packageInfo.packageName,
                             false,
                             60,
-                            0
+                            0,
+                            System.currentTimeMillis()
                         )
                     )
 
@@ -171,7 +173,8 @@ class SettingsFragment : Fragment() {
                                 packageInfo.packageName,
                                 false,
                                 60,
-                                0
+                                0,
+                                System.currentTimeMillis()
                             )
                         )
                     }

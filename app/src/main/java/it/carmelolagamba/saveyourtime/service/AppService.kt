@@ -11,6 +11,9 @@ import javax.inject.Inject
  */
 class AppService @Inject constructor() {
 
+    @Inject
+    lateinit var utilService: UtilService
+
     /**
      *
      * @return all applications (in List) checked by the user
@@ -18,6 +21,36 @@ class AppService @Inject constructor() {
     fun findAllChecked(): List<App> {
         return DBFactory.getDatabase(SaveYourTimeApplication.context).applicationDao()
             .getAllActive()
+    }
+
+    /**
+     *
+     * @return all applications (in List) unchecked
+     */
+    fun findAllUnchecked(): List<App> {
+        return DBFactory.getDatabase(SaveYourTimeApplication.context).applicationDao()
+            .getAllUnchecked()
+    }
+
+    /**
+     *
+     * @return all applications (in List) checked by the user
+     */
+    fun resetOldData() {
+
+        val apps: List<App> = findAllChecked()
+        apps.forEach { app ->
+            if (app.lastUpdate < utilService.todayMidnightMillis()) {
+                app.todayUsage = 0
+                upsert(app)
+            }
+        }
+
+        val appsUnchecked: List<App> = findAllUnchecked()
+        appsUnchecked.forEach { app ->
+            app.todayUsage = 0
+            upsert(app)
+        }
     }
 
     /**

@@ -14,5 +14,6 @@ data class App(
     @PrimaryKey @ColumnInfo(name = "package") val packageName: String,
     @ColumnInfo(name = "selected") var selected: Boolean,
     @ColumnInfo(name = "time") var notifyTime: Int,
-    @ColumnInfo(name = "timeToday") var todayUsage: Int
-)
+    @ColumnInfo(name = "timeToday") var todayUsage: Int,
+    @ColumnInfo(name = "lastUpdate") var lastUpdate: Long
+    )

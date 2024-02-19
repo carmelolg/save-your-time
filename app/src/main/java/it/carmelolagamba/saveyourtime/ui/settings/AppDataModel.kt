@@ -12,5 +12,6 @@ class AppDataModel internal constructor(
     var packageName: String,
     var checked: Boolean,
     var notifyTime: Int,
-    var todayUsage: Int
+    var todayUsage: Int,
+    var lastUpdate: Long
 )

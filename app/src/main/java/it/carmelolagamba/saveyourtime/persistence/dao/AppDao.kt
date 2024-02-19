@@ -19,6 +19,10 @@ interface AppDao {
     @Query("SELECT * FROM application WHERE selected = 1")
     fun getAllActive(): List<App>
 
+    @Query("SELECT * FROM application WHERE selected = 0")
+    fun getAllUnchecked(): List<App>
+
+
     @Query("SELECT * FROM application WHERE package = :packageName")
     fun getByPackageName(packageName: String): App
 

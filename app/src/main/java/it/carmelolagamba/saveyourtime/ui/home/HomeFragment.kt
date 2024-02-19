@@ -2,7 +2,7 @@ package it.carmelolagamba.saveyourtime.ui.home
 
 import android.app.NotificationManager
 import android.app.PendingIntent
-import android.app.usage.UsageStats
+import android.app.usage.UsageEvents
 import android.app.usage.UsageStatsManager
 import android.content.Context
 import android.content.Intent
@@ -59,6 +59,8 @@ class HomeFragment : Fragment(), EventListener {
 
     private lateinit var eventBroadcaster: EventNotifier
 
+    private var apps: List<App> = mutableListOf()
+
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -79,6 +81,7 @@ class HomeFragment : Fragment(), EventListener {
         super.onStart()
         eventBroadcaster.addListener(this)
         refreshData()
+        refreshUI()
     }
 
     override fun onDestroyView() {
@@ -87,60 +90,23 @@ class HomeFragment : Fragment(), EventListener {
         _binding = null
     }
 
-    private fun refreshData() {
-        val statsManager =
-            requireContext().getSystemService(Context.USAGE_STATS_SERVICE) as UsageStatsManager
+    private fun refreshUI() {
 
-        binding.usageTable.removeAllViews()
+        val usageTable: TableLayout = binding.usageTable
+        usageTable.removeAllViews()
 
-        /** Get today app usages */
-        var statsUsageMap = statsManager.queryUsageStats(
-            UsageStatsManager.INTERVAL_DAILY,
-            utilService.todayMidnightMillis(),
-            utilService.tomorrowMidnightMillis()
-        )
+        /** Add header to the table */
+        usageTable.addView(homeService.createTableHeader(requireContext(), resources), 0)
 
-        /** Sort application for usage in DESC mode */
-        statsUsageMap = statsUsageMap
-            .sortedByDescending { value -> value.totalTimeInForeground }
+        /** Building VICO graph main object */
+        var chartData = mutableMapOf<Float, Pair<Float, String>>()
 
-        /** Get all checked apps from local DB. A checked app is selected by the final user on the control plane */
-        var apps: List<App> = appService.findAllChecked()
+        /** This index is used in order to formatting graph's axis better */
+        var index = 1F
 
-        /** If the final user selected at list one application, then build the page */
         if (apps.isNotEmpty()) {
 
-            val usageTable: TableLayout = binding.usageTable
-
-            //apps = apps.sortedByDescending { value -> value.todayUsage }.sortedBy { value -> value.name }.toList()
-            apps = apps.sortedWith(compareBy<App> { it.todayUsage }.reversed().thenBy { it.name })
-                .toList()
-
-            /** Add header to the table */
-            usageTable.addView(homeService.createTableHeader(requireContext(), resources), 0)
-
-            /** Building VICO graph main object */
-            var chartData = mutableMapOf<Float, Pair<Float, String>>()
-
-            /** This index is used in order to formatting graph's axis better */
-            var index = 1F
-
             apps.forEach { app ->
-
-                val statsUsageMapValue: UsageStats
-
-                /**
-                 * If a selected app isn't used could not appear in statsUsageMap system object (and catch a NoSuchElementException
-                 * We use statsUsageMap to get the total usage time for a single application (in the selected range)
-                 * */
-                try {
-                    statsUsageMapValue =
-                        statsUsageMap.last { application -> app.packageName == application.packageName }
-                    app.todayUsage = statsUsageMapValue.totalTimeInForeground.toInt() / 1000 / 60
-                } catch (ex: NoSuchElementException) {
-                    app.todayUsage = 0
-                    Log.d("SYT", "${app.name} unused")
-                }
 
                 /** Create a row in table for the selected application */
                 usageTable.addView(
@@ -157,9 +123,6 @@ class HomeFragment : Fragment(), EventListener {
                     app.name
                 )
                 index++
-
-                /** Update app on local DB */
-                appService.upsert(app)
             }
 
             /** Build the custom axis formatter */
@@ -191,7 +154,6 @@ class HomeFragment : Fragment(), EventListener {
 
             /** Set VICO graph view */
             binding.chartView.setModel(chartEntryModel)
-
         } else {
             binding.caringMessage.text = resources.getText(R.string.apps_empty_caring_message)
             binding.chartLabel.visibility = View.INVISIBLE
@@ -199,17 +161,89 @@ class HomeFragment : Fragment(), EventListener {
         }
     }
 
+    private fun refreshData() {
 
+        /** Clean old data */
+        appService.resetOldData()
+
+        /** Get all checked apps from local DB. A checked app is selected by the final user on the control plane */
+        apps = appService.findAllChecked()
+
+        /** If the final user selected at list one application, then build the page */
+        if (apps.isNotEmpty()) {
+
+            apps.forEach { app ->
+
+                app.todayUsage = getUsageInMinutesByPackage(app.packageName)
+                if (app.todayUsage > 0) {
+                    app.lastUpdate = System.currentTimeMillis()
+                }
+
+                /** Update app on local DB */
+                appService.upsert(app)
+            }
+
+            apps = apps.sortedWith(compareBy<App> { it.todayUsage }.reversed().thenBy { it.name })
+                .toList()
+        }
+    }
+
+    /**
+     * @param packageName the package of the app that you want get the total daily usage
+     * @return the total usage in minutes
+     */
+    private fun getUsageInMinutesByPackage(packageName: String): Int {
+
+        val statsManager =
+            requireContext().getSystemService(Context.USAGE_STATS_SERVICE) as UsageStatsManager
+
+        val usageEvents: UsageEvents = statsManager.queryEvents(
+            utilService.todayMidnightMillis(),
+            utilService.tomorrowMidnightMillis()
+        )
+
+        var singleEventUsage: Long = 0L
+        var totalUsage: Long = 0L
+
+        while (usageEvents.hasNextEvent()) {
+            val currentEvent: UsageEvents.Event = UsageEvents.Event()
+            usageEvents.getNextEvent(currentEvent)
+
+            if (packageName == currentEvent.packageName) {
+                val time = currentEvent.timeStamp
+
+                if (currentEvent.eventType == UsageEvents.Event.ACTIVITY_RESUMED
+                    || currentEvent.eventType == UsageEvents.Event.ACTIVITY_PAUSED
+                ) {
+                    if (currentEvent.eventType == UsageEvents.Event.ACTIVITY_RESUMED) {
+                        singleEventUsage = time
+                    } else {
+                        if (singleEventUsage > 0) {
+                            totalUsage = totalUsage.plus(time - singleEventUsage)
+                        }
+                        singleEventUsage = 0L
+                    }
+                }
+            }
+        }
+        if (singleEventUsage > 0) {
+            totalUsage += (System.currentTimeMillis() - singleEventUsage)
+        }
+
+        return (totalUsage / 1000 / 60).toInt()
+    }
     override fun onEvent(channel: String) {
-        Log.d("SYT", "Event received")
-        Log.d("SYT", channel)
+        Log.d("SYT", "Event $channel received")
+
+        refreshData()
 
         /** Step 0 If it's midnight, reset all and clean DB */
         if (utilService.isNearMidnight()) {
-            eventService.cleanDB()
             appService.resetAllUsages()
         }
 
+        eventService.cleanDB()
+        appService.resetOldData()
 
         /** Step 1 Check application with time exceeded */
         val exceededApp: List<App> = appService.findExceededApplication()
