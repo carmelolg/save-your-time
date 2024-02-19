@@ -92,19 +92,19 @@ class HomeFragment : Fragment(), EventListener {
 
     private fun refreshUI() {
 
-        val usageTable: TableLayout = binding.usageTable
-        usageTable.removeAllViews()
-
-        /** Add header to the table */
-        usageTable.addView(homeService.createTableHeader(requireContext(), resources), 0)
-
-        /** Building VICO graph main object */
-        var chartData = mutableMapOf<Float, Pair<Float, String>>()
-
-        /** This index is used in order to formatting graph's axis better */
-        var index = 1F
-
         if (apps.isNotEmpty()) {
+
+            /** Building VICO graph main object */
+            var chartData = mutableMapOf<Float, Pair<Float, String>>()
+
+            /** This index is used in order to formatting graph's axis better */
+            var index = 1F
+
+            val usageTable: TableLayout = binding.usageTable
+            usageTable.removeAllViews()
+
+            /** Add header to the table */
+            usageTable.addView(homeService.createTableHeader(requireContext(), resources), 0)
 
             apps.forEach { app ->
 

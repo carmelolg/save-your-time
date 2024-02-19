@@ -15,10 +15,10 @@ android {
 
     defaultConfig {
         applicationId = "it.carmelolagamba.saveyourtime"
-        minSdk = 29
+        minSdk = 28
         targetSdk = 33
-        versionCode = 10
-        versionName = "1.0.5"
+        versionCode = 12
+        versionName = "1.0.7"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }

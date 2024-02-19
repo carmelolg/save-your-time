@@ -19,7 +19,7 @@
             android:padding="@dimen/padding_default"
             android:textAlignment="center"
             android:text="@string/label_chart"
-            android:textColor="@color/first"
+            android:textColor="?android:colorPrimary"
             android:textSize="@dimen/text_size_default" />
 
         <com.patrykandpatrick.vico.views.chart.ChartView
@@ -41,7 +41,7 @@
             android:layout_below="@id/chart_view"
             android:padding="@dimen/padding_default"
             android:textAlignment="center"
-            android:textColor="@color/first"
+            android:textColor="?android:colorPrimary"
             android:text="@string/label_table"
             android:textSize="@dimen/text_size_default" />
 
@@ -51,6 +51,7 @@
             android:layout_height="match_parent"
             android:layout_below="@id/table_label"
             android:layout_centerHorizontal="true"
+            style="Theme.SaveYourTime.Table"
             android:padding="15dp"
             android:stretchColumns="*"></TableLayout>
 
@@ -64,7 +65,7 @@
             android:layout_marginBottom="348dp"
             android:padding="@dimen/margin_default"
             android:textAlignment="center"
-            android:textColor="@color/primary"
+            android:textColor="?android:colorPrimary"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

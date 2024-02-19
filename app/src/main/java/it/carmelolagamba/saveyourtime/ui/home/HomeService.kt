@@ -41,10 +41,9 @@ class HomeService @Inject constructor() {
         thirdCol.gravity = Gravity.RIGHT
 
         // Set text color
-        val primaryColor = context.getColor(R.color.first)
-        firstCol.setTextColor(primaryColor)
-        secondCol.setTextColor(primaryColor)
-        thirdCol.setTextColor(primaryColor)
+        firstCol.setTextAppearance(R.style.Theme_SaveYourTime_Table_Header)
+        secondCol.setTextAppearance(R.style.Theme_SaveYourTime_Table_Header)
+        thirdCol.setTextAppearance(R.style.Theme_SaveYourTime_Table_Header)
 
         // Set text size
         val textSize = resources.getDimension(R.dimen.table_header_size_default)
@@ -79,15 +78,14 @@ class HomeService @Inject constructor() {
         thirdCol.text = resources.getText(R.string.time_exceeded)
 
         // Set text color
-        var secondaryColor = context.getColor(R.color.second)
-        firstCol.setTextColor(secondaryColor)
-        secondCol.setTextColor(secondaryColor)
+        firstCol.setTextAppearance(R.style.Theme_SaveYourTime_Table_Row)
+        secondCol.setTextAppearance(R.style.Theme_SaveYourTime_Table_Row)
         val timeRemaining = app.notifyTime - time
         if (timeRemaining < 0) {
             context?.let { thirdCol.setTextColor(it.getColor(R.color.fifth)) }
         } else {
             thirdCol.text = "$timeRemaining min"
-            thirdCol.setTextColor(secondaryColor)
+            thirdCol.setTextAppearance(R.style.Theme_SaveYourTime_Table_Row)
         }
 
         // Set text size
