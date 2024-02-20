@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Process
 import android.util.Log
+import android.view.GestureDetector
 import android.view.View
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
@@ -14,6 +15,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import it.carmelolagamba.saveyourtime.databinding.ActivityMainBinding
+import it.carmelolagamba.saveyourtime.service.worker.ForegroundNotificationService
 
 /**
  * @author carmelolg
@@ -22,12 +24,16 @@ import it.carmelolagamba.saveyourtime.databinding.ActivityMainBinding
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var gestureDetector: GestureDetector
+
     private lateinit var binding: ActivityMainBinding
     private var backPressedTime: Long = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
+
+        ForegroundNotificationService.startService(this)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -74,9 +80,7 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-
     }
-
 
     override fun onResume() {
         super.onResume()

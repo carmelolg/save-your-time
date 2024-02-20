@@ -19,6 +19,9 @@ interface EventDao {
     @Query("SELECT * FROM event WHERE id = :id")
     fun getById(id: Int): Event
 
+    @Query("SELECT * FROM event WHERE appId = :appId")
+    fun getByAppId(appId: String): List<Event>
+
     @Query("SELECT * FROM event WHERE insertDate >= :lastMidnight")
     fun getAllActive(lastMidnight: Long): List<Event>
 

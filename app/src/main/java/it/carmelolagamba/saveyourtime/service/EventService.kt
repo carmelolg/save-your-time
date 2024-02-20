@@ -32,6 +32,19 @@ class EventService @Inject constructor() {
     }
 
     /**
+     * @param appId the application id, so the package name
+     * @return the last event linked to the app
+     */
+    fun findEventByPackageName(appId: String): Event? {
+        try {
+            return DBFactory.getDatabase(SaveYourTimeApplication.context).eventDao()
+                .getByAppId(appId).filter { it.notified }.last()
+        } catch (ex: NoSuchElementException) {
+            return null
+        }
+    }
+
+    /**
      * @param event the event to add
      */
     fun insert(event: Event) {

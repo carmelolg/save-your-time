@@ -13,6 +13,6 @@ data class Event(
     @PrimaryKey(autoGenerate = true) @ColumnInfo(name = "id") val id: Int?,
     @ColumnInfo(name = "name") val name: String,
     @ColumnInfo(name = "appId") val appId: String,
-    @ColumnInfo(name = "insertDate") val insertDate: Long,
-    @ColumnInfo(name = "notified") val notified: Boolean
+    @ColumnInfo(name = "insertDate") var insertDate: Long,
+    @ColumnInfo(name = "notified") var notified: Boolean
     )

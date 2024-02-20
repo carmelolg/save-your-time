@@ -6,6 +6,7 @@ import android.app.usage.UsageEvents
 import android.app.usage.UsageStatsManager
 import android.content.Context
 import android.content.Intent
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -41,7 +42,7 @@ import kotlin.random.Random
  * @since version 1.0
  */
 @AndroidEntryPoint
-class HomeFragment : Fragment(), EventListener {
+class HomeFragment : Fragment() /*AbstractFragment()*/, EventListener {
 
     private var _binding: FragmentHomeBinding? = null
 
@@ -63,6 +64,11 @@ class HomeFragment : Fragment(), EventListener {
 
     private val binding get() = _binding!!
 
+    /**
+    override fun innerOnScroll(x: Float, y: Float) {
+    //TODO("Not yet implemented")
+    }*/
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -71,6 +77,11 @@ class HomeFragment : Fragment(), EventListener {
 
         _binding = _binding ?: FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
+
+        /**
+        root.setOnTouchListener { _, event ->
+        gestureDetector.onTouchEvent(event)
+        }*/
 
         eventBroadcaster = EventNotifier.getInstance()
 
@@ -183,7 +194,8 @@ class HomeFragment : Fragment(), EventListener {
                 appService.upsert(app)
             }
 
-            apps = apps.sortedWith(compareBy<App> { it.todayUsage }.reversed().thenBy { it.name })
+            apps = apps.sortedWith(compareBy<App> { it.todayUsage }.reversed()
+                .thenBy { it.name.lowercase() })
                 .toList()
         }
     }
@@ -232,6 +244,7 @@ class HomeFragment : Fragment(), EventListener {
 
         return (totalUsage / 1000 / 60).toInt()
     }
+
     override fun onEvent(channel: String) {
         Log.d("SYT", "Event $channel received")
 
@@ -252,15 +265,22 @@ class HomeFragment : Fragment(), EventListener {
         exceededApp.forEach { app: App ->
             if (!eventService.isAppNotified(app.packageName)) {
                 /** Step 3 if app isn't notified to user, create Event and save it on DB */
-                eventService.insert(
-                    Event(
-                        null,
-                        channel,
-                        app.packageName,
-                        System.currentTimeMillis(),
-                        true
+                var event: Event? = eventService.findEventByPackageName(app.packageName)
+                if (event != null) {
+                    event.notified = true
+                    event.insertDate = System.currentTimeMillis()
+                    eventService.upsert(event)
+                } else {
+                    eventService.insert(
+                        Event(
+                            null,
+                            channel,
+                            app.packageName,
+                            System.currentTimeMillis(),
+                            true
+                        )
                     )
-                )
+                }
                 /** Step 3.1 Send the notification */
                 Log.d("SYT", "Sending notification for $app")
                 sendNotification(
@@ -292,6 +312,12 @@ class HomeFragment : Fragment(), EventListener {
             ContextCompat.getString(context, R.string.notification_channel_id)
         )
             .setSmallIcon(R.drawable.ic_launcher_foreground)
+            .setLargeIcon(
+                BitmapFactory.decodeResource(
+                    resources,
+                    R.drawable.ic_launcher_foreground
+                )
+            )
             .setContentTitle(title)
             .setContentText(description)
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
@@ -305,4 +331,5 @@ class HomeFragment : Fragment(), EventListener {
             notificationManager.notify(Random.nextInt(), builder)
         }
     }
+
 }

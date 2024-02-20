@@ -19,4 +19,7 @@
     <string name="label_chart">Andamento grafico</string>
     <string name="dialog_reset_title">Sei sicuro?</string>
     <string name="dialog_reset_description">Se approverai, tutte le tue preferenze saranno eliminate.</string>
+    <string name="delete">delete</string>
+    <string name="notification_service_title">Save Your Time attivo</string>
+    <string name="notification_service_description">Clicca qui per i dettagli</string>
 </resources>

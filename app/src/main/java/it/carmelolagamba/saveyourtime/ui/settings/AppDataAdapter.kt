@@ -15,7 +15,9 @@ import android.widget.TextView
 import com.patrykandpatrick.vico.core.extension.setFieldValue
 import it.carmelolagamba.saveyourtime.R
 import it.carmelolagamba.saveyourtime.persistence.App
+import it.carmelolagamba.saveyourtime.persistence.Event
 import it.carmelolagamba.saveyourtime.service.AppService
+import it.carmelolagamba.saveyourtime.service.EventService
 
 /**
  * @author carmelolg
@@ -24,6 +26,7 @@ import it.carmelolagamba.saveyourtime.service.AppService
 class AppDataAdapter(
     private val applications: List<AppDataModel>,
     private val appService: AppService,
+    private val eventService: EventService,
     context: Context
 ) :
     ArrayAdapter<Any?>(context, R.layout.app_data_model, applications) {
@@ -122,6 +125,11 @@ class AppDataAdapter(
                 item.lastUpdate
             )
         )
+        var event: Event? = eventService.findEventByPackageName(viewHolder.packageName)
+        if(event != null){
+            event.notified = false
+            eventService.upsert(event)
+        }
     }
 
     private fun Context.hideKeyboard(view: View) {

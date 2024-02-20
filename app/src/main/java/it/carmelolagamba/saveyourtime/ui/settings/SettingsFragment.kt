@@ -9,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.GridView
 import android.widget.ProgressBar
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -29,7 +28,7 @@ import javax.inject.Inject
  * @since version 1.0
  */
 @AndroidEntryPoint
-class SettingsFragment : Fragment() {
+class SettingsFragment : Fragment() /*AbstractFragment()*/ {
 
     private var _binding: FragmentSettingsBinding? = null
 
@@ -42,6 +41,16 @@ class SettingsFragment : Fragment() {
     @Inject
     lateinit var eventService: EventService
 
+    /**
+    override fun innerOnScroll(x: Float, y: Float) {
+    //binding.gridList.smoothScrollToPosition(y.toInt())
+    //binding.gridList.scrollX = x.toInt()
+    //binding.gridList.scrollY = y.toInt()
+    binding.gridList.scrollListBy(y.toInt())
+    binding.gridList.scrollBarFadeDuration = 2
+    binding.gridList.scrollBarSize = 10
+    }
+     */
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -73,10 +82,10 @@ class SettingsFragment : Fragment() {
             }
 
             builder.setNegativeButton(android.R.string.cancel) { _, _ ->
-                Toast.makeText(
+                /**Toast.makeText(
                     context,
                     android.R.string.cancel, Toast.LENGTH_SHORT
-                ).show()
+                ).show()*/
             }
 
             builder.show()
@@ -105,10 +114,16 @@ class SettingsFragment : Fragment() {
         blockButtons()
 
         val applications = retrieveApps()
-        adapter = AppDataAdapter(applications, appService, requireContext())
+        adapter = AppDataAdapter(applications, appService, eventService, requireContext())
 
         val gridView: GridView = binding.gridList
         gridView.adapter = adapter
+
+        /**
+        gridView.setOnTouchListener { _, event ->
+        gestureDetector.onTouchEvent(event)
+        }
+         */
 
         requireActivity().findViewById<ProgressBar>(R.id.progressbar).visibility = View.INVISIBLE
 
@@ -182,7 +197,8 @@ class SettingsFragment : Fragment() {
             }
         }
 
-        applications.sortWith(compareBy<AppDataModel> { it.checked }.reversed().thenBy { it.name })
+        applications.sortWith(
+            compareBy<AppDataModel> { it.checked }.reversed().thenBy { it.name?.lowercase() })
         return@withContext applications
     }
 

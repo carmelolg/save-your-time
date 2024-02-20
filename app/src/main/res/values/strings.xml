@@ -24,4 +24,7 @@
     <string name="dialog_reset_title">Are you sure?</string>
     <string name="dialog_reset_description">This action will reset all preferences</string>
     <string name="check_notifiy" translatable="false">check_notify</string>
+    <string name="delete">delete</string>
+    <string name="notification_service_title">Save Your Time on action</string>
+    <string name="notification_service_description">Click here for details</string>
 </resources>
