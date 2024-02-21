@@ -2,27 +2,28 @@ package it.carmelolagamba.saveyourtime
 
 import android.app.AppOpsManager
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.os.Process
 import android.provider.Settings
 import android.util.Log
-import android.widget.Button
+import android.view.View
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultCallback
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.app.AppCompatActivity
 import dagger.hilt.android.AndroidEntryPoint
 import it.carmelolagamba.saveyourtime.databinding.ActivityStartBinding
 import it.carmelolagamba.saveyourtime.service.AppService
 import javax.inject.Inject
+
 
 /**
  * @author carmelolg
  * @since version 1.0
  */
 @AndroidEntryPoint
-class StartActivity : AppCompatActivity() {
+class StartActivity : AbstractActivity() {
 
     private lateinit var binding: ActivityStartBinding
 
@@ -35,6 +36,16 @@ class StartActivity : AppCompatActivity() {
         binding = ActivityStartBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        initPage()
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        initPage()
+    }
+
+    private fun initPage(){
         val appOps = getSystemService(APP_OPS_SERVICE) as AppOpsManager
         val mode = appOps.checkOpNoThrow(
             AppOpsManager.OPSTR_GET_USAGE_STATS,
@@ -43,42 +54,46 @@ class StartActivity : AppCompatActivity() {
 
         if (mode != AppOpsManager.MODE_ALLOWED) {
 
-            Log.d("Permission", "Not Allowed")
+            Log.d("SYT Permission", "Usage data not Allowed")
 
-            val allowButton = findViewById<Button>(R.id.allow_button)
-            allowButton.setOnClickListener {
+            binding.allowButton.visibility = View.VISIBLE
+            binding.disclaimer.visibility = View.VISIBLE
+            binding.allowButtonNotification.visibility = View.INVISIBLE
+            binding.disclaimerNotification.visibility = View.INVISIBLE
+
+            binding.allowButton.setOnClickListener {
                 val intent = Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS)
+                intent.data = Uri.fromParts("package", packageName, null)
                 launcher.launch(intent)
             }
 
-        } else {
-            Log.d("Permission", "Allowed")
+        } else if(!isNotificationChannelEnabled(this, resources.getString(R.string.notification_channel_id))){
+
+            Log.d("SYT Permission", "Channel Notification ID not Allowed")
+
+            binding.allowButton.visibility = View.INVISIBLE
+            binding.disclaimer.visibility = View.INVISIBLE
+            binding.allowButtonNotification.visibility = View.VISIBLE
+            binding.disclaimerNotification.visibility = View.VISIBLE
+
+            binding.allowButtonNotification.setOnClickListener {
+                val intent = Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS)
+                    .putExtra(Settings.EXTRA_APP_PACKAGE, packageName)
+                    .putExtra(Settings.EXTRA_CHANNEL_ID, resources.getString(R.string.notification_channel_id))
+                launcher.launch(intent)
+            }
+
+        } else if(isAllCheckPassed()) {
+            Log.d("SYT Permission", "Allowed")
             startMainActivity()
         }
-
-
-    }
-
-    override fun onResume() {
-        super.onResume()
-        val appOps = getSystemService(APP_OPS_SERVICE) as AppOpsManager
-        val mode = appOps.checkOpNoThrow(
-            AppOpsManager.OPSTR_GET_USAGE_STATS,
-            Process.myUid(), packageName
-        )
-
-        if (mode == AppOpsManager.MODE_ALLOWED) {
-            Log.d("Permission", "Allowed")
-            startMainActivity()
-        }
-
     }
 
     private val launcher: ActivityResultLauncher<Intent> = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult(),
         ActivityResultCallback<ActivityResult> { result ->
             if (result.resultCode === RESULT_OK) {
-                Log.d("Permission", "Allowed ok")
+                Log.d("SYT Permission", "Allowed ok")
             }
         })
 

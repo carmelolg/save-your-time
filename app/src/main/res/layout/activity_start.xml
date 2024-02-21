@@ -3,68 +3,80 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:paddingTop="?attr/actionBarSize">
 
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/start_text_view"
+
+    <TextView
+        android:id="@+id/disclaimer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical">
+        android:padding="@dimen/margin_default"
+        android:text="@string/start_disclaimer"
+        android:textColor="?android:colorPrimary"
+        android:textSize="@dimen/text_size_start_activity"></TextView>
 
-        <TextView
-            android:id="@+id/disclaimer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/margin_default"
-            android:text="@string/start_disclaimer"
-            android:textColor="@color/primary"
-            android:textSize="@dimen/text_size_start_activity"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0"></TextView>
-    </androidx.appcompat.widget.LinearLayoutCompat>
 
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/start_button_view"
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/allow_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/start_text_view"
-        android:layout_centerInParent="true"
-        android:gravity="center_horizontal">
+        android:layout_below="@id/disclaimer"
+        android:layout_marginLeft="@dimen/margin_default"
+        android:layout_marginRight="@dimen/margin_default"
+        android:backgroundTint="?android:colorPrimary"
+        android:textColor="?android:colorAccent"
+        android:padding="@dimen/margin_default"
+        android:text="@string/allow_button" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/allow_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/margin_default"
-            android:layout_marginRight="@dimen/margin_default"
-            android:backgroundTint="@color/secondary"
-            android:padding="@dimen/margin_default"
-            android:text="@string/allow_button"
-            android:textColor="@color/text_primary"/>
-
-    </androidx.appcompat.widget.LinearLayoutCompat>
-
-    <!--androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/start_disclaimer_view"
+    <TextView
+        android:id="@+id/disclaimer_notification"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/start_button_view"
-        android:orientation="horizontal">
-        <CheckedTextView
-            android:id="@+id/disclaimer_check_note"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/margin_start_activity"
-            android:layout_weight="1"
-            android:text="@string/list_of_permission"
-            android:textColor="@color/primary"
-            android:textSize="@dimen/text_size_start_activity" />
-    </androidx.appcompat.widget.LinearLayoutCompat-->
+        android:padding="@dimen/margin_default"
+        android:text="@string/start_disclaimer_notification"
+        android:textColor="?android:colorPrimary"
+        android:textSize="@dimen/text_size_start_activity"
+        ></TextView>
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/allow_button_notification"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/disclaimer_notification"
+        android:layout_marginLeft="@dimen/margin_default"
+        android:layout_marginRight="@dimen/margin_default"
+        android:backgroundTint="?android:colorPrimary"
+        android:textColor="?android:colorAccent"
+        android:padding="@dimen/margin_default"
+        android:text="@string/allow_button_notification"/>
+
+
+    <TextView
+        android:id="@+id/privacy_disclaimer_prefix"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/privacy_disclaimer"
+        android:text="@string/privacy_disclaimer_prefix"
+        android:textColor="?android:colorPrimary"
+        android:textSize="@dimen/text_size_default"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        ></TextView>
+    <TextView
+        android:id="@+id/privacy_disclaimer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/margin_default"
+        android:text="@string/privacy_disclaimer"
+        android:textColor="?android:colorPrimary"
+        android:textSize="@dimen/text_size_default"
+        android:layout_gravity="bottom"
+        android:layout_alignParentBottom="true"
+        android:textAlignment="center"
+        ></TextView>
+
 
 </RelativeLayout>

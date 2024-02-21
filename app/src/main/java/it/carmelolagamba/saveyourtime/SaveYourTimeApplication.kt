@@ -25,6 +25,7 @@ class SaveYourTimeApplication : Application() {
         context = applicationContext
         startWorker()
         createNotificationChannel()
+        createNotificationServiceChannel()
     }
 
     companion object {
@@ -65,5 +66,27 @@ class SaveYourTimeApplication : Application() {
 
     }
 
+    private fun createNotificationServiceChannel() {
+
+        val name = ContextCompat.getString(applicationContext, R.string.notification_service_channel_name)
+        val descriptionText =
+            ContextCompat.getString(applicationContext, R.string.notification_service_channel_description)
+        val importance = NotificationManager.IMPORTANCE_HIGH
+        val channel = NotificationChannel(
+            ContextCompat.getString(applicationContext, R.string.notification_service_channel_id),
+            name,
+            importance
+        ).apply {
+            description = descriptionText
+        }
+
+        channel.setSound(null, null)
+        channel.setShowBadge(false)
+
+        // Register the channel with the system.
+        val notificationManager: NotificationManager =
+            applicationContext.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        notificationManager.createNotificationChannel(channel)
+    }
 }
 

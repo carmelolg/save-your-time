@@ -2,21 +2,27 @@ package it.carmelolagamba.saveyourtime.service.worker
 
 import android.content.Context
 import android.util.Log
-import androidx.work.Worker
+import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import it.carmelolagamba.saveyourtime.R
 import it.carmelolagamba.saveyourtime.service.streaming.EventNotifier
+import kotlinx.coroutines.delay
 import javax.inject.Inject
 
 /**
  * @author carmelolg
  * @since version 1.0
  */
-class InnerNotificationWorker @Inject constructor(val context: Context,
-                                                  workerParams: WorkerParameters): Worker(context, workerParams) {
+class InnerNotificationWorker @Inject constructor(
+    val context: Context,
+    workerParams: WorkerParameters
+) : CoroutineWorker(context, workerParams) {
 
-    override fun doWork(): Result {
-        innerDoWork()
+    override suspend fun doWork(): Result {
+        for (i in 1..30) {
+            delay(30000)
+            innerDoWork()
+        }
         return Result.success()
     }
 
@@ -25,7 +31,10 @@ class InnerNotificationWorker @Inject constructor(val context: Context,
      * The event check_notify it's used for checking app with time exceeded
      */
     private fun innerDoWork() {
-        Log.d("SYT", "Notification Worker emit event " + context.resources.getString(R.string.check_notifiy))
+        Log.d(
+            "SYT",
+            "Notification Worker emit event " + context.resources.getString(R.string.check_notifiy)
+        )
         val eventBroadcaster = EventNotifier.getInstance()
         eventBroadcaster.notifyEvent(context.resources.getString(R.string.check_notifiy))
     }

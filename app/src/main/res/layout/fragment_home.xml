@@ -43,7 +43,9 @@
             android:textAlignment="center"
             android:textColor="?android:colorPrimary"
             android:text="@string/label_table"
-            android:textSize="@dimen/text_size_default" />
+            android:textSize="@dimen/text_size_default"
+            android:visibility="invisible"
+            />
 
         <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/usage_table"
@@ -55,21 +57,38 @@
             android:padding="15dp"
             android:stretchColumns="*"></TableLayout>
 
+
         <TextView
-            android:id="@+id/caringMessage"
+            android:id="@+id/caring_message"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginBottom="348dp"
+            android:layout_below="@id/caring_image"
             android:padding="@dimen/margin_default"
-            android:textAlignment="center"
+            android:text="@string/apps_empty_caring_message"
             android:textColor="?android:colorPrimary"
             android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            android:gravity="center"
+            android:visibility="invisible"
+            />
+
+
+        <ImageView
+            android:id="@+id/caring_image"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="70dp"
+            android:layout_alignParentTop="true"
+            android:padding="@dimen/margin_default"
+            android:src="@drawable/ic_arrow_up"
+            android:adjustViewBounds="true"
+            android:scaleType="fitEnd"
+            android:visibility="invisible"
+            />
 
     </RelativeLayout>
 

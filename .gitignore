@@ -18,3 +18,4 @@ google-services.json
 /app/release
 
 /.idea/deploymentTargetDropDown.xml
+*.aab

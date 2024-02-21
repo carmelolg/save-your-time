@@ -1,15 +1,11 @@
 package it.carmelolagamba.saveyourtime
 
-import android.app.AppOpsManager
 import android.content.Intent
 import android.os.Bundle
-import android.os.Process
 import android.util.Log
-import android.view.GestureDetector
 import android.view.View
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
-import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -22,9 +18,7 @@ import it.carmelolagamba.saveyourtime.service.worker.ForegroundNotificationServi
  * @since version 1.0
  */
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
-
-    private lateinit var gestureDetector: GestureDetector
+class MainActivity : AbstractActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private var backPressedTime: Long = 0
@@ -84,14 +78,9 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        val appOps = getSystemService(APP_OPS_SERVICE) as AppOpsManager
-        val mode = appOps.checkOpNoThrow(
-            AppOpsManager.OPSTR_GET_USAGE_STATS,
-            Process.myUid(), packageName
-        )
 
-        if (mode != AppOpsManager.MODE_ALLOWED) {
-            Log.d("Permission", "Not allowed")
+        if (!isAllCheckPassed()) {
+            Log.d("SYT Permission", "Not allowed")
             val intent = Intent(this, StartActivity::class.java)
             startActivity(intent)
         }

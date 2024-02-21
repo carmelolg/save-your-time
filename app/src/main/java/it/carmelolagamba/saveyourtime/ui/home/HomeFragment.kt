@@ -105,6 +105,9 @@ class HomeFragment : Fragment() /*AbstractFragment()*/, EventListener {
 
         if (apps.isNotEmpty()) {
 
+            binding.caringMessage.visibility = View.INVISIBLE
+            binding.caringImage.visibility = View.INVISIBLE
+
             /** Building VICO graph main object */
             var chartData = mutableMapOf<Float, Pair<Float, String>>()
 
@@ -166,7 +169,8 @@ class HomeFragment : Fragment() /*AbstractFragment()*/, EventListener {
             /** Set VICO graph view */
             binding.chartView.setModel(chartEntryModel)
         } else {
-            binding.caringMessage.text = resources.getText(R.string.apps_empty_caring_message)
+            binding.caringMessage.visibility = View.VISIBLE
+            binding.caringImage.visibility = View.VISIBLE
             binding.chartLabel.visibility = View.INVISIBLE
             binding.tableLabel.visibility = View.INVISIBLE
         }
@@ -288,6 +292,9 @@ class HomeFragment : Fragment() /*AbstractFragment()*/, EventListener {
                     requireContext().resources.getString(R.string.warn_title_notify_app),
                     requireContext().resources.getString(R.string.warn_description_notify_app) + " ${app.name}"
                 )
+
+                /** Step 4 Block application */
+                // TODO
             }
         }
 

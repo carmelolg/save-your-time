@@ -38,6 +38,7 @@
         android:layout_toLeftOf="@id/min_label"
         android:textColor="?android:colorSecondary"
         android:backgroundTint="?android:colorSecondary"
+        android:gravity="center"
         android:ems="2"
         android:inputType="time" />
 

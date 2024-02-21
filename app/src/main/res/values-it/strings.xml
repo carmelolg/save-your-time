@@ -4,8 +4,6 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifiche</string>
     <string name="title_settings">Pannello di controllo</string>
-    <string name="allow_button">Permetti</string>
-    <string name="start_disclaimer">L\'applicazione richiede il tuo permesso per visualizzare le statistiche di utilizzo dello smartphone</string>
     <string name="list_of_permission">La lista dei permessi richiesti:\n\n<li>Utilizzo accesso dati</li></string>
     <string name="close_app_message">Premi ancora indietro per chiudere l\'app.</string>
     <string name="time_exceeded">Scad.</string>
@@ -20,6 +18,20 @@
     <string name="dialog_reset_title">Sei sicuro?</string>
     <string name="dialog_reset_description">Se approverai, tutte le tue preferenze saranno eliminate.</string>
     <string name="delete">delete</string>
+
+
+    <!-- START ACTIVITY -->
+    <string name="privacy_disclaimer">Non esportiamo nessun tipo di dato personale o di utilizzo al di fuori della memoria interna del telefono. Nessuna terza parte interagisce con i dati acquisiti dall\'applicazione.</string>
+    <string name="allow_button">Permetti</string>
+    <string name="start_disclaimer">Per funzionare correttamente l\'applicazione richiede l\'accesso ai dati di utilizzo</string>
+    <string name="allow_button_notification">Abilita le notifiche</string>
+    <string name="start_disclaimer_notification">Per funzionare correttamente l\'applicazione richiede di abilitare le notifiche base</string>
+
+    <!-- NOTIFICHE -->
+    <string name="notification_channel_name">Notifiche base</string>
+    <string name="notification_channel_description">Notifiche sul tempo speso sulle applicazioni</string>
     <string name="notification_service_title">Save Your Time attivo</string>
     <string name="notification_service_description">Clicca qui per i dettagli</string>
+    <string name="notification_service_channel_description">Notifica mostrata quando il servizio è attivo</string>
+    <string name="notification_service_channel_name">Notifiche di servizio</string>
 </resources>
