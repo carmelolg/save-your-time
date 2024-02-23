@@ -10,7 +10,7 @@ import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
 import androidx.work.WorkRequest
 import dagger.hilt.android.HiltAndroidApp
-import it.carmelolagamba.saveyourtime.service.worker.InnerNotificationWorker
+import it.carmelolagamba.saveyourtime.service.worker.SYTWorker
 import java.util.concurrent.TimeUnit
 
 /**
@@ -37,7 +37,7 @@ class SaveYourTimeApplication : Application() {
         WorkManager.getInstance(applicationContext).cancelAllWork()
         val inputData = Data.Builder()
 
-        val notificationWorker: WorkRequest = PeriodicWorkRequestBuilder<InnerNotificationWorker>(
+        val notificationWorker: WorkRequest = PeriodicWorkRequestBuilder<SYTWorker>(
             resources.getInteger(
                 R.integer.job_time
             ).toLong(), TimeUnit.MINUTES

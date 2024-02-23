@@ -11,7 +11,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import it.carmelolagamba.saveyourtime.databinding.ActivityMainBinding
-import it.carmelolagamba.saveyourtime.service.worker.ForegroundNotificationService
+import it.carmelolagamba.saveyourtime.service.worker.SYTBackgroundService
 
 /**
  * @author carmelolg
@@ -27,7 +27,7 @@ class MainActivity : AbstractActivity() {
 
         super.onCreate(savedInstanceState)
 
-        ForegroundNotificationService.startService(this)
+        SYTBackgroundService.startService(this)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)

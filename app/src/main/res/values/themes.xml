@@ -20,6 +20,7 @@
         <item name="android:colorPrimary">@color/first</item>
         <item name="android:colorSecondary">@color/second</item>
         <item name="android:colorAccent">@color/white</item>
+        <item name="android:colorActivatedHighlight">@color/fourth</item>
 
     </style>
 

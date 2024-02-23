@@ -13,7 +13,7 @@ import javax.inject.Inject
  * @author carmelolg
  * @since version 1.0
  */
-class InnerNotificationWorker @Inject constructor(
+class SYTWorker @Inject constructor(
     val context: Context,
     workerParams: WorkerParameters
 ) : CoroutineWorker(context, workerParams) {
@@ -27,7 +27,7 @@ class InnerNotificationWorker @Inject constructor(
     }
 
     /**
-     * The worker emit a new event to all listener every 15 minutes
+     * The worker emit a new event to all listener every 30 seconds
      * The event check_notify it's used for checking app with time exceeded
      */
     private fun innerDoWork() {

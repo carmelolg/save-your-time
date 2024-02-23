@@ -1,21 +1,13 @@
 package it.carmelolagamba.saveyourtime.ui.home
 
-import android.app.NotificationManager
-import android.app.PendingIntent
 import android.app.usage.UsageEvents
 import android.app.usage.UsageStatsManager
 import android.content.Context
-import android.content.Intent
-import android.graphics.BitmapFactory
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TableLayout
-import androidx.core.app.NotificationCompat
-import androidx.core.app.NotificationManagerCompat
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.patrykandpatrick.vico.core.axis.AxisPosition
 import com.patrykandpatrick.vico.core.axis.formatter.AxisValueFormatter
@@ -23,18 +15,12 @@ import com.patrykandpatrick.vico.core.axis.horizontal.HorizontalAxis
 import com.patrykandpatrick.vico.core.entry.entryModelOf
 import com.patrykandpatrick.vico.core.entry.entryOf
 import dagger.hilt.android.AndroidEntryPoint
-import it.carmelolagamba.saveyourtime.R
-import it.carmelolagamba.saveyourtime.StartActivity
 import it.carmelolagamba.saveyourtime.databinding.FragmentHomeBinding
 import it.carmelolagamba.saveyourtime.persistence.App
-import it.carmelolagamba.saveyourtime.persistence.Event
 import it.carmelolagamba.saveyourtime.service.AppService
 import it.carmelolagamba.saveyourtime.service.EventService
 import it.carmelolagamba.saveyourtime.service.UtilService
-import it.carmelolagamba.saveyourtime.service.streaming.EventListener
-import it.carmelolagamba.saveyourtime.service.streaming.EventNotifier
 import javax.inject.Inject
-import kotlin.random.Random
 
 
 /**
@@ -42,7 +28,7 @@ import kotlin.random.Random
  * @since version 1.0
  */
 @AndroidEntryPoint
-class HomeFragment : Fragment() /*AbstractFragment()*/, EventListener {
+class HomeFragment : Fragment() /*AbstractFragment()*/ {
 
     private var _binding: FragmentHomeBinding? = null
 
@@ -57,8 +43,6 @@ class HomeFragment : Fragment() /*AbstractFragment()*/, EventListener {
 
     @Inject
     lateinit var eventService: EventService
-
-    private lateinit var eventBroadcaster: EventNotifier
 
     private var apps: List<App> = mutableListOf()
 
@@ -83,21 +67,17 @@ class HomeFragment : Fragment() /*AbstractFragment()*/, EventListener {
         gestureDetector.onTouchEvent(event)
         }*/
 
-        eventBroadcaster = EventNotifier.getInstance()
-
         return root
     }
 
     override fun onStart() {
         super.onStart()
-        eventBroadcaster.addListener(this)
         refreshData()
         refreshUI()
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        eventBroadcaster.removeListener(this)
         _binding = null
     }
 
@@ -247,96 +227,6 @@ class HomeFragment : Fragment() /*AbstractFragment()*/, EventListener {
         }
 
         return (totalUsage / 1000 / 60).toInt()
-    }
-
-    override fun onEvent(channel: String) {
-        Log.d("SYT", "Event $channel received")
-
-        refreshData()
-
-        /** Step 0 If it's midnight, reset all and clean DB */
-        if (utilService.isNearMidnight()) {
-            appService.resetAllUsages()
-        }
-
-        eventService.cleanDB()
-        appService.resetOldData()
-
-        /** Step 1 Check application with time exceeded */
-        val exceededApp: List<App> = appService.findExceededApplication()
-
-        /** Step 2 if app is already notified to user, do nothing */
-        exceededApp.forEach { app: App ->
-            if (!eventService.isAppNotified(app.packageName)) {
-                /** Step 3 if app isn't notified to user, create Event and save it on DB */
-                var event: Event? = eventService.findEventByPackageName(app.packageName)
-                if (event != null) {
-                    event.notified = true
-                    event.insertDate = System.currentTimeMillis()
-                    eventService.upsert(event)
-                } else {
-                    eventService.insert(
-                        Event(
-                            null,
-                            channel,
-                            app.packageName,
-                            System.currentTimeMillis(),
-                            true
-                        )
-                    )
-                }
-                /** Step 3.1 Send the notification */
-                Log.d("SYT", "Sending notification for $app")
-                sendNotification(
-                    requireContext(),
-                    requireContext().resources.getString(R.string.warn_title_notify_app),
-                    requireContext().resources.getString(R.string.warn_description_notify_app) + " ${app.name}"
-                )
-
-                /** Step 4 Block application */
-                // TODO
-            }
-        }
-
-    }
-
-    private fun sendNotification(context: Context, title: String, description: String) {
-
-        val startActivityIntent = Intent(context, StartActivity::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        }
-
-
-        val startActivityPendingIntent = PendingIntent.getActivity(
-            context,
-            Random.nextInt(),
-            startActivityIntent,
-            PendingIntent.FLAG_MUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
-        )
-
-        val builder = NotificationCompat.Builder(
-            context,
-            ContextCompat.getString(context, R.string.notification_channel_id)
-        )
-            .setSmallIcon(R.drawable.ic_launcher_foreground)
-            .setLargeIcon(
-                BitmapFactory.decodeResource(
-                    resources,
-                    R.drawable.ic_launcher_foreground
-                )
-            )
-            .setContentTitle(title)
-            .setContentText(description)
-            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-            .setContentIntent(startActivityPendingIntent)
-            .setAutoCancel(true)
-            .build()
-
-        val notificationManager: NotificationManager =
-            context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        with(NotificationManagerCompat.from(context)) {
-            notificationManager.notify(Random.nextInt(), builder)
-        }
     }
 
 }

@@ -9,7 +9,7 @@ import android.util.Log
  * @author carmelolg
  * @since version 1.0
  */
-class StartReceiver : BroadcastReceiver() {
+class SYTReceiver : BroadcastReceiver() {
 
     override fun onReceive(context: Context, intent: Intent?) {
         Log.d("SYT", "broadcast receiver service start")
