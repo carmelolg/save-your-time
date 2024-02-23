@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Spare deine Zeit</string>
+    <string name="title_home">Startseite</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Benachrichtigungen</string>
+    <string name="title_settings">Steuerung</string>
+    <string name="list_of_permission">Liste der angeforderten Berechtigungen:\n\n<li>Zugriff auf Nutzungsdaten</li></string>
+    <string name="close_app_message">Drücken Sie erneut zurück, um die App zu schließen.</string>
+    <string name="time_exceeded">Abg.</string>
+    <string name="application_label">App</string>
+    <string name="time_usage_label">Verwendet</string>
+    <string name="time_remaining_label">Verbleibend</string>
+    <string name="warn_title_notify_app">Zeit zum Ausloggen</string>
+    <string name="warn_description_notify_app">Tageslimit überschritten auf</string>
+    <string name="apps_empty_caring_message">Sie sehen hier Ihre Statistiken. Klicken Sie auf das Steuerungspanel, um Apps zur Überwachung hinzuzufügen.</string>
+    <string name="label_table">Zusammenfassende Tabelle</string>
+    <string name="label_chart">Trenddiagramm</string>
+    <string name="dialog_reset_title">Sind Sie sicher?</string>
+    <string name="dialog_reset_description">Wenn Sie fortfahren, werden alle Ihre Einstellungen zurückgesetzt.</string>
+    <string name="delete">löschen</string>
+
+    <!-- START ACTIVITY -->
+    <string name="privacy_disclaimer">Wir exportieren keine persönlichen oder Nutzungsdaten außerhalb des internen Speichers des Telefons. Keine Drittanbieter greifen auf die von der Anwendung gesammelten Daten zu.</string>
+    <string name="allow_button">Zulassen</string>
+    <string name="start_disclaimer">Die Anwendung benötigt Zugriff auf Nutzungsdaten, um ordnungsgemäß zu funktionieren.</string>
+    <string name="allow_button_notification">Benachrichtigungen aktivieren</string>
+    <string name="start_disclaimer_notification">Die Anwendung erfordert die Aktivierung grundlegender Benachrichtigungen, um ordnungsgemäß zu funktionieren.</string>
+
+    <!-- NOTIFICATIONS -->
+    <string name="notification_channel_name">Grundlegende Benachrichtigungen</string>
+    <string name="notification_channel_description">Benachrichtigungen über die auf Apps verbrachte Zeit</string>
+    <string name="notification_service_title">Spare deine Zeit Aktiv</string>
+    <string name="notification_service_description">Klicken Sie hier für Details</string>
+    <string name="notification_service_channel_description">Benachrichtigung, die angezeigt wird, wenn der Dienst aktiv ist</string>
+    <string name="notification_service_channel_name">Service-Benachrichtigungen</string>
+    <string name="control_panel_total_label">Total daily usage</string>
+</resources>

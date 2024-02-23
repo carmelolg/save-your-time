@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">あなたの時間を節約</string>
+    <string name="title_home">ホーム</string>
+    <string name="title_dashboard">ダッシュボード</string>
+    <string name="title_notifications">通知</string>
+    <string name="title_settings">設定パネル</string>
+    <string name="list_of_permission">要求された許可のリスト:\n\n<li>データ使用のアクセス</li></string>
+    <string name="close_app_message">アプリを閉じるにはもう一度バックを押してください。</string>
+    <string name="time_exceeded">期限切れ</string>
+    <string name="application_label">アプリ</string>
+    <string name="time_usage_label">使用済み</string>
+    <string name="time_remaining_label">残り</string>
+    <string name="warn_title_notify_app">ログオフする時間です</string>
+    <string name="warn_description_notify_app">以下のデイリーリミットが超過しました</string>
+    <string name="apps_empty_caring_message">ここには統計が表示されます。監視するアプリを追加するにはコントロールパネルをクリックしてください。</string>
+    <string name="label_table">サマリーテーブル</string>
+    <string name="label_chart">トレンドチャート</string>
+    <string name="dialog_reset_title">本当に？</string>
+    <string name="dialog_reset_description">続行すると、すべての設定がリセットされます。</string>
+    <string name="delete">削除</string>
+
+    <!-- START ACTIVITY -->
+    <string name="privacy_disclaimer">私たちは、アプリケーションが収集したデータを内部メモリー以外にはエクスポートしません。第三者は、アプリケーションによって収集されたデータに干渉しません。</string>
+    <string name="allow_button">許可する</string>
+    <string name="start_disclaimer">正常に機能するには、アプリケーションが使用データへのアクセスが必要です。</string>
+    <string name="allow_button_notification">通知を有効にする</string>
+    <string name="start_disclaimer_notification">正常に機能するには、アプリケーションが基本的な通知を有効にする必要があります。</string>
+
+    <!-- NOTIFICATIONS -->
+    <string name="notification_channel_name">基本通知</string>
+    <string name="notification_channel_description">アプリで過ごした時間に関する通知</string>
+    <string name="notification_service_title">あなたの時間を節約アクティブ</string>
+    <string name="notification_service_description">詳細についてはこちらをクリックしてください</string>
+    <string name="notification_service_channel_description">サービスがアクティブな場合に表示される通知</string>
+    <string name="notification_service_channel_name">サービス通知</string>
+    <string name="control_panel_total_label">Total daily usage</string>
+</resources>

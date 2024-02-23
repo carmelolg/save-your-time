@@ -4,41 +4,40 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="title_settings">Control Panel</string>
-    <string name="list_of_permission">Permission list is the following:\n\n<li>Component usage statistics</li></string>
-    <string name="close_app_message">Press back again to leave the app.</string>
-    <string name="time_exceeded">Exc.</string>
-    <string name="application_label">Application</string>
-    <string name="time_usage_label">Usage</string>
+    <string name="list_of_permission">List of requested permissions:\n\n<li>Data Usage Access</li></string>
+    <string name="close_app_message">Press back again to close the app.</string>
+    <string name="time_exceeded">Exp.</string>
+    <string name="application_label">App</string>
+    <string name="time_usage_label">Used</string>
     <string name="time_remaining_label">Remaining</string>
-    <string name="warn_title_notify_app">Turn off warning</string>
-    <string name="warn_description_notify_app">You have exceeded your day limit for </string>
-    <string name="apps_empty_caring_message">"You'll visualize here some statistics about your current usages. Click on control plane for adding apps on monitoring "</string>
-    <string name="label_table">Table</string>
-    <string name="label_chart">Chart</string>
+    <string name="warn_title_notify_app">Time to Log Off</string>
+    <string name="warn_description_notify_app">Daily limit exceeded on</string>
+    <string name="apps_empty_caring_message">You will see your statistics here. Click on the control panel to add apps for monitoring.</string>
+    <string name="label_table">Summary Table</string>
+    <string name="label_chart">Trend Chart</string>
     <string name="dialog_reset_title">Are you sure?</string>
-    <string name="dialog_reset_description">This action will reset all preferences</string>
+    <string name="dialog_reset_description">If you proceed, all your preferences will be reset.</string>
     <string name="check_notifiy" translatable="false">check_notify</string>
     <string name="delete">delete</string>
-
+    <string name="control_panel_total_label">Expected daily usage</string>
 
     <!-- START ACTIVITY -->
-    <string name="privacy_disclaimer">We do not export any personal or usage data outside of your phone\'s internal storage. No third party interacts with the data acquired by the application.</string>
+
     <string name="privacy_disclaimer_prefix" translatable="false">Note</string>
+    <string name="privacy_disclaimer">We do not export any personal or usage data outside the internal memory of the phone. No third party interacts with the data collected by the application.</string>
     <string name="allow_button">Allow</string>
-    <string name="start_disclaimer">This app needs \"Usage access settings\" enabled to work properly</string>
-    <!--  If you want to use this app you must permit us to get the phone usages statistics -->
-    <string name="allow_button_notification">Allow notifications</string>
-    <string name="start_disclaimer_notification">This app needs \"Alert notifications\" enabled to work properly </string>
+    <string name="start_disclaimer">To function properly, the application requires access to usage data.</string>
+    <string name="allow_button_notification">Enable Notifications</string>
+    <string name="start_disclaimer_notification">To function properly, the application requires enabling basic notifications.</string>
 
     <!-- NOTIFICATIONS -->
     <string name="default_notification_channel_id" translatable="false">default_channel_id</string>
     <string name="notification_channel_id" translatable="false">channel_id</string>
-    <string name="notification_channel_name">Alert notifications</string>
-    <string name="notification_channel_description">Notifications about exceeded time alerts</string>
-    <string name="notification_service_title">Save Your Time on action</string>
-    <string name="notification_service_description">Click here for details</string>
+    <string name="notification_channel_name">Basic Notifications</string>
+    <string name="notification_channel_description">Notifications about time spent on applications</string>
     <string name="notification_service_channel_id" translatable="false">service_channel_id</string>
-    <string name="notification_service_channel_description">Show a message when the service is active</string>
-    <string name="notification_service_channel_name">Service notifications</string>
-
+    <string name="notification_service_title">Save Your Time Active</string>
+    <string name="notification_service_description">Click here for details</string>
+    <string name="notification_service_channel_description">Notification shown when the service is active</string>
+    <string name="notification_service_channel_name">Service Notifications</string>
 </resources>

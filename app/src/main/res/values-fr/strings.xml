@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Économisez votre temps</string>
+    <string name="title_home">Accueil</string>
+    <string name="title_dashboard">Tableau de bord</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_settings">Panneau de configuration</string>
+    <string name="list_of_permission">Liste des autorisations demandées :\n\n<li>Accès aux données d\'utilisation</li></string>
+    <string name="close_app_message">Appuyez à nouveau sur retour pour fermer l\'application.</string>
+    <string name="time_exceeded">Exp.</string>
+    <string name="application_label">Application</string>
+    <string name="time_usage_label">Utilisé</string>
+    <string name="time_remaining_label">Restant</string>
+    <string name="warn_title_notify_app">Il est temps de se déconnecter</string>
+    <string name="warn_description_notify_app">Limite quotidienne dépassée sur</string>
+    <string name="apps_empty_caring_message">Vous verrez ici vos statistiques. Cliquez sur le panneau de configuration pour ajouter des applications à surveiller.</string>
+    <string name="label_table">Tableau Récapitulatif</string>
+    <string name="label_chart">Graphique de Tendance</string>
+    <string name="dialog_reset_title">Êtes-vous sûr ?</string>
+    <string name="dialog_reset_description">Si vous continuez, toutes vos préférences seront réinitialisées.</string>
+    <string name="delete">supprimer</string>
+
+    <!-- START ACTIVITY -->
+    <string name="privacy_disclaimer">Nous n\'exportons aucune donnée personnelle ou d\'utilisation en dehors de la mémoire interne du téléphone. Aucune tierce partie n\'interagit avec les données collectées par l\'application.</string>
+    <string name="allow_button">Autoriser</string>
+    <string name="start_disclaimer">Pour fonctionner correctement, l\'application nécessite l\'accès aux données d\'utilisation.</string>
+    <string name="allow_button_notification">Activer les notifications</string>
+    <string name="start_disclaimer_notification">Pour fonctionner correctement, l\'application nécessite d\'activer les notifications de base.</string>
+
+    <!-- NOTIFICATIONS -->
+    <string name="notification_channel_name">Notifications de Base</string>
+    <string name="notification_channel_description">Notifications sur le temps passé sur les applications</string>
+    <string name="notification_service_title">Économisez votre temps Actif</string>
+    <string name="notification_service_description">Cliquez ici pour les détails</string>
+    <string name="notification_service_channel_description">Notification affichée lorsque le service est actif</string>
+    <string name="notification_service_channel_name">Notifications de Service</string>
+    <string name="control_panel_total_label">Total daily usage</string>
+</resources>

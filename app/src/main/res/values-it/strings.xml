@@ -18,6 +18,7 @@
     <string name="dialog_reset_title">Sei sicuro?</string>
     <string name="dialog_reset_description">Se approverai, tutte le tue preferenze saranno eliminate.</string>
     <string name="delete">delete</string>
+    <string name="control_panel_total_label">Utilizzo quotidiano totale</string>
 
 
     <!-- START ACTIVITY -->

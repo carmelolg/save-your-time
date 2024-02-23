@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Экономьте своё время</string>
+    <string name="title_home">Главная</string>
+    <string name="title_dashboard">Панель управления</string>
+    <string name="title_notifications">Уведомления</string>
+    <string name="title_settings">Настройки</string>
+    <string name="list_of_permission">Список запрашиваемых разрешений:\n\n<li>Доступ к данным использования</li></string>
+    <string name="close_app_message">Нажмите ещё раз кнопку "назад", чтобы закрыть приложение.</string>
+    <string name="time_exceeded">Истекло время</string>
+    <string name="application_label">Приложение</string>
+    <string name="time_usage_label">Использовано</string>
+    <string name="time_remaining_label">Осталось</string>
+    <string name="warn_title_notify_app">Пора выйти</string>
+    <string name="warn_description_notify_app">Превышен суточный лимит на</string>
+    <string name="apps_empty_caring_message">Здесь отображаются ваши статистические данные. Нажмите на панель управления, чтобы добавить приложения для отслеживания.</string>
+    <string name="label_table">Таблица сводки</string>
+    <string name="label_chart">График трендов</string>
+    <string name="dialog_reset_title">Вы уверены?</string>
+    <string name="dialog_reset_description">При продолжении все ваши настройки будут сброшены.</string>
+    <string name="delete">удалить</string>
+
+    <!-- START ACTIVITY -->
+    <string name="privacy_disclaimer">Мы не экспортируем никакие личные или использованные данные за пределами внутренней памяти телефона. Никакие сторонние лица не взаимодействуют с данными, собранными приложением.</string>
+    <string name="allow_button">Разрешить</string>
+    <string name="start_disclaimer">Для правильной работы приложение требует доступа к данным использования.</string>
+    <string name="allow_button_notification">Включить уведомления</string>
+    <string name="start_disclaimer_notification">Для правильной работы приложение требует включения основных уведомлений.</string>
+
+    <!-- NOTIFICATIONS -->
+    <string name="notification_channel_name">Основные уведомления</string>
+    <string name="notification_channel_description">Уведомления о времени, проведенном в приложениях</string>
+    <string name="notification_service_title">Экономьте своё время активно</string>
+    <string name="notification_service_description">Нажмите здесь для деталей</string>
+    <string name="notification_service_channel_description">Уведомление, отображаемое при активации службы</string>
+    <string name="notification_service_channel_name">Служебные уведомления</string>
+    <string name="control_panel_total_label">Total daily usage</string>
+</resources>
