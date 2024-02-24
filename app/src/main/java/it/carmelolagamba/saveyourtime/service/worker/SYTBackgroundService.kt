@@ -187,7 +187,7 @@ class SYTBackgroundService : Service(), EventListener {
     override fun onEvent(channel: String) {
         Log.d("SYT", "Background service event received $channel")
 
-        /** Refreshing data */
+        /** Step 0 Refreshing data */
         eventService.cleanDB()
         refreshData()
 
@@ -197,7 +197,7 @@ class SYTBackgroundService : Service(), EventListener {
         /** Step 2 if app is already notified to user, do nothing */
         exceededApp.forEach { app: App ->
             if (!eventService.isAppNotified(app.packageName)) {
-                /** Step 3 if app isn't notified to user, create Event and save it on DB */
+                /** Step 2.1 if app isn't notified to user, create Event and save it on DB */
                 val event: Event? = eventService.findEventByPackageName(app.packageName)
                 if (event != null) {
                     event.notified = true
@@ -214,7 +214,7 @@ class SYTBackgroundService : Service(), EventListener {
                         )
                     )
                 }
-                /** Step 3.1 Send the notification */
+                /** Step 2.2 Send the notification */
                 Log.d("SYT", "Sending notification for $app")
                 sendNotification(
                     this,
@@ -222,7 +222,7 @@ class SYTBackgroundService : Service(), EventListener {
                     this.resources.getString(R.string.warn_description_notify_app) + " ${app.name}"
                 )
 
-                /** Step 4 Block application */
+                /** Step 3 Block application */
                 // TODO
             }
         }
