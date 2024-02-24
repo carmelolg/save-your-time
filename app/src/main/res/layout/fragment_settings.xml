@@ -6,36 +6,75 @@
     android:layout_height="wrap_content"
     tools:context=".ui.settings.SettingsFragment">
 
-    <!--
-    android:backgroundTint="?android:colorPrimary"
-        app:tint="@color/white"
-    -->
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/resetFab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:clickable="true"
-        android:contentDescription="@string/delete"
-        android:backgroundTint="?android:colorPrimary"
-        app:tint="?android:colorAccent"
-        android:src="@android:drawable/ic_delete"
-        app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
-        app:useCompatPadding="true" />
+    <LinearLayout
+        android:id="@+id/top_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottom_layout"
+        android:orientation="horizontal">
 
-        <GridView
-            android:id="@+id/grid_list"
-            style="@android:style/Widget.Material.GridView"
+        <FrameLayout
             android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <!--
+            android:backgroundTint="?android:colorPrimary"
+                app:tint="@color/white"
+            -->
+            <GridView
+                android:id="@+id/grid_list"
+                style="@android:style/Widget.Material.GridView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fastScrollEnabled="false"
+                android:fastScrollStyle="@style/Theme.SaveYourTime"
+                android:scrollIndicators="right"
+                android:scrollbarStyle="insideInset"
+                android:textAlignment="center"
+                android:textSize="@dimen/text_size_default">
+
+            </GridView>
+
+        </FrameLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/bottom_layout"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:fastScrollEnabled="false"
-            android:fastScrollStyle="@style/Theme.SaveYourTime"
-            android:scrollIndicators="right"
-            android:scrollbarStyle="insideInset"
-            android:textAlignment="center"
-            android:textSize="@dimen/text_size_default">
+            android:layout_weight="1">
 
-        </GridView>
+            <TextView
+                android:id="@+id/total_time"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:gravity="center"
+                android:text="@string/control_panel_total_label"
+                android:textAlignment="center"
+                android:textColor="?android:colorActivatedHighlight"
+                android:textSize="@dimen/text_size_default" />
+        </RelativeLayout>
 
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+            <Button
+                android:id="@+id/reset_button"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="15dp"
+                android:text="Reset"
+
+                />
+        </RelativeLayout>
+    </LinearLayout>
 </RelativeLayout>

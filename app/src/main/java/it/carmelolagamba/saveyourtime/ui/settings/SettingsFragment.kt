@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -66,10 +67,10 @@ class SettingsFragment : Fragment() /*AbstractFragment()*/ {
         val progressBar = requireActivity().findViewById<ProgressBar>(R.id.progressbar)
         progressBar.visibility = View.VISIBLE
 
-        val resetFab = binding.resetFab
+        val resetButton = binding.resetButton
 
         /** Dialog if floating button (delete) is clicked */
-        resetFab.setOnClickListener {
+        resetButton.setOnClickListener {
 
             val builder = AlertDialog.Builder(context)
             builder.setTitle(resources.getText(R.string.dialog_reset_title))
@@ -83,8 +84,8 @@ class SettingsFragment : Fragment() /*AbstractFragment()*/ {
 
             builder.setNegativeButton(android.R.string.cancel) { _, _ ->
                 /**Toast.makeText(
-                    context,
-                    android.R.string.cancel, Toast.LENGTH_SHORT
+                context,
+                android.R.string.cancel, Toast.LENGTH_SHORT
                 ).show()*/
             }
 
@@ -95,9 +96,9 @@ class SettingsFragment : Fragment() /*AbstractFragment()*/ {
         binding.gridList.setOnScrollChangeListener { _, _, scrollY, _, oldScrollY ->
             val x = scrollY - oldScrollY
             if (x > 0) {
-                resetFab.show()
+                resetButton.visibility = View.VISIBLE
             } else if (x < 0) {
-                resetFab.hide()
+                resetButton.visibility = View.INVISIBLE
             }
         }
 
@@ -114,6 +115,22 @@ class SettingsFragment : Fragment() /*AbstractFragment()*/ {
         blockButtons()
 
         val applications = retrieveApps()
+
+        var totalTimeChecked = 0
+        applications.filter { it.notifyTime > 0 && it.checked }.map { it.notifyTime }.forEach {
+            Log.d("SYT", it.toString())
+            totalTimeChecked += it
+        }
+
+        if (totalTimeChecked > 0) {
+            binding.bottomLayout.visibility = View.VISIBLE
+            val hours: Int = totalTimeChecked / 60
+            val minutes: Int = totalTimeChecked % 60
+            binding.totalTime.text = binding.totalTime.text.toString() + " $hours h, $minutes min"
+        } else {
+            binding.bottomLayout.visibility = View.INVISIBLE
+        }
+        
         adapter = AppDataAdapter(applications, appService, eventService, requireContext())
 
         val gridView: GridView = binding.gridList
@@ -205,13 +222,15 @@ class SettingsFragment : Fragment() /*AbstractFragment()*/ {
     private fun blockButtons() {
         requireActivity().findViewById<View>(R.id.navigation_home).isEnabled = false
         requireActivity().findViewById<View>(R.id.navigation_info).isEnabled = false
-        binding.resetFab.hide()
+        binding.resetButton.visibility = View.INVISIBLE
+        binding.bottomLayout.visibility = View.INVISIBLE
     }
 
     private fun unblockButtons() {
         requireActivity().findViewById<View>(R.id.navigation_home).isEnabled = true
         requireActivity().findViewById<View>(R.id.navigation_info).isEnabled = true
-        binding.resetFab.show()
+        binding.bottomLayout.visibility = View.VISIBLE
+        binding.resetButton.visibility = View.VISIBLE
     }
 
     override fun onDestroyView() {
