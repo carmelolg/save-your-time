@@ -31,7 +31,7 @@ interface EventDao {
     @Query("DELETE FROM event")
     fun deleteAll()
 
-    @Query("DELETE FROM event WHERE insertDate < :lastMidnight")
+    @Query("DELETE FROM event WHERE insertDate <= :lastMidnight")
     fun cleanDB(lastMidnight: Long)
 
     @Update

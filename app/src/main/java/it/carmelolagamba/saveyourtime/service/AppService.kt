@@ -33,8 +33,7 @@ class AppService @Inject constructor() {
     }
 
     /**
-     *
-     * @return all applications (in List) checked by the user
+     * Reset
      */
     fun resetOldData() {
 
@@ -76,6 +75,7 @@ class AppService @Inject constructor() {
      */
     fun upsert(app: App): App {
         return run {
+            app.lastUpdate = System.currentTimeMillis()
             DBFactory.getDatabase(SaveYourTimeApplication.context).applicationDao().update(app)
             app
         }

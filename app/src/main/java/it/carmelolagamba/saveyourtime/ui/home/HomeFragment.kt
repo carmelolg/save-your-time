@@ -1,8 +1,5 @@
 package it.carmelolagamba.saveyourtime.ui.home
 
-import android.app.usage.UsageEvents
-import android.app.usage.UsageStatsManager
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -18,8 +15,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import it.carmelolagamba.saveyourtime.databinding.FragmentHomeBinding
 import it.carmelolagamba.saveyourtime.persistence.App
 import it.carmelolagamba.saveyourtime.service.AppService
-import it.carmelolagamba.saveyourtime.service.EventService
-import it.carmelolagamba.saveyourtime.service.UtilService
 import javax.inject.Inject
 
 
@@ -33,16 +28,10 @@ class HomeFragment : Fragment() /*AbstractFragment()*/ {
     private var _binding: FragmentHomeBinding? = null
 
     @Inject
-    lateinit var utilService: UtilService
-
-    @Inject
     lateinit var appService: AppService
 
     @Inject
     lateinit var homeService: HomeService
-
-    @Inject
-    lateinit var eventService: EventService
 
     private var apps: List<App> = mutableListOf()
 
@@ -72,7 +61,7 @@ class HomeFragment : Fragment() /*AbstractFragment()*/ {
 
     override fun onStart() {
         super.onStart()
-        refreshData()
+        retrieveApps()
         refreshUI()
     }
 
@@ -156,77 +145,12 @@ class HomeFragment : Fragment() /*AbstractFragment()*/ {
         }
     }
 
-    private fun refreshData() {
+    private fun retrieveApps() {
 
-        /** Clean old data */
-        appService.resetOldData()
-
-        /** Get all checked apps from local DB. A checked app is selected by the final user on the control plane */
         apps = appService.findAllChecked()
 
-        /** If the final user selected at list one application, then build the page */
-        if (apps.isNotEmpty()) {
-
-            apps.forEach { app ->
-
-                app.todayUsage = getUsageInMinutesByPackage(app.packageName)
-                if (app.todayUsage > 0) {
-                    app.lastUpdate = System.currentTimeMillis()
-                }
-
-                /** Update app on local DB */
-                appService.upsert(app)
-            }
-
-            apps = apps.sortedWith(compareBy<App> { it.todayUsage }.reversed()
-                .thenBy { it.name.lowercase() })
-                .toList()
-        }
+        apps = apps.sortedWith(compareBy<App> { it.todayUsage }.reversed()
+            .thenBy { it.name.lowercase() })
+            .toList()
     }
-
-    /**
-     * @param packageName the package of the app that you want get the total daily usage
-     * @return the total usage in minutes
-     */
-    private fun getUsageInMinutesByPackage(packageName: String): Int {
-
-        val statsManager =
-            requireContext().getSystemService(Context.USAGE_STATS_SERVICE) as UsageStatsManager
-
-        val usageEvents: UsageEvents = statsManager.queryEvents(
-            utilService.todayMidnightMillis(),
-            utilService.tomorrowMidnightMillis()
-        )
-
-        var singleEventUsage: Long = 0L
-        var totalUsage: Long = 0L
-
-        while (usageEvents.hasNextEvent()) {
-            val currentEvent: UsageEvents.Event = UsageEvents.Event()
-            usageEvents.getNextEvent(currentEvent)
-
-            if (packageName == currentEvent.packageName) {
-                val time = currentEvent.timeStamp
-
-                if (currentEvent.eventType == UsageEvents.Event.ACTIVITY_RESUMED
-                    || currentEvent.eventType == UsageEvents.Event.ACTIVITY_PAUSED
-                ) {
-                    if (currentEvent.eventType == UsageEvents.Event.ACTIVITY_RESUMED) {
-                        singleEventUsage = time
-                    } else {
-                        if (singleEventUsage > 0) {
-                            totalUsage = totalUsage.plus(time - singleEventUsage)
-                        }
-                        singleEventUsage = 0L
-                    }
-                }
-            }
-        }
-        if (singleEventUsage > 0) {
-            totalUsage += (System.currentTimeMillis() - singleEventUsage)
-        }
-
-        return (totalUsage / 1000 / 60).toInt()
-    }
-
 }
