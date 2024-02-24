@@ -3,6 +3,8 @@ package it.carmelolagamba.saveyourtime.service.worker
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.app.Service
+import android.app.usage.UsageEvents
+import android.app.usage.UsageStatsManager
 import android.content.Context
 import android.content.Intent
 import android.graphics.BitmapFactory
@@ -43,6 +45,8 @@ class SYTBackgroundService : Service(), EventListener {
 
     @Inject
     lateinit var eventService: EventService
+
+    private var apps: List<App> = mutableListOf()
 
     companion object {
         fun startService(context: Context) {
@@ -112,17 +116,80 @@ class SYTBackgroundService : Service(), EventListener {
 
         startForeground(1, notification)
     }
+    private fun refreshData() {
+
+        /** Get all checked apps from local DB. A checked app is selected by the final user on the control plane */
+        apps = appService.findAllChecked()
+
+        /** If the final user selected at list one application, then build the page */
+        if (apps.isNotEmpty()) {
+
+            apps.forEach { app ->
+
+                app.todayUsage = getUsageInMinutesByPackage(app.packageName)
+                if (app.todayUsage > 0) {
+                    app.lastUpdate = System.currentTimeMillis()
+                }
+
+                /** Update app on local DB */
+                appService.upsert(app)
+            }
+
+        }
+    }
+
+    /**
+     * @param packageName the package of the app that you want get the total daily usage
+     * @return the total usage in minutes
+     */
+    private fun getUsageInMinutesByPackage(packageName: String): Int {
+
+        val statsManager =
+            applicationContext.getSystemService(Context.USAGE_STATS_SERVICE) as UsageStatsManager
+
+        val usageEvents: UsageEvents = statsManager.queryEvents(
+            utilService.todayMidnightMillis(),
+            utilService.tomorrowMidnightMillis()
+        )
+
+        var singleEventUsage: Long = 0L
+        var totalUsage: Long = 0L
+
+        while (usageEvents.hasNextEvent()) {
+            val currentEvent: UsageEvents.Event = UsageEvents.Event()
+            usageEvents.getNextEvent(currentEvent)
+
+            if (packageName == currentEvent.packageName) {
+                val time = currentEvent.timeStamp
+
+                if (currentEvent.eventType == UsageEvents.Event.ACTIVITY_RESUMED
+                    || currentEvent.eventType == UsageEvents.Event.ACTIVITY_PAUSED
+                ) {
+                    if (currentEvent.eventType == UsageEvents.Event.ACTIVITY_RESUMED) {
+                        singleEventUsage = time
+                    } else {
+                        if (singleEventUsage > 0) {
+                            totalUsage = totalUsage.plus(time - singleEventUsage)
+                        }
+                        singleEventUsage = 0L
+                    }
+                }
+            }
+        }
+        if (singleEventUsage > 0) {
+            totalUsage += (System.currentTimeMillis() - singleEventUsage)
+        }
+
+        return (totalUsage / 1000 / 60).toInt()
+    }
+
 
     override fun onEvent(channel: String) {
         Log.d("SYT", "Background service event received $channel")
 
-        /** Step 0 If it's midnight, reset all and clean DB */
-        if (utilService.isNearMidnight()) {
-            appService.resetAllUsages()
-        }
-
+        /** Refreshing data */
         eventService.cleanDB()
-        appService.resetOldData()
+        refreshData()
 
         /** Step 1 Check application with time exceeded */
         val exceededApp: List<App> = appService.findExceededApplication()
