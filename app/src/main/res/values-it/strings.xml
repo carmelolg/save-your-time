@@ -12,6 +12,7 @@
     <string name="time_remaining_label">Rimasti</string>
     <string name="warn_title_notify_app">È ora di spegnere</string>
     <string name="warn_description_notify_app">Limite giornaliero superato su</string>
+    <string name="warn_description_notify_app_recheck">Stai continuando ad usare l\'app! Limite giornaliero superato su</string>
     <string name="apps_empty_caring_message">"Visualizzerai qui le tue statistiche. Clicca su pannello di controllo per aggiungere le app al monitoraggio."</string>
     <string name="label_table">Tabella riepilogativa</string>
     <string name="label_chart">Andamento grafico</string>

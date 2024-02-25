@@ -116,6 +116,7 @@ class SYTBackgroundService : Service(), EventListener {
 
         startForeground(1, notification)
     }
+
     private fun refreshData() {
 
         /** Get all checked apps from local DB. A checked app is selected by the final user on the control plane */
@@ -131,6 +132,8 @@ class SYTBackgroundService : Service(), EventListener {
                     app.lastUpdate = System.currentTimeMillis()
                 }
 
+                Log.d("SYT", "${app.name} used ${app.todayUsage}")
+
                 /** Update app on local DB */
                 appService.upsert(app)
             }
@@ -140,16 +143,22 @@ class SYTBackgroundService : Service(), EventListener {
 
     /**
      * @param packageName the package of the app that you want get the total daily usage
+     * @param start millis of start time of the range @default today's midnight
+     * @param end millis of end time of the range @default tomorrow's midnight
      * @return the total usage in minutes
      */
-    private fun getUsageInMinutesByPackage(packageName: String): Int {
+    private fun getUsageInMinutesByPackage(
+        packageName: String,
+        start: Long = utilService.todayMidnightMillis(),
+        end: Long = utilService.tomorrowMidnightMillis()
+    ): Int {
 
         val statsManager =
             applicationContext.getSystemService(Context.USAGE_STATS_SERVICE) as UsageStatsManager
 
         val usageEvents: UsageEvents = statsManager.queryEvents(
-            utilService.todayMidnightMillis(),
-            utilService.tomorrowMidnightMillis()
+            start,
+            end
         )
 
         var singleEventUsage: Long = 0L
@@ -196,77 +205,98 @@ class SYTBackgroundService : Service(), EventListener {
 
         /** Step 2 if app is already notified to user, do nothing */
         exceededApp.forEach { app: App ->
-            if (!eventService.isAppNotified(app.packageName)) {
-                /** Step 2.1 if app isn't notified to user, create Event and save it on DB */
-                val event: Event? = eventService.findEventByPackageName(app.packageName)
-                if (event != null) {
+
+            val event: Event? = eventService.findEventByPackageName(app.packageName)
+
+            /** Step 2.1
+             * If there's an event but the variable "notified" is false, update event object and then send a notification
+             * If there's an event but the variable "notified" is true, check if user is continuing to use the app and if it's true send a notification
+             * If there's no event, create one and then send notification
+             * */
+            var checkSend: Boolean = true
+            var notificationTitle: String = this.resources.getString(R.string.warn_title_notify_app)
+            var notificationDescription: String =
+                this.resources.getString(R.string.warn_description_notify_app) + " ${app.name}"
+
+            if (event != null) {
+                if (!event.notified) {
                     event.notified = true
-                    event.insertDate = System.currentTimeMillis()
-                    eventService.upsert(event)
+                    eventService.upsert(event, app.todayUsage)
                 } else {
-                    eventService.insert(
-                        Event(
-                            null,
-                            channel,
-                            app.packageName,
-                            System.currentTimeMillis(),
-                            true
-                        )
-                    )
+                    val minutesUsed: Int = app.todayUsage - event.usageAtEvent
+                    if (minutesUsed >= 5)
+                    /** TODO get 5 from the preferences table */
+                    {
+                        eventService.upsert(event, app.todayUsage)
+                        notificationDescription =
+                            this.resources.getString(R.string.warn_description_notify_app_recheck) + " ${app.name}"
+                    } else {
+                        /** App is not used anymore */
+                        checkSend = false
+                    }
                 }
-                /** Step 2.2 Send the notification */
+            } else {
+                eventService.insert(
+                    Event(
+                        null,
+                        channel,
+                        app.packageName,
+                        System.currentTimeMillis(),
+                        app.todayUsage,
+                        true
+                    )
+                )
+            }
+            /** Step 2.2 Send the notification */
+            if (checkSend) {
                 Log.d("SYT", "Sending notification for $app")
                 sendNotification(
-                    this,
-                    this.resources.getString(R.string.warn_title_notify_app),
-                    this.resources.getString(R.string.warn_description_notify_app) + " ${app.name}"
+                    this, notificationTitle, notificationDescription
                 )
-
-                /** Step 3 Block application */
-                // TODO
             }
+
+            /** Step 3 Block application */
+            // TODO
         }
+    }
+}
+
+
+private fun sendNotification(context: Context, title: String, description: String) {
+
+    val startActivityIntent = Intent(context, StartActivity::class.java).apply {
+        flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
     }
 
 
-    private fun sendNotification(context: Context, title: String, description: String) {
+    val startActivityPendingIntent = PendingIntent.getActivity(
+        context,
+        Random.nextInt(),
+        startActivityIntent,
+        PendingIntent.FLAG_MUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
+    )
 
-        val startActivityIntent = Intent(context, StartActivity::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        }
-
-
-        val startActivityPendingIntent = PendingIntent.getActivity(
-            context,
-            Random.nextInt(),
-            startActivityIntent,
-            PendingIntent.FLAG_MUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
-        )
-
-        val builder = NotificationCompat.Builder(
-            context,
-            ContextCompat.getString(context, R.string.notification_channel_id)
-        )
-            .setSmallIcon(R.drawable.ic_launcher_foreground)
-            .setLargeIcon(
-                BitmapFactory.decodeResource(
-                    resources,
-                    R.drawable.ic_launcher_foreground
-                )
+    val builder = NotificationCompat.Builder(
+        context,
+        ContextCompat.getString(context, R.string.notification_channel_id)
+    )
+        .setSmallIcon(R.drawable.ic_launcher_foreground)
+        .setLargeIcon(
+            BitmapFactory.decodeResource(
+                context.resources,
+                R.drawable.ic_launcher_foreground
             )
-            .setContentTitle(title)
-            .setContentText(description)
-            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-            .setContentIntent(startActivityPendingIntent)
-            .setAutoCancel(true)
-            .build()
+        )
+        .setContentTitle(title)
+        .setContentText(description)
+        .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+        .setContentIntent(startActivityPendingIntent)
+        .setAutoCancel(true)
+        .build()
 
-        val notificationManager: NotificationManager =
-            context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        with(NotificationManagerCompat.from(context)) {
-            notificationManager.notify(Random.nextInt(), builder)
-        }
+    val notificationManager: NotificationManager =
+        context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+    with(NotificationManagerCompat.from(context)) {
+        notificationManager.notify(Random.nextInt(), builder)
     }
-
-
 }

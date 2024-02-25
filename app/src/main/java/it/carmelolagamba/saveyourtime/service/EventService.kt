@@ -1,5 +1,6 @@
 package it.carmelolagamba.saveyourtime.service
 
+import android.util.Log
 import it.carmelolagamba.saveyourtime.SaveYourTimeApplication
 import it.carmelolagamba.saveyourtime.persistence.DBFactory
 import it.carmelolagamba.saveyourtime.persistence.Event
@@ -17,7 +18,7 @@ class EventService @Inject constructor() {
     /**
      * @return an event List with the events currently active
      */
-    fun findAllActive(): List<Event> {
+    private fun findAllActive(): List<Event> {
         val lastMidnight: Long = utilService.todayMidnightMillis()
         return DBFactory.getDatabase(SaveYourTimeApplication.context).eventDao()
             .getAllActive(lastMidnight)
@@ -25,22 +26,14 @@ class EventService @Inject constructor() {
 
     /**
      * @param appId the application id, so the package name
-     * @return true if the app is already notified to the final user, false otherwise
-     */
-    fun isAppNotified(appId: String): Boolean {
-        return findAllActive().any { event: Event -> event.appId == appId && event.notified }
-    }
-
-    /**
-     * @param appId the application id, so the package name
      * @return the last event linked to the app
      */
     fun findEventByPackageName(appId: String): Event? {
-        try {
-            return DBFactory.getDatabase(SaveYourTimeApplication.context).eventDao()
-                .getByAppId(appId).filter { it.notified }.last()
+        return try {
+            findAllActive().last { event: Event -> event.appId == appId }
         } catch (ex: NoSuchElementException) {
-            return null
+            Log.d("SYT", "No event generated for $appId")
+            null
         }
     }
 
@@ -55,7 +48,9 @@ class EventService @Inject constructor() {
      * @param event the event to update
      * @return the event updated
      */
-    fun upsert(event: Event): Event {
+    fun upsert(event: Event, usageAtEvent: Int = event.usageAtEvent): Event {
+        event.insertDate = System.currentTimeMillis()
+        event.usageAtEvent = usageAtEvent
         return run {
             DBFactory.getDatabase(SaveYourTimeApplication.context).eventDao().update(event)
             event
