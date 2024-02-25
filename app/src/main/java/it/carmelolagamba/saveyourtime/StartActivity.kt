@@ -79,7 +79,7 @@ class StartActivity : AbstractActivity() {
             binding.allowButtonNotification.setOnClickListener {
                 val intent = Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS)
                     .putExtra(Settings.EXTRA_APP_PACKAGE, packageName)
-                    .putExtra(Settings.EXTRA_CHANNEL_ID, resources.getString(R.string.notification_channel_id))
+                    //.putExtra(Settings.EXTRA_CHANNEL_ID, resources.getString(R.string.notification_channel_id))
                 launcher.launch(intent)
             }
 

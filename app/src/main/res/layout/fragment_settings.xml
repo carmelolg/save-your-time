@@ -36,6 +36,7 @@
             android:textAlignment="center"
             android:textSize="@dimen/text_size_default">
 
+
         </GridView>
 
 </RelativeLayout>

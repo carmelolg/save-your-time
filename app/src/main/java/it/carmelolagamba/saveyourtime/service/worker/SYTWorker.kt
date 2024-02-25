@@ -33,10 +33,10 @@ class SYTWorker @Inject constructor(
     private fun innerDoWork() {
         Log.d(
             "SYT",
-            "Notification Worker emit event " + context.resources.getString(R.string.check_notifiy)
+            "Notification Worker emit event " + context.resources.getString(R.string.check_notify)
         )
         val eventBroadcaster = EventNotifier.getInstance()
-        eventBroadcaster.notifyEvent(context.resources.getString(R.string.check_notifiy))
+        eventBroadcaster.notifyEvent(context.resources.getString(R.string.check_notify))
     }
 
 

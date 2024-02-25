@@ -22,6 +22,7 @@ abstract class DBFactory : RoomDatabase() {
         private var Instance: DBFactory? = null
 
         fun getDatabase(context: Context): DBFactory {
+
             // if the Instance is not null, return it, otherwise create a new database instance.
             return Instance ?: synchronized(this) {
                 Room.databaseBuilder(context, DBFactory::class.java, "db")
