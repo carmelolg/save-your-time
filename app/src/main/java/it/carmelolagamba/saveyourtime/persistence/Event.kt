@@ -14,5 +14,6 @@ data class Event(
     @ColumnInfo(name = "name") val name: String,
     @ColumnInfo(name = "appId") val appId: String,
     @ColumnInfo(name = "insertDate") var insertDate: Long,
+    @ColumnInfo(name = "usageAtEvent") var usageAtEvent: Int,
     @ColumnInfo(name = "notified") var notified: Boolean
     )
