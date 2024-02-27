@@ -30,6 +30,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:weightSum="2"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="10dp"
                     android:orientation="vertical">
 
                     <TextView
@@ -39,7 +41,7 @@
                         android:padding="10dp"
                         android:text="@string/section_block_app_label"
                         android:textColor="?android:colorPrimary"
-                        android:textSize="@dimen/text_size_medium_low" />
+                        android:textSize="@dimen/text_size_default" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -73,6 +75,7 @@
                     android:id="@+id/section_preferences_notification"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginLeft="15dp"
                     android:layout_marginTop="10dp"
                     android:layout_weight="1"
                     android:orientation="vertical">
@@ -84,7 +87,7 @@
                         android:padding="10dp"
                         android:text="@string/section_notification_app_label"
                         android:textColor="?android:colorPrimary"
-                        android:textSize="@dimen/text_size_medium_low" />
+                        android:textSize="@dimen/text_size_default" />
 
                     <Switch
                         android:id="@+id/enable_reminder"
@@ -132,6 +135,7 @@
                     android:id="@+id/section_disclaimer"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginLeft="15dp"
                     android:layout_marginTop="10dp"
                     android:layout_weight="1"
                     android:orientation="vertical">
@@ -143,7 +147,7 @@
                         android:padding="10dp"
                         android:text="@string/section_disclaimer_label"
                         android:textColor="?android:colorPrimary"
-                        android:textSize="@dimen/text_size_medium_low" />
+                        android:textSize="@dimen/text_size_default" />
 
                     <LinearLayout
                         android:id="@+id/license_layout"
