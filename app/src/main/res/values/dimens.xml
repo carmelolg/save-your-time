@@ -6,7 +6,11 @@
     <dimen name="padding_default">6dp</dimen>
     <dimen name="text_size_start_activity">22dp</dimen>
     <dimen name="text_size_default">16dp</dimen>
+    <dimen name="text_size_low">13dp</dimen>
+    <dimen name="text_size_medium_low">19dp</dimen>
     <dimen name="text_size_medium">22dp</dimen>
+    <dimen name="text_size_medium_high">25dp</dimen>
+    <dimen name="text_size_high">28dp</dimen>
     <dimen name="table_header_size_default">18dp</dimen>
     <dimen name="image_size_default">35dp</dimen>
     <dimen name="margin_from_image_default">40dp</dimen>

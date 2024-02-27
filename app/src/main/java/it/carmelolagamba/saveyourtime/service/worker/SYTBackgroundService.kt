@@ -21,6 +21,7 @@ import it.carmelolagamba.saveyourtime.persistence.App
 import it.carmelolagamba.saveyourtime.persistence.Event
 import it.carmelolagamba.saveyourtime.service.AppService
 import it.carmelolagamba.saveyourtime.service.EventService
+import it.carmelolagamba.saveyourtime.service.PreferencesService
 import it.carmelolagamba.saveyourtime.service.UtilService
 import it.carmelolagamba.saveyourtime.service.streaming.EventListener
 import it.carmelolagamba.saveyourtime.service.streaming.EventNotifier
@@ -45,6 +46,9 @@ class SYTBackgroundService : Service(), EventListener {
 
     @Inject
     lateinit var eventService: EventService
+
+    @Inject
+    lateinit var preferencesService: PreferencesService
 
     private var apps: List<App> = mutableListOf()
 
@@ -73,14 +77,15 @@ class SYTBackgroundService : Service(), EventListener {
 
     override fun onDestroy() {
         Log.d("SYT", "Task killed")
-        eventBroadcaster.removeListener(this)
+        startService(applicationContext)
+        createServiceTask()
         super.onDestroy()
     }
 
     override fun onTaskRemoved(rootIntent: Intent?) {
         super.onTaskRemoved(rootIntent)
         Log.d("SYT", "Task removed")
-        eventBroadcaster.removeListener(this)
+        startService(applicationContext)
         createServiceTask()
     }
 
@@ -192,9 +197,7 @@ class SYTBackgroundService : Service(), EventListener {
         return (totalUsage / 1000 / 60).toInt()
     }
 
-
-    override fun onEvent(channel: String) {
-        Log.d("SYT", "Background service event received $channel")
+    private fun doWork(channel: String) {
 
         /** Step 0 Refreshing data */
         eventService.cleanDB()
@@ -224,9 +227,7 @@ class SYTBackgroundService : Service(), EventListener {
                     eventService.upsert(event, app.todayUsage)
                 } else {
                     val minutesUsed: Int = app.todayUsage - event.usageAtEvent
-                    if (minutesUsed >= 5)
-                    /** TODO get 5 from the preferences table */
-                    {
+                    if (preferencesService.isAppReminderEnabled() && minutesUsed >= preferencesService.findAppReminderTimePreference()) {
                         eventService.upsert(event, app.todayUsage)
                         notificationDescription =
                             this.resources.getString(R.string.warn_description_notify_app_recheck) + " ${app.name}"
@@ -259,44 +260,53 @@ class SYTBackgroundService : Service(), EventListener {
             // TODO
         }
     }
-}
 
+    override fun onEvent(channel: String) {
+        Log.d("SYT", "Background service event received $channel")
 
-private fun sendNotification(context: Context, title: String, description: String) {
-
-    val startActivityIntent = Intent(context, StartActivity::class.java).apply {
-        flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        for (i in 1..59) {
+            doWork(channel)
+            Thread.sleep(15000)
+        }
     }
 
 
-    val startActivityPendingIntent = PendingIntent.getActivity(
-        context,
-        Random.nextInt(),
-        startActivityIntent,
-        PendingIntent.FLAG_MUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
-    )
+    private fun sendNotification(context: Context, title: String, description: String) {
 
-    val builder = NotificationCompat.Builder(
-        context,
-        ContextCompat.getString(context, R.string.notification_channel_id)
-    )
-        .setSmallIcon(R.drawable.ic_launcher_foreground)
-        .setLargeIcon(
-            BitmapFactory.decodeResource(
-                context.resources,
-                R.drawable.ic_launcher_foreground
-            )
+        val startActivityIntent = Intent(context, StartActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        }
+
+
+        val startActivityPendingIntent = PendingIntent.getActivity(
+            context,
+            Random.nextInt(),
+            startActivityIntent,
+            PendingIntent.FLAG_MUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
         )
-        .setContentTitle(title)
-        .setContentText(description)
-        .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-        .setContentIntent(startActivityPendingIntent)
-        .setAutoCancel(true)
-        .build()
 
-    val notificationManager: NotificationManager =
-        context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-    with(NotificationManagerCompat.from(context)) {
-        notificationManager.notify(Random.nextInt(), builder)
+        val builder = NotificationCompat.Builder(
+            context,
+            ContextCompat.getString(context, R.string.notification_channel_id)
+        )
+            .setSmallIcon(R.drawable.ic_launcher_foreground)
+            .setLargeIcon(
+                BitmapFactory.decodeResource(
+                    context.resources,
+                    R.drawable.ic_launcher_foreground
+                )
+            )
+            .setContentTitle(title)
+            .setContentText(description)
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+            .setContentIntent(startActivityPendingIntent)
+            .setAutoCancel(true)
+            .build()
+
+        val notificationManager: NotificationManager =
+            context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        with(NotificationManagerCompat.from(context)) {
+            notificationManager.notify(Random.nextInt(), builder)
+        }
     }
 }

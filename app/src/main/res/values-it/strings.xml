@@ -4,6 +4,7 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifiche</string>
     <string name="title_settings">Pannello di controllo</string>
+    <string name="title_preferences">Preferenze</string>
     <string name="list_of_permission">La lista dei permessi richiesti:\n\n<li>Utilizzo accesso dati</li></string>
     <string name="close_app_message">Premi ancora indietro per chiudere l\'app.</string>
     <string name="delete">delete</string>
@@ -14,7 +15,7 @@
     <string name="application_label">App</string>
     <string name="time_usage_label">Usati</string>
     <string name="time_remaining_label">Rimasti</string>
-    <string name="apps_empty_caring_message">"Visualizzerai qui le tue statistiche. Clicca su pannello di controllo per aggiungere le app al monitoraggio."</string>
+    <string name="apps_empty_caring_message">"Vedrai le tue statistiche qui.\nClicca su pannello di controllo per scegliere le applicazioni da monitorare."</string>
     <string name="label_table">Tabella riepilogativa</string>
     <string name="label_chart">Andamento grafico</string>
 
@@ -42,5 +43,18 @@
     <string name="notification_service_description">Clicca qui per i dettagli</string>
     <string name="notification_service_channel_description">Notifica mostrata quando il servizio è attivo</string>
     <string name="notification_service_channel_name">Notifiche di servizio</string>
+
+    <!-- PREFERENCES -->
+    <string name="section_block_app_label">Preferenze di blocco</string>
+    <string name="section_block_app_label_stay_tuned">Funzione non ancora attiva!</string>
+    <string name="section_block_app_option">Blocca le app quando scade il tempo</string>
+    <string name="section_notification_app_label">Preferenze di notifica</string>
+    <string name="section_notification_app_option_enabled">Abilita promemoria alla scadenza</string>
+    <string name="section_notification_app_option">I minuti dopo il quale riceverai il promemoria a tempo scaduto (se continuerai ad usare l\'app)</string>
+    <string name="section_disclaimer_label">Varie</string>
+    <string name="section_disclaimer_license_option">Licenza d\'uso</string>
+    <string name="section_disclaimer_privacy_option">Privacy</string>
+    <string name="section_disclaimer_reset_option">Ripristina preferenze</string>
+
 
 </resources>

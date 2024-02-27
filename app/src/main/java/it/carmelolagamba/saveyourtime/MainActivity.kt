@@ -56,6 +56,12 @@ class MainActivity : AbstractActivity() {
 
         }
 
+        navView.findViewById<View>(R.id.navigation_preferences).setOnClickListener {
+            val navController = this.findNavController(R.id.nav_host_fragment_activity_main)
+            navController.navigate(R.id.navigation_preferences)
+
+        }
+
         /** Appbar not used setupActionBarWithNavController(navController, appBarConfiguration) */
         navView.setupWithNavController(navController)
 

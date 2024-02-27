@@ -4,6 +4,7 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="title_settings">Control Panel</string>
+    <string name="title_preferences">Preferences</string>
     <string name="list_of_permission">List of requested permissions:\n\n<li>Data Usage Access</li></string>
     <string name="close_app_message">Press back again to close the app.</string>
     <string name="delete">delete</string>
@@ -45,4 +46,27 @@
     <string name="notification_service_description">Click here for details</string>
     <string name="notification_service_channel_description">Notification shown when the service is active</string>
     <string name="notification_service_channel_name">Service Notifications</string>
+
+    <!-- PREFERENCES -->
+    <string name="section_block_app_label">Block preferences</string>
+    <string name="section_block_app_label_stay_tuned">Stay tuned!</string>
+    <string name="section_block_app_option">Block apps when time expires</string>
+    <string name="section_notification_app_label">Notification preferences</string>
+    <string name="section_notification_app_option_enabled">Enable reminder at expiration</string>
+    <string name="section_notification_app_option">The minutes after which you will receive the reminder upon expiration (if you continue to use the app)</string>
+    <string name="section_disclaimer_label">Miscellaneous</string>
+    <string name="section_disclaimer_license_option">License</string>
+    <string name="section_disclaimer_privacy_option">Privacy</string>
+    <string name="section_disclaimer_reset_option">Reset all preferences</string>
+    <string-array name="section_notification_app_option_list">
+        <item>1</item>
+        <item>5</item>
+        <item>10</item>
+        <item>15</item>
+        <item>30</item>
+    </string-array>
+    <string name="privacy_url" translatable="false">https://github.com/carmelolg/save-your-time/blob/master/PRIVACY.md</string>
+    <string name="license_url" translatable="false">https://github.com/carmelolg/save-your-time/blob/master/PRIVACY.md</string>
+
+
 </resources>

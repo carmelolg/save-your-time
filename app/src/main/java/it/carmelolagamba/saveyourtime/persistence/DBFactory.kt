@@ -6,16 +6,19 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import it.carmelolagamba.saveyourtime.persistence.dao.AppDao
 import it.carmelolagamba.saveyourtime.persistence.dao.EventDao
+import it.carmelolagamba.saveyourtime.persistence.dao.PreferencesDao
 
 /**
  * @author carmelolg
  * @since version 1.0
  */
-@Database(entities = [App::class, Event::class], version = 1)
+@Database(entities = [App::class, Event::class, Preferences::class], version = 1)
 abstract class DBFactory : RoomDatabase() {
     abstract fun applicationDao(): AppDao
 
     abstract fun eventDao(): EventDao
+
+    abstract fun preferencesDao(): PreferencesDao
 
     companion object {
         @Volatile

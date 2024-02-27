@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    tools:context=".ui.preferences.PreferencesFragment">
+
+    <LinearLayout
+        android:id="@+id/top_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottom_layout"
+        android:orientation="horizontal">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/container_preferences"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:weightSum="4">
+
+                <LinearLayout
+                    android:id="@+id/section_preferences_stop_app"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:weightSum="2"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:padding="10dp"
+                        android:text="@string/section_block_app_label"
+                        android:textColor="?android:colorPrimary"
+                        android:textSize="@dimen/text_size_medium_low" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:padding="20dp"
+                        android:text="@string/section_block_app_label_stay_tuned"
+                        android:textColor="?android:colorActivatedHighlight"
+                        android:textSize="@dimen/text_size_low"
+                        android:textStyle="bold"
+
+                        />
+
+                    <Switch
+                        android:id="@+id/stop_application"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:enabled="false"
+                        android:padding="20dp"
+                        android:text="@string/section_block_app_option"
+                        android:textColor="?android:colorSecondary"
+                        android:textSize="@dimen/text_size_default" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="?android:colorBackgroundFloating" />
+
+                <LinearLayout
+                    android:id="@+id/section_preferences_notification"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0"
+                        android:padding="10dp"
+                        android:text="@string/section_notification_app_label"
+                        android:textColor="?android:colorPrimary"
+                        android:textSize="@dimen/text_size_medium_low" />
+
+                    <Switch
+                        android:id="@+id/enable_reminder"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="20dp"
+                        android:text="@string/section_notification_app_option_enabled"
+                        android:textColor="?android:colorSecondary"
+                        android:textSize="@dimen/text_size_default" />
+
+                    <LinearLayout
+                        android:id="@+id/reminder_time"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="horizontal"
+                        android:padding="20dp">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:text="@string/section_notification_app_option"
+                            android:textColor="?android:colorSecondary"
+                            android:textSize="@dimen/text_size_default" />
+
+                        <Spinner
+                            android:id="@+id/reminder_time_choice"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.3"
+                            android:clickable="false"
+                            android:padding="20dp"
+                            android:spinnerMode="dropdown" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="?android:colorBackgroundFloating" />
+
+                <LinearLayout
+                    android:id="@+id/section_disclaimer"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0"
+                        android:padding="10dp"
+                        android:text="@string/section_disclaimer_label"
+                        android:textColor="?android:colorPrimary"
+                        android:textSize="@dimen/text_size_medium_low" />
+
+                    <LinearLayout
+                        android:id="@+id/license_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:padding="20dp">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/section_disclaimer_license_option"
+                            android:textColor="?android:colorSecondary"
+                            android:textSize="@dimen/text_size_default" />
+
+                        <ImageButton
+                            android:id="@+id/license_button"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:background="?android:colorBackground"
+                            android:clickable="true"
+                            android:contentDescription="@string/section_disclaimer_license_option"
+                            android:scaleType="centerInside"
+                            android:scaleX="1.25"
+                            android:scaleY="1.25"
+                            android:src="@drawable/ic_link"
+                            app:tint="?android:colorSecondary" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/privacy_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:padding="20dp">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/section_disclaimer_privacy_option"
+                            android:textColor="?android:colorSecondary"
+                            android:textSize="@dimen/text_size_default" />
+
+                        <ImageButton
+                            android:id="@+id/privacy_button"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:background="?android:colorBackground"
+                            android:clickable="true"
+                            android:contentDescription="@string/section_disclaimer_privacy_option"
+                            android:scaleX="1.25"
+                            android:scaleY="1.25"
+                            android:src="@drawable/ic_link"
+                            app:tint="?android:colorSecondary" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/reset_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:padding="20dp">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/section_disclaimer_reset_option"
+                            android:textColor="?android:colorSecondary"
+                            android:textSize="@dimen/text_size_default" />
+
+                        <ImageButton
+                            android:id="@+id/reset_button"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:background="?android:colorBackground"
+                            android:clickable="true"
+                            android:contentDescription="@string/section_disclaimer_privacy_option"
+                            android:scaleX="1.25"
+                            android:scaleY="1.25"
+                            android:src="@drawable/ic_remove"
+                            app:tint="?android:colorSecondary" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/bottom_layout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/fourth"
+        android:orientation="horizontal"
+        android:outlineAmbientShadowColor="@color/black"
+        android:outlineSpotShadowColor="@color/black">
+
+
+    </LinearLayout>
+
+</RelativeLayout>

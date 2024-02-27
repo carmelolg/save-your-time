@@ -19,10 +19,8 @@ class SYTWorker @Inject constructor(
 ) : CoroutineWorker(context, workerParams) {
 
     override suspend fun doWork(): Result {
-        for (i in 1..30) {
-            delay(30000)
-            innerDoWork()
-        }
+        delay(15000)
+        innerDoWork()
         return Result.success()
     }
 
