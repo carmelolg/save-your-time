@@ -66,7 +66,7 @@
         <item>30</item>
     </string-array>
     <string name="privacy_url" translatable="false">https://github.com/carmelolg/save-your-time/blob/master/PRIVACY.md</string>
-    <string name="license_url" translatable="false">https://github.com/carmelolg/save-your-time/blob/master/PRIVACY.md</string>
+    <string name="license_url" translatable="false">https://raw.githubusercontent.com/carmelolg/save-your-time/master/LICENSE</string>
 
 
 </resources>
