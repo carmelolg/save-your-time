@@ -21,6 +21,8 @@
         <item name="android:colorSecondary">@color/second</item>
         <item name="android:colorAccent">@color/white</item>
         <item name="android:colorActivatedHighlight">@color/fourth</item>
+        <item name="android:colorBackground">@color/white</item>
+        <item name="android:colorBackgroundFloating">@android:color/darker_gray</item>
 
     </style>
 
