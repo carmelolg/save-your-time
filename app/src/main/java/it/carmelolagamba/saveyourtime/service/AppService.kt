@@ -119,8 +119,8 @@ class AppService @Inject constructor() {
     /**
      * @return a List of applications that exceeded the time usage chose by the user
      */
-    fun findExceededApplication(): List<App> {
-        return findAllChecked().filter { app -> app.todayUsage >= app.notifyTime }
+    fun findExceededApplication(apps: List<App> = findAllChecked()): List<App> {
+        return apps.filter { app -> app.todayUsage >= app.notifyTime }
     }
 
 }

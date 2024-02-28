@@ -18,7 +18,7 @@ class EventService @Inject constructor() {
     /**
      * @return an event List with the events currently active
      */
-    private fun findAllActive(): List<Event> {
+    fun findAllActive(): List<Event> {
         val lastMidnight: Long = utilService.todayMidnightMillis()
         return DBFactory.getDatabase(SaveYourTimeApplication.context).eventDao()
             .getAllActive(lastMidnight)
@@ -28,9 +28,9 @@ class EventService @Inject constructor() {
      * @param appId the application id, so the package name
      * @return the last event linked to the app
      */
-    fun findEventByPackageName(appId: String): Event? {
+    fun findEventByPackageName(appId: String, events: List<Event> = findAllActive()): Event? {
         return try {
-            findAllActive().last { event: Event -> event.appId == appId }
+            events.last { event: Event -> event.appId == appId }
         } catch (ex: NoSuchElementException) {
             Log.d("SYT", "No event generated for $appId")
             null

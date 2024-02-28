@@ -28,13 +28,13 @@ import it.carmelolagamba.saveyourtime.service.streaming.EventNotifier
 import javax.inject.Inject
 import kotlin.random.Random
 
+
 /**
  * @author carmelolg
  * @since version 1.0
  */
 @AndroidEntryPoint
 class SYTBackgroundService : Service(), EventListener {
-
 
     private lateinit var eventBroadcaster: EventNotifier
 
@@ -56,7 +56,6 @@ class SYTBackgroundService : Service(), EventListener {
         fun startService(context: Context) {
             val startIntent = Intent(context, SYTBackgroundService::class.java)
             ContextCompat.startForegroundService(context, startIntent)
-
         }
 
         fun stopService(context: Context) {
@@ -166,8 +165,8 @@ class SYTBackgroundService : Service(), EventListener {
             end
         )
 
-        var singleEventUsage: Long = 0L
-        var totalUsage: Long = 0L
+        var singleEventUsage = 0L
+        var totalUsage = 0L
 
         while (usageEvents.hasNextEvent()) {
             val currentEvent: UsageEvents.Event = UsageEvents.Event()
@@ -197,26 +196,60 @@ class SYTBackgroundService : Service(), EventListener {
         return (totalUsage / 1000 / 60).toInt()
     }
 
+    fun isAnApplicationRunningNow(packageName: String,
+                                  start: Long = System.currentTimeMillis() - 60000,
+                                  end: Long = utilService.tomorrowMidnightMillis()): Boolean {
+
+        Log.d("SYT", "$packageName application running checking")
+
+        val statsManager =
+            applicationContext.getSystemService(Context.USAGE_STATS_SERVICE) as UsageStatsManager
+
+        val usageEvents: UsageEvents = statsManager.queryEvents(
+            start,
+            end
+        )
+
+        var singleEventUsage = 0L
+        var totalUsage = 0L
+
+        while (usageEvents.hasNextEvent()) {
+            val currentEvent: UsageEvents.Event = UsageEvents.Event()
+            usageEvents.getNextEvent(currentEvent)
+
+            if (packageName == currentEvent.packageName && currentEvent.eventType == UsageEvents.Event.ACTIVITY_RESUMED) {
+                Log.d("SYT", "$packageName checking")
+                Log.d("SYT", "${currentEvent.eventType} ${currentEvent.timeStamp}")
+                return true
+            }
+        }
+        return false
+    }
+
     private fun doWork(channel: String) {
 
         /** Step 0 Refreshing data */
-        eventService.cleanDB()
         refreshData()
 
         /** Step 1 Check application with time exceeded */
-        val exceededApp: List<App> = appService.findExceededApplication()
+        val exceededApp: List<App> = appService.findExceededApplication(apps)
+
+        /** Optimize DB query */
+        val isAppReminderEnabled = preferencesService.isAppReminderEnabled()
+        val appReminderTime = preferencesService.findAppReminderTimePreference()
+        val events = eventService.findAllActive()
 
         /** Step 2 if app is already notified to user, do nothing */
         exceededApp.forEach { app: App ->
 
-            val event: Event? = eventService.findEventByPackageName(app.packageName)
+            val event: Event? = eventService.findEventByPackageName(app.packageName, events)
 
             /** Step 2.1
              * If there's an event but the variable "notified" is false, update event object and then send a notification
              * If there's an event but the variable "notified" is true, check if user is continuing to use the app and if it's true send a notification
              * If there's no event, create one and then send notification
              * */
-            var checkSend: Boolean = true
+            var checkSend = true
             var notificationTitle: String = this.resources.getString(R.string.warn_title_notify_app)
             var notificationDescription: String =
                 this.resources.getString(R.string.warn_description_notify_app) + " ${app.name}"
@@ -227,12 +260,12 @@ class SYTBackgroundService : Service(), EventListener {
                     eventService.upsert(event, app.todayUsage)
                 } else {
                     val minutesUsed: Int = app.todayUsage - event.usageAtEvent
-                    if (preferencesService.isAppReminderEnabled() && minutesUsed >= preferencesService.findAppReminderTimePreference()) {
+                    if (isAppReminderEnabled && minutesUsed >= appReminderTime) {
                         eventService.upsert(event, app.todayUsage)
                         notificationDescription =
                             this.resources.getString(R.string.warn_description_notify_app_recheck) + " ${app.name}"
                     } else {
-                        /** App is not used anymore */
+                        /** App is not used anymore for today */
                         checkSend = false
                     }
                 }
@@ -258,15 +291,19 @@ class SYTBackgroundService : Service(), EventListener {
 
             /** Step 3 Block application */
             // TODO
+            /** if(isAnApplicationRunningNow(app.packageName)){} */
         }
     }
 
     override fun onEvent(channel: String) {
         Log.d("SYT", "Background service event received $channel")
 
-        for (i in 1..59) {
+        /** remove old events (events from yesterday) */
+        eventService.cleanDB()
+
+        for (i in 1..14) {
             doWork(channel)
-            Thread.sleep(15000)
+            Thread.sleep(60000)
         }
     }
 

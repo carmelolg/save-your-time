@@ -76,6 +76,7 @@ class HomeFragment : Fragment() /*AbstractFragment()*/ {
 
             binding.caringMessage.visibility = View.INVISIBLE
             binding.caringImage.visibility = View.INVISIBLE
+            binding.containerCaring.visibility = View.GONE
 
             /** Building VICO graph main object */
             var chartData = mutableMapOf<Float, Pair<Float, String>>()
@@ -137,9 +138,19 @@ class HomeFragment : Fragment() /*AbstractFragment()*/ {
 
             /** Set VICO graph view */
             binding.chartView.setModel(chartEntryModel)
+
+            if (apps.sumOf { app -> app.todayUsage } < 1) {
+                binding.chartLabel.visibility = View.INVISIBLE
+                binding.chartView.visibility = View.INVISIBLE
+            } else {
+                binding.chartLabel.visibility = View.VISIBLE
+                binding.chartView.visibility = View.VISIBLE
+            }
+
         } else {
             binding.caringMessage.visibility = View.VISIBLE
             binding.caringImage.visibility = View.VISIBLE
+            binding.containerCaring.visibility = View.VISIBLE
             binding.chartLabel.visibility = View.INVISIBLE
             binding.tableLabel.visibility = View.INVISIBLE
         }

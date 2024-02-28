@@ -90,6 +90,7 @@ class PreferencesService @Inject constructor() {
 
         @JvmStatic
         val REMINDER_EXPIRED_TIME: String = "app_expired_reminder_time"
+
     }
 
 }
