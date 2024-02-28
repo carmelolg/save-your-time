@@ -20,7 +20,7 @@
         android:contentDescription="@string/delete"
         android:backgroundTint="?android:colorPrimary"
         app:tint="?android:colorAccent"
-        android:src="@android:drawable/ic_delete"
+        android:src="@drawable/ic_remove"
         app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
         app:useCompatPadding="true" />
 
