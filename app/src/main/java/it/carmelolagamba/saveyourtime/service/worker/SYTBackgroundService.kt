@@ -250,7 +250,7 @@ class SYTBackgroundService : Service(), EventListener {
              * If there's no event, create one and then send notification
              * */
             var checkSend = true
-            var notificationTitle: String = this.resources.getString(R.string.warn_title_notify_app) + " ${app.name}"
+            val notificationTitle: String = this.resources.getString(R.string.warn_title_notify_app) + " ${app.name}"
             var notificationDescription: String =
                 this.resources.getString(R.string.warn_description_notify_app) + " ${app.name}"
 

@@ -5,6 +5,9 @@
     <string name="title_notifications">Notifications</string>
     <string name="title_settings">Control Panel</string>
     <string name="title_preferences">Preferences</string>
+    <string name="title_history_dashboard">History</string>
+    <string name="back_label">Back</string>
+    <string name="forward_label">Forward</string>
     <string name="list_of_permission">List of requested permissions:\n\n<li>Data Usage Access</li></string>
     <string name="close_app_message">Press back again to close the app.</string>
     <string name="delete">delete</string>
@@ -33,7 +36,7 @@
     <string name="start_disclaimer_notification">To function properly, the application requires enabling basic notifications.</string>
 
     <!-- NOTIFICATIONS -->
-    <string name="warn_title_notify_app">Time to Log Off</string>
+    <string name="warn_title_notify_app">Time to log off</string>
     <string name="warn_description_notify_app">Daily limit exceeded for</string>
     <string name="warn_description_notify_app_recheck">You\'re still using the app! Daily limit exceeded for</string>
     <string name="check_notify" translatable="false">check_notify</string>
@@ -67,6 +70,11 @@
     </string-array>
     <string name="privacy_url" translatable="false">https://github.com/carmelolg/save-your-time/blob/master/PRIVACY.md</string>
     <string name="license_url" translatable="false">https://raw.githubusercontent.com/carmelolg/save-your-time/master/LICENSE</string>
+
+    <!-- HISTORY -->
+    <string name="history_label">Choose the application</string>
+    <string name="history_weekly_chart_label">Weekly trend</string>
+    <string name="history_monthly_chart_label">Monthly trend</string>
 
 
 </resources>

@@ -17,16 +17,7 @@
         android:name="it.carmelolagamba.saveyourtime.ui.settings.SettingsFragment"
         android:label="@string/title_settings"
         tools:layout="@layout/fragment_settings" >
-        <action
-            android:id="@+id/action_navigation_info_to_navigation_home"
-            app:destination="@id/navigation_home" />
     </fragment>
 
-    <fragment
-        android:id="@+id/navigation_preferences"
-        android:name="it.carmelolagamba.saveyourtime.ui.preferences.PreferencesFragment"
-        android:label="@string/title_preferences"
-        tools:layout="@layout/fragment_preferences" >
-    </fragment>
 
 </navigation>

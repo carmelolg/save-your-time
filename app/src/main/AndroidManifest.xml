@@ -18,9 +18,7 @@
         android:name="android.permission.PACKAGE_USAGE_STATS"
         tools:ignore="ProtectedPermissions" />
 
-    <uses-permission
-        android:name="com.google.android.gms.permission.AD_ID"
-        tools:node="remove" />
+    <uses-permission android:name="com.google.android.gms.permission.AD_ID" />
 
     <application
         android:name="it.carmelolagamba.saveyourtime.SaveYourTimeApplication"
@@ -37,10 +35,15 @@
         <service
             android:name=".service.worker.SYTBackgroundService"
             android:enabled="true"
-            android:exported="false"/>
+            android:exported="false" />
 
         <activity
             android:name=".MainActivity"
+            android:exported="true"
+            android:label="@string/app_name" />
+
+        <activity
+            android:name=".SecondaryActivity"
             android:exported="true"
             android:label="@string/app_name" />
 
@@ -54,10 +57,12 @@
             </intent-filter>
         </activity>
 
-        <receiver android:enabled="true" android:name=".service.worker.SYTReceiver"
+        <receiver
+            android:name=".service.worker.SYTReceiver"
+            android:enabled="true"
             android:exported="true">
             <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
 

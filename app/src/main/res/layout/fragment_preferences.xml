@@ -119,7 +119,7 @@
                             android:id="@+id/reminder_time_choice"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight="0.3"
+                            android:layout_weight="0.4"
                             android:clickable="false"
                             android:padding="20dp"
                             android:spinnerMode="dropdown" />

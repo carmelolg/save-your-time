@@ -5,6 +5,9 @@
     <string name="title_notifications">Notifiche</string>
     <string name="title_settings">Pannello di controllo</string>
     <string name="title_preferences">Preferenze</string>
+    <string name="title_history_dashboard">Storico</string>
+    <string name="back_label">Indietro</string>
+    <string name="forward_label">Avanti</string>
     <string name="list_of_permission">La lista dei permessi richiesti:\n\n<li>Utilizzo accesso dati</li></string>
     <string name="close_app_message">Premi ancora indietro per chiudere l\'app.</string>
     <string name="delete">delete</string>
@@ -56,5 +59,8 @@
     <string name="section_disclaimer_privacy_option">Privacy</string>
     <string name="section_disclaimer_reset_option">Ripristina preferenze</string>
 
-
+    <!-- HISTORY -->
+    <string name="history_label">Scegli l\'applicazione</string>
+    <string name="history_weekly_chart_label">Grafico settimanale</string>
+    <string name="history_monthly_chart_label">Grafico mensile</string>
 </resources>

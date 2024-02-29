@@ -142,9 +142,11 @@ class HomeFragment : Fragment() /*AbstractFragment()*/ {
             if (apps.sumOf { app -> app.todayUsage } < 1) {
                 binding.chartLabel.visibility = View.INVISIBLE
                 binding.chartView.visibility = View.INVISIBLE
+                binding.containerChart.visibility = View.GONE
             } else {
                 binding.chartLabel.visibility = View.VISIBLE
                 binding.chartView.visibility = View.VISIBLE
+                binding.containerChart.visibility = View.VISIBLE
             }
 
         } else {

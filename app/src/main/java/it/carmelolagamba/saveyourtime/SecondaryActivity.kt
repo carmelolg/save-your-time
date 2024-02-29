@@ -10,57 +10,45 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
-import it.carmelolagamba.saveyourtime.databinding.ActivityMainBinding
-import it.carmelolagamba.saveyourtime.service.worker.SYTBackgroundService
+import it.carmelolagamba.saveyourtime.databinding.ActivitySecondaryBinding
 
 /**
  * @author carmelolg
  * @since version 1.0
  */
 @AndroidEntryPoint
-class MainActivity : AbstractActivity() {
+class SecondaryActivity : AbstractActivity() {
 
-    private lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivitySecondaryBinding
     private var backPressedTime: Long = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
 
-        SYTBackgroundService.startService(this)
-
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivitySecondaryBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         val navView: BottomNavigationView = binding.navView
 
-        val navController = findNavController(R.id.nav_host_fragment_activity_main)
+        val navController = findNavController(R.id.nav_host_fragment_activity_history)
 
-        /** Appbar not used
-        val appBarConfiguration = AppBarConfiguration(
-        setOf(
-        R.id.navigation_home, R.id.navigation_info
-        )
-        )
-         */
-
-        navView.findViewById<View>(R.id.navigation_home).setOnClickListener {
-            val navController = this.findNavController(R.id.nav_host_fragment_activity_main)
-            navController.navigate(R.id.navigation_home)
+        navView.findViewById<View>(R.id.navigation_history_dashboard).setOnClickListener {
+            val navController = this.findNavController(R.id.nav_host_fragment_activity_history)
+            navController.navigate(R.id.navigation_history_dashboard)
 
         }
 
-        navView.findViewById<View>(R.id.navigation_info).setOnClickListener {
-            val navController = this.findNavController(R.id.nav_host_fragment_activity_main)
-            navController.navigate(R.id.navigation_info)
+        navView.findViewById<View>(R.id.navigation_preferences).setOnClickListener {
+            val navController = this.findNavController(R.id.nav_host_fragment_activity_history)
+            navController.navigate(R.id.navigation_preferences)
 
         }
 
-        navView.findViewById<View>(R.id.navigation_to_right).setOnClickListener {
-            val history = Intent(this, SecondaryActivity::class.java)
-            startActivity(history)
+        navView.findViewById<View>(R.id.navigation_to_left).setOnClickListener {
+            val main = Intent(this, MainActivity::class.java)
+            startActivity(main)
         }
-
 
         /** Appbar not used setupActionBarWithNavController(navController, appBarConfiguration) */
         navView.setupWithNavController(navController)
