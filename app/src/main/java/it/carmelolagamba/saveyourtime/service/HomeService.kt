@@ -1,4 +1,4 @@
-package it.carmelolagamba.saveyourtime.ui.home
+package it.carmelolagamba.saveyourtime.service
 
 import android.content.Context
 import android.content.res.Resources
@@ -8,7 +8,6 @@ import android.widget.TableRow
 import android.widget.TextView
 import it.carmelolagamba.saveyourtime.R
 import it.carmelolagamba.saveyourtime.persistence.App
-import it.carmelolagamba.saveyourtime.service.AppService
 import javax.inject.Inject
 
 /**

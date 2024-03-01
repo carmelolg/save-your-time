@@ -15,6 +15,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import it.carmelolagamba.saveyourtime.databinding.FragmentHomeBinding
 import it.carmelolagamba.saveyourtime.persistence.App
 import it.carmelolagamba.saveyourtime.service.AppService
+import it.carmelolagamba.saveyourtime.service.HomeService
 import javax.inject.Inject
 
 

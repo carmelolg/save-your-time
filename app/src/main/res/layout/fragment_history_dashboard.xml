@@ -29,7 +29,7 @@
             android:orientation="vertical">
 
             <LinearLayout
-                android:id="@+id/container_chart"
+                android:id="@+id/container_choice"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
@@ -57,14 +57,25 @@
 
             <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent">
 
                 <LinearLayout
-                    android:id="@+id/container_table"
+                    android:id="@+id/container_weekly"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
+                    <com.patrykandpatrick.vico.views.chart.ChartView
+                        android:id="@+id/weekly_chart"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        android:padding="15dp"
+                        app:chart="column"
+                        app:columnChartStyle="@style/Theme.SaveYourTime.Chart"
+                        app:showBottomAxis="true"
+                        app:showStartAxis="true" />
 
                 </LinearLayout>
             </ScrollView>

@@ -1,5 +1,6 @@
 package it.carmelolagamba.saveyourtime.service
 
+import android.util.Log
 import it.carmelolagamba.saveyourtime.SaveYourTimeApplication
 import it.carmelolagamba.saveyourtime.persistence.App
 import it.carmelolagamba.saveyourtime.persistence.DBFactory
@@ -114,6 +115,19 @@ class AppService @Inject constructor() {
      */
     fun findNameByPackageName(packageName: String): String {
         return findByPackageName(packageName).name
+    }
+
+    /**
+     * @param name the app name
+     * @return the application package name
+     */
+    fun findPackageByName(name: String, apps: List<App> = findAllChecked()): String? {
+        return try {
+            apps.first { it.name == name }.packageName
+        } catch (ex: NoSuchElementException) {
+            Log.d("SYT", "$name doesn't exists or unchecked")
+            null
+        }
     }
 
     /**
