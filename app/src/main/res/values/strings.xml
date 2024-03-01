@@ -75,6 +75,7 @@
     <string name="history_label">Choose the application</string>
     <string name="history_weekly_chart_label">Weekly trend</string>
     <string name="history_monthly_chart_label">Monthly trend</string>
+    <string name="history_apps_empty_caring_message">Go back and access the control panel to choose the applications to monitor</string>
 
 
 </resources>

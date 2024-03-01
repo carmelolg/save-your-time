@@ -43,6 +43,7 @@ class HistoryFragment : Fragment() /*AbstractFragment()*/, AdapterView.OnItemSel
 
     private var apps: List<App> = mutableListOf()
     private var weeklyMap: Map<String, Int> = mutableMapOf()
+    private var packageName: String? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -68,8 +69,16 @@ class HistoryFragment : Fragment() /*AbstractFragment()*/, AdapterView.OnItemSel
         )
 
         binding.appHistoryChoice.adapter = adapter
-
         binding.appHistoryChoice.onItemSelectedListener = this
+
+
+        if (apps.isEmpty()) {
+            binding.containerCaring.visibility = View.VISIBLE
+            binding.containerTop.visibility = View.GONE
+        } else {
+            binding.containerCaring.visibility = View.GONE
+            binding.containerTop.visibility = View.VISIBLE
+        }
 
     }
 
@@ -81,8 +90,6 @@ class HistoryFragment : Fragment() /*AbstractFragment()*/, AdapterView.OnItemSel
     private fun refreshChart() {
 
         if (weeklyMap.isNotEmpty()) {
-
-            binding.containerCaring.visibility = View.GONE
 
             /** Building VICO graph main object */
             var chartData = mutableMapOf<Float, Pair<Float, String>>()
@@ -138,8 +145,6 @@ class HistoryFragment : Fragment() /*AbstractFragment()*/, AdapterView.OnItemSel
                 binding.containerWeekly.visibility = View.VISIBLE
             }
 
-        } else {
-            binding.containerCaring.visibility = View.VISIBLE
         }
     }
 
@@ -203,7 +208,6 @@ class HistoryFragment : Fragment() /*AbstractFragment()*/, AdapterView.OnItemSel
             "avg $weeklyAvg trend yesterday $comparedToYesterdayInPercentage trend last week $comparedToLastWeekInPercentage"
         )
 
-
         refreshChart()
     }
 
@@ -218,11 +222,9 @@ class HistoryFragment : Fragment() /*AbstractFragment()*/, AdapterView.OnItemSel
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
         val name = binding.appHistoryChoice.selectedItem.toString()
-        val packageName = appService.findPackageByName(name, apps)
+        packageName = appService.findPackageByName(name, apps)
 
-        if (packageName != null) {
-            refreshUI(packageName)
-        }
+        packageName?.let { refreshUI(it) }
     }
 
     override fun onNothingSelected(parent: AdapterView<*>?) {
