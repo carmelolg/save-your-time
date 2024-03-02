@@ -64,8 +64,7 @@ class HistoryFragment : Fragment() /*AbstractFragment()*/, AdapterView.OnItemSel
         retrieveApps()
 
         val adapter: ArrayAdapter<String> = ArrayAdapter<String>(
-            requireContext(),
-            R.layout.simple_spinner_dropdown_item, apps.map { it.name }
+            requireContext(), R.layout.simple_spinner_dropdown_item, apps.map { it.name }
         )
 
         binding.appHistoryChoice.adapter = adapter

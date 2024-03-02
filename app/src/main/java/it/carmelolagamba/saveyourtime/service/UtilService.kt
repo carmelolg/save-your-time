@@ -53,14 +53,30 @@ class UtilService @Inject constructor() {
      * @return the millis value of current midnight
      */
     fun todayMidnightMillis(): Long {
-        return getMidnight()
+        val midnight: Calendar = Calendar.getInstance()
+        midnight.set(Calendar.HOUR_OF_DAY, 0)
+        midnight.set(Calendar.MINUTE, 0)
+        midnight.set(Calendar.SECOND, 0)
+        midnight.set(Calendar.MILLISECOND, 0)
+
+        return midnight.timeInMillis
+        //return getMidnight()
     }
 
     /**
      * @return the millis value of tomorrow midnight
      */
     fun tomorrowMidnightMillis(): Long {
-        return getMidnight(TimeParams().tomorrow(true).build())
+        val tomorrow: Calendar = Calendar.getInstance()
+        tomorrow.set(Calendar.HOUR_OF_DAY, 0)
+        tomorrow.set(Calendar.MINUTE, 0)
+        tomorrow.set(Calendar.SECOND, 0)
+        tomorrow.set(Calendar.MILLISECOND, 0)
+
+        tomorrow.add(Calendar.DAY_OF_YEAR, 1)
+
+        return tomorrow.timeInMillis
+        //return getMidnight(TimeParams().tomorrow(true).build())
     }
 
     /**

@@ -66,10 +66,11 @@
                     android:id="@+id/chart_label"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="?android:colorBackgroundCacheHint"
                     android:padding="@dimen/padding_default"
                     android:text="@string/label_chart"
                     android:textAlignment="center"
-                    android:textColor="?android:colorPrimary"
+                    android:textColor="?android:colorPrimaryDark"
                     android:textSize="@dimen/text_size_default" />
 
                 <com.patrykandpatrick.vico.views.chart.ChartView
@@ -104,9 +105,10 @@
                         android:padding="@dimen/padding_default"
                         android:text="@string/label_table"
                         android:textAlignment="center"
-                        android:textColor="?android:colorPrimary"
+                        android:textColor="?android:colorPrimaryDark"
                         android:textSize="@dimen/text_size_default"
-                        android:visibility="gone" />
+                        android:background="?android:colorBackgroundCacheHint"
+                        android:visibility="visible" />
 
                     <TableLayout
                         android:id="@+id/usage_table"
@@ -125,8 +127,8 @@
         android:id="@+id/bottom_layout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="3dp"
         android:layout_alignParentBottom="true"
+        android:layout_marginTop="3dp"
         android:background="?android:colorPrimary"
         android:gravity="center"
         android:orientation="horizontal">
