@@ -65,19 +65,17 @@
                     android:id="@+id/history"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:background="?android:colorBackgroundCacheHint"
                     android:padding="15dp"
                     android:text="@string/history_label"
                     android:textColor="?android:colorPrimaryDark"
-                    android:background="?android:colorBackgroundCacheHint"
                     android:textSize="@dimen/text_size_default" />
 
                 <Spinner
                     android:id="@+id/app_history_choice"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:backgroundTintMode="src_atop"
-                    android:backgroundTint="@color/black"
-                    android:clickable="false"
+                    android:backgroundTint="?android:colorPrimary"
                     android:padding="10dp"
                     android:spinnerMode="dropdown" />
 
@@ -87,6 +85,8 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
                 android:background="?android:colorBackgroundFloating" />
 
             <ScrollView
@@ -94,24 +94,204 @@
                 android:layout_height="match_parent">
 
                 <LinearLayout
-                    android:id="@+id/container_weekly"
+                    android:id="@+id/container_body"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <com.patrykandpatrick.vico.views.chart.ChartView
-                        android:id="@+id/weekly_chart"
+                    <LinearLayout
+                        android:id="@+id/container_weekly"
                         android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:clickable="true"
-                        android:padding="15dp"
-                        app:chart="column"
-                        app:columnChartStyle="@style/Theme.SaveYourTime.Chart"
-                        app:showBottomAxis="true"
-                        app:showStartAxis="true" />
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/history_chart_label"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="?android:colorBackgroundCacheHint"
+                            android:padding="15dp"
+                            android:text="@string/history_weekly_chart_label"
+                            android:textColor="?android:colorPrimaryDark"
+                            android:textSize="@dimen/text_size_default" />
+
+                        <com.patrykandpatrick.vico.views.chart.ChartView
+                            android:id="@+id/weekly_chart"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:clickable="true"
+                            android:padding="15dp"
+                            app:chart="column"
+                            app:columnChartStyle="@style/Theme.SaveYourTime.Chart"
+                            app:showBottomAxis="true"
+                            app:showStartAxis="true" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:background="?android:colorBackgroundFloating" />
+
+                    <LinearLayout
+                        android:id="@+id/container_stats"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/history_stats_label"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="?android:colorBackgroundCacheHint"
+                            android:padding="15dp"
+                            android:text="@string/history_stats_label"
+                            android:textColor="?android:colorPrimaryDark"
+                            android:textSize="@dimen/text_size_default" />
+
+                        <LinearLayout
+                            android:id="@+id/container_stats_labels"
+                            android:layout_width="match_parent"
+                            android:layout_height="35dp"
+                            android:orientation="horizontal"
+                            android:weightSum="2">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_margin="5dp"
+                                android:layout_weight="1"
+                                android:background="?android:colorSecondary"
+                                android:gravity="center"
+                                android:text="@string/history_stats_label_total_usage"
+                                android:textColor="?android:colorAccent" />
+
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_margin="5dp"
+                                android:layout_weight="1"
+                                android:background="?android:colorSecondary"
+                                android:gravity="center"
+                                android:text="@string/history_stats_label_avg_usage"
+                                android:textColor="?android:colorAccent" />
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:id="@+id/container_stats_result"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:weightSum="2">
+
+                            <TextView
+                                android:id="@+id/total_weekly_usage"
+                                android:layout_width="0dp"
+                                android:layout_height="50dp"
+                                android:layout_margin="5dp"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:textColor="?android:colorSecondary"
+                                android:textSize="25sp"
+                                android:textStyle="bold" />
+
+
+                            <TextView
+                                android:id="@+id/total_avg_usage"
+                                android:layout_width="0dp"
+                                android:layout_height="50dp"
+                                android:layout_margin="5dp"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:textColor="?android:colorSecondary"
+                                android:textSize="25sp"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:id="@+id/container_stats_labels_2"
+                            android:layout_width="match_parent"
+                            android:layout_height="35dp"
+                            android:orientation="horizontal"
+                            android:weightSum="2">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_margin="5dp"
+                                android:layout_weight="1"
+                                android:background="?android:colorSecondary"
+                                android:gravity="center"
+                                android:text="@string/history_stats_label_difference_from_yesterday"
+                                android:textColor="?android:colorAccent" />
+
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_margin="5dp"
+                                android:layout_weight="1"
+                                android:background="?android:colorSecondary"
+                                android:gravity="center"
+                                android:text="@string/history_stats_label_difference_from_last_week"
+                                android:textColor="?android:colorAccent" />
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:id="@+id/container_stats_result_2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:weightSum="2">
+
+                            <TextView
+                                android:id="@+id/difference_from_yesterday"
+                                android:layout_width="0dp"
+                                android:layout_height="50dp"
+                                android:layout_margin="5dp"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:textColor="?android:colorSecondary"
+                                android:textSize="25sp"
+                                android:textStyle="bold" />
+
+
+                            <TextView
+                                android:id="@+id/difference_from_last_week"
+                                android:layout_width="0dp"
+                                android:layout_height="50dp"
+                                android:layout_margin="5dp"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:textColor="?android:colorSecondary"
+                                android:textSize="25sp"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:background="?android:colorBackgroundFloating" />
+
+
 
                 </LinearLayout>
+
             </ScrollView>
         </LinearLayout>
     </LinearLayout>

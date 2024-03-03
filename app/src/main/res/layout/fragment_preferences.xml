@@ -29,18 +29,19 @@
                     android:id="@+id/section_preferences_stop_app"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:weightSum="2"
                     android:layout_marginTop="10dp"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    android:weightSum="2">
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
+                        android:background="?android:colorBackgroundCacheHint"
                         android:padding="10dp"
                         android:text="@string/section_block_app_label"
                         android:textColor="?android:colorPrimaryDark"
-                        android:background="?android:colorBackgroundCacheHint"
                         android:textSize="@dimen/text_size_default" />
 
                     <TextView
@@ -83,10 +84,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="0"
+                        android:background="?android:colorBackgroundCacheHint"
                         android:padding="10dp"
                         android:text="@string/section_notification_app_label"
                         android:textColor="?android:colorPrimaryDark"
-                        android:background="?android:colorBackgroundCacheHint"
                         android:textSize="@dimen/text_size_default" />
 
                     <Switch
@@ -120,10 +121,10 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="0.4"
+                            android:backgroundTint="?android:colorPrimary"
                             android:clickable="false"
                             android:padding="20dp"
-                            android:spinnerMode="dropdown"
-                            />
+                            android:spinnerMode="dropdown" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -144,10 +145,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="0"
+                        android:background="?android:colorBackgroundCacheHint"
                         android:padding="10dp"
                         android:text="@string/section_disclaimer_label"
                         android:textColor="?android:colorPrimaryDark"
-                        android:background="?android:colorBackgroundCacheHint"
                         android:textSize="@dimen/text_size_default" />
 
                     <LinearLayout

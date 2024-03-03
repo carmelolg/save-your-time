@@ -18,15 +18,18 @@ import it.carmelolagamba.saveyourtime.persistence.App
 import it.carmelolagamba.saveyourtime.persistence.Event
 import it.carmelolagamba.saveyourtime.service.AppService
 import it.carmelolagamba.saveyourtime.service.EventService
+import it.carmelolagamba.saveyourtime.service.UtilService
+import javax.inject.Inject
 
 /**
  * @author carmelolg
  * @since version 1.0
  */
-class AppDataAdapter(
+class AppDataAdapter @Inject constructor(
     private val applications: List<AppDataModel>,
     private val appService: AppService,
     private val eventService: EventService,
+    private val utilService: UtilService,
     context: Context
 ) :
     ArrayAdapter<Any?>(context, R.layout.app_data_model, applications) {
@@ -121,12 +124,12 @@ class AppDataAdapter(
                 viewHolder.packageName,
                 viewHolder.appChecked.isChecked,
                 minutes,
-                item.todayUsage,
+                utilService.getUsageInMinutesByPackage(context, item.packageName),
                 item.lastUpdate
             )
         )
         var event: Event? = eventService.findEventByPackageName(viewHolder.packageName)
-        if(event != null){
+        if (event != null) {
             event.notified = false
             eventService.upsert(event)
         }

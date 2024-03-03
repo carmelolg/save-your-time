@@ -42,7 +42,7 @@ class HistoryService @Inject constructor() {
             UtilService.TimeParams().weekday(UtilService.Weekday.SUNDAY).week(week).build()
         )
         val nextMonday = utilService.getMidnight(
-            UtilService.TimeParams().weekday(UtilService.Weekday.SUNDAY).week(week).tomorrow(true).build()
+            UtilService.TimeParams().weekday(UtilService.Weekday.MONDAY).week(week + 1).build()
         )
 
         val weeklyMap = mutableMapOf<String, Int>()

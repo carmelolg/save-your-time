@@ -94,6 +94,11 @@ class UtilService @Inject constructor() {
     fun getMidnight(timeParams: TimeParams? = null): Long {
         val midnight: Calendar = Calendar.getInstance()
 
+        midnight.set(Calendar.HOUR_OF_DAY, 0)
+        midnight.set(Calendar.MINUTE, 0)
+        midnight.set(Calendar.SECOND, 0)
+        midnight.set(Calendar.MILLISECOND, 0)
+
         if (timeParams != null) {
             if (timeParams.tomorrow) {
                 midnight.add(Calendar.DAY_OF_YEAR, 1)
@@ -106,10 +111,6 @@ class UtilService @Inject constructor() {
             }
         }
 
-        midnight.set(Calendar.HOUR_OF_DAY, 0)
-        midnight.set(Calendar.MINUTE, 0)
-        midnight.set(Calendar.SECOND, 0)
-        midnight.set(Calendar.MILLISECOND, 0)
 
         return midnight.timeInMillis
     }

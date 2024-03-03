@@ -18,6 +18,7 @@ import it.carmelolagamba.saveyourtime.databinding.FragmentSettingsBinding
 import it.carmelolagamba.saveyourtime.persistence.App
 import it.carmelolagamba.saveyourtime.service.AppService
 import it.carmelolagamba.saveyourtime.service.EventService
+import it.carmelolagamba.saveyourtime.service.UtilService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -40,6 +41,9 @@ class SettingsFragment : Fragment() /*AbstractFragment()*/ {
 
     @Inject
     lateinit var eventService: EventService
+
+    @Inject
+    lateinit var utilService: UtilService
 
     /**
     override fun innerOnScroll(x: Float, y: Float) {
@@ -114,7 +118,7 @@ class SettingsFragment : Fragment() /*AbstractFragment()*/ {
         blockButtons()
 
         val applications = retrieveApps()
-        adapter = AppDataAdapter(applications, appService, eventService, requireContext())
+        adapter = AppDataAdapter(applications, appService, eventService, utilService,  requireContext())
 
         val gridView: GridView = binding.gridList
         gridView.adapter = adapter

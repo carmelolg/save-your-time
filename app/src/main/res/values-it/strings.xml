@@ -63,5 +63,10 @@
     <string name="history_label">Scegli l\'applicazione</string>
     <string name="history_weekly_chart_label">Grafico settimanale</string>
     <string name="history_monthly_chart_label">Grafico mensile</string>
+    <string name="history_stats_label">Statistiche</string>
+    <string name="history_stats_label_total_usage">Uso totale settimanale</string>
+    <string name="history_stats_label_avg_usage">Media uso settimanale</string>
+    <string name="history_stats_label_difference_from_yesterday">Rispetto a ieri</string>
+    <string name="history_stats_label_difference_from_last_week">Rispetto all\'ultima settimana</string>
     <string name="history_apps_empty_caring_message">Ritorna indietro e accedi al pannello di controllo per scegliere le applicazioni da monitorare</string>
 </resources>

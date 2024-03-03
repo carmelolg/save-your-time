@@ -2,7 +2,6 @@ package it.carmelolagamba.saveyourtime.ui.history
 
 import android.R
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -136,14 +135,6 @@ class HistoryFragment : Fragment() /*AbstractFragment()*/, AdapterView.OnItemSel
             /** Set VICO graph view */
             binding.weeklyChart.setModel(chartEntryModel)
 
-            if (apps.sumOf { app -> app.todayUsage } < 1) {
-                binding.weeklyChart.visibility = View.INVISIBLE
-                binding.containerWeekly.visibility = View.GONE
-            } else {
-                binding.weeklyChart.visibility = View.VISIBLE
-                binding.containerWeekly.visibility = View.VISIBLE
-            }
-
         }
     }
 
@@ -200,12 +191,30 @@ class HistoryFragment : Fragment() /*AbstractFragment()*/, AdapterView.OnItemSel
         }
 
         /** Refresh UI */
-        Log.d("SYT", "$weeklyMap")
-        Log.d("SYT", "$lastWeeklyMap")
-        Log.d(
-            "SYT",
-            "avg $weeklyAvg trend yesterday $comparedToYesterdayInPercentage trend last week $comparedToLastWeekInPercentage"
-        )
+
+        if (totalWeekUsage > 0) {
+            binding.containerWeekly.visibility = View.VISIBLE
+        } else {
+            binding.containerWeekly.visibility = View.GONE
+        }
+
+        binding.totalAvgUsage.text = "$weeklyAvg min"
+        binding.totalWeeklyUsage.text = "${weeklyMap.values.sumOf { it }} min"
+
+        val prefixYesterday = if (comparedToYesterdayInPercentage > 0) {
+            "+"
+        } else {
+            ""
+        }
+
+        val prefixLastWeek = if (comparedToLastWeekInPercentage > 0) {
+            "+"
+        } else {
+            ""
+        }
+
+        binding.differenceFromLastWeek.text = "$prefixLastWeek $comparedToLastWeekInPercentage %"
+        binding.differenceFromYesterday.text = "$prefixYesterday $comparedToYesterdayInPercentage %"
 
         refreshChart()
     }
