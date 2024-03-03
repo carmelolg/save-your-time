@@ -18,8 +18,8 @@
         android:layout_alignParentBottom="true"
         android:clickable="true"
         android:contentDescription="@string/delete"
-        android:backgroundTint="?android:colorPrimary"
         app:tint="?android:colorAccent"
+        app:backgroundTint="?android:colorPrimary"
         android:src="@drawable/ic_remove"
         app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
         app:useCompatPadding="true" />

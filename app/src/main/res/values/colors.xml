@@ -11,9 +11,43 @@
     <color name="text_primary">#FFFFFF</color>
     <color name="text_secondary">#F3F0CA</color>
 
+    <!--
+    prima prova
     <color name="first">#283D3B</color>
     <color name="second">#197278</color>
     <color name="third">#EDDDD4</color>
     <color name="fourth">#C44536</color>
     <color name="fifth">#772E25</color>
+
+    seconda prova
+    <color name="first">#1C3144</color>
+    <color name="second">#3F88C5</color>
+    <color name="third">#A2AEBB</color>
+    <color name="fourth">#FFBA08</color>
+    <color name="fifth">#D00000</color>
+
+    terza prova
+    <color name="first">#373F51</color>
+    <color name="second">#008DD5</color>
+    <color name="third">#DFBBB1</color>
+    <color name="fourth">#F56476</color>
+    <color name="fifth">#E43F6F</color>
+
+ -->
+    <!-- quarta prova -->
+    <color name="first">#19323C</color>
+    <color name="second">#324A5F</color>
+    <color name="third">#FFD275</color>
+    <color name="fourth">#F2545B</color>
+    <color name="fifth">#A93F55</color>
+
+
+    <!-- night theme -->
+    <color name="n_first">#283D3B</color>
+    <color name="n_second">#197278</color>
+    <color name="n_third">#EDDDD4</color>
+    <color name="n_fourth">#C44536</color>
+    <color name="n_fifth">#772E25</color>
+
+
 </resources>
