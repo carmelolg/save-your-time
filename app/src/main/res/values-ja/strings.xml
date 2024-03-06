@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Save Your Time</string>
+    <string name="title_home">ホーム</string>
+    <string name="title_dashboard">ダッシュボード</string>
+    <string name="title_notifications">通知</string>
+    <string name="title_settings">設定</string>
+    <string name="title_preferences">設定</string>
+    <string name="title_history_dashboard">履歴</string>
+    <string name="back_label">戻る</string>
+    <string name="forward_label">進む</string>
+    <string name="list_of_permission">必要な権限のリスト:\n\n<li>データ使用アクセス</li></string>
+    <string name="close_app_message">アプリを終了するにはもう一度戻るボタンを押してください。</string>
+    <string name="delete">削除</string>
+
+
+    <!-- DASHBOARD -->
+    <string name="time_exceeded">超過</string>
+    <string name="application_label">アプリ</string>
+    <string name="time_usage_label">使用時間</string>
+    <string name="time_remaining_label">残り時間</string>
+    <string name="apps_empty_caring_message">"ここに統計が表示されます。\nモニタリングするアプリを選択するには、ダッシュボードをクリックしてください。"</string>
+    <string name="label_table">概要表</string>
+    <string name="label_chart">トレンドグラフ</string>
+
+
+    <!--  SETTINGS -->
+    <string name="dialog_reset_title">本当によろしいですか？</string>
+    <string name="dialog_reset_description">承認すると、すべての設定が削除されます。</string>
+    <string name="control_panel_total_label">毎日の合計使用時間</string>
+
+    <!-- START ACTIVITY -->
+    <string name="privacy_disclaimer">アプリケーションは、個人データまたは使用データを端末の内部メモリ以外にエクスポートしません。第三者は、アプリケーションによって取得されたデータとはやり取りしません。</string>
+    <string name="allow_button">許可</string>
+    <string name="start_disclaimer">アプリケーションを正常に機能させるには、使用データへのアクセスが必要です。</string>
+    <string name="allow_button_notification">通知を有効にする</string>
+    <string name="start_disclaimer_notification">アプリケーションを正常に機能させるには、基本通知を有効にする必要があります。</string>
+
+    <!-- NOTIFICATIONS -->
+
+    <string name="warn_title_notify_app">シャットダウンの時間です</string>
+    <string name="warn_description_notify_app">日ごとの制限を超えました</string>
+    <string name="warn_description_notify_app_recheck">アプリを引き続き使用しています！日ごとの制限を超えました</string>
+    <string name="notification_channel_name">基本通知</string>
+    <string name="notification_channel_description">アプリごとの時間を通知します</string>
+    <string name="notification_service_title">Save Your Time がアクティブです</string>
+    <string name="notification_service_description">詳細を表示するにはこちらをクリックしてください</string>
+    <string name="notification_service_channel_description">サービスがアクティブな場合に表示される通知</string>
+    <string name="notification_service_channel_name">サービス通知</string>
+
+    <!-- PREFERENCES -->
+    <string name="section_block_app_label">ブロック設定</string>
+    <string name="section_block_app_label_stay_tuned">機能はまだ有効ではありません！</string>
+    <string name="section_block_app_option">時間切れ時にアプリをブロックする</string>
+    <string name="section_notification_app_label">通知設定</string>
+    <string name="section_notification_app_option_enabled">期限切れのリマインダーを有効にする</string>
+    <string name="section_notification_app_option">アプリを続けて使用した場合のリマインダーを受信するまでの分数</string>
+    <string name="section_disclaimer_label">その他</string>
+    <string name="section_disclaimer_license_option">ライセンス</string>
+    <string name="section_disclaimer_privacy_option">プライバシー</string>
+    <string name="section_disclaimer_reset_option">設定をリセット</string>
+
+    <!-- HISTORY -->
+    <string name="yesterday">昨日</string>
+    <string name="history_label">アプリを選択</string>
+    <string name="history_weekly_chart_label">今週</string>
+    <string name="history_last7days_chart_label">過去7日間</string>
+    <string name="history_monthly_chart_label">月間グラフ</string>
+    <string name="history_stats_label">統計</string>
+    <string name="history_stats_label_total_usage">今週の合計</string>
+    <string name="history_stats_label_avg_usage">今週の平均</string>
+    <string name="history_stats_label_difference_from_yesterday">昨日との差</string>
+    <string name="history_stats_label_difference_from_last_week">先週との差</string>
+    <string name="history_apps_empty_caring_message">戻ってコントロールパネルにアクセスし、モニタリングするアプリを選択してください</string>
+
+    <!-- VARIABLES -->
+    <string name="now">今日</string>
+    <string-array name="days">
+        <item>日曜日</item>
+        <item>月曜日</item>
+        <item>火曜日</item>
+        <item>水曜日</item>
+        <item>木曜日</item>
+        <item>金曜日</item>
+        <item>土曜日</item>
+    </string-array>
+</resources>

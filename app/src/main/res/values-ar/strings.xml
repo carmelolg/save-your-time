@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">حفظ وقتك</string>
+    <string name="title_home">الصفحة الرئيسية</string>
+    <string name="title_dashboard">لوحة القيادة</string>
+    <string name="title_notifications">الإشعارات</string>
+    <string name="title_settings">الإعدادات</string>
+    <string name="title_preferences">التفضيلات</string>
+    <string name="title_history_dashboard">سجل</string>
+    <string name="back_label">رجوع</string>
+    <string name="forward_label">إلى الأمام</string>
+    <string name="list_of_permission">قائمة الأذونات المطلوبة:\n\n<li>الوصول إلى بيانات الاستخدام</li></string>
+    <string name="close_app_message">اضغط مرة أخرى على الزر للخروج من التطبيق.</string>
+    <string name="delete">حذف</string>
+
+
+    <!-- لوحة القيادة -->
+    <string name="time_exceeded">تجاوز</string>
+    <string name="application_label">التطبيق</string>
+    <string name="time_usage_label">تم استخدامه</string>
+    <string name="time_remaining_label">متبقي</string>
+    <string name="apps_empty_caring_message">"ستظهر إحصائياتك هنا.\nانقر فوق لوحة القيادة لتحديد التطبيقات التي ترغب في مراقبتها."</string>
+    <string name="label_table">جدول موجز</string>
+    <string name="label_chart">الرسم البياني للاتجاه</string>
+
+
+    <!-- الإعدادات -->
+    <string name="dialog_reset_title">هل أنت متأكد؟</string>
+    <string name="dialog_reset_description">إذا وافقت، سيتم حذف جميع تفضيلاتك.</string>
+    <string name="control_panel_total_label">الاستخدام اليومي الإجمالي</string>
+
+    <!-- بدء النشاط -->
+    <string name="privacy_disclaimer">لا نصدر أي نوع من البيانات الشخصية أو الاستخدام خارج الذاكرة الداخلية للهاتف. لا يتفاعل أي طرف ثالث مع البيانات التي يتم جمعها بواسطة التطبيق.</string>
+    <string name="allow_button">السماح</string>
+    <string name="start_disclaimer">للعمل بشكل صحيح، يتطلب التطبيق الوصول إلى بيانات الاستخدام.</string>
+    <string name="allow_button_notification">تمكين الإشعارات</string>
+    <string name="start_disclaimer_notification">للعمل بشكل صحيح، يجب تمكين الإشعارات الأساسية.</string>
+
+    <!-- الإشعارات -->
+
+    <string name="warn_title_notify_app">حان الوقت لإيقاف التشغيل</string>
+    <string name="warn_description_notify_app">تجاوز الحد اليومي على</string>
+    <string name="warn_description_notify_app_recheck">لا تزال تستخدم التطبيق! تجاوز الحد اليومي على</string>
+    <string name="notification_channel_name">الإشعارات الأساسية</string>
+    <string name="notification_channel_description">الإشعارات حول الوقت المستغرق في التطبيقات</string>
+    <string name="notification_service_title">حفظ وقتك نشط</string>
+    <string name="notification_service_description">انقر هنا للتفاصيل</string>
+    <string name="notification_service_channel_description">الإشعار المعروض عندما يكون الخدمة نشطة</string>
+    <string name="notification_service_channel_name">إشعارات الخدمة</string>
+
+    <!-- التفضيلات -->
+    <string name="section_block_app_label">تفضيلات الحظر</string>
+    <string name="section_block_app_label_stay_tuned">الوظيفة غير نشطة بعد!</string>
+    <string name="section_block_app_option">حظر التطبيقات عند انتهاء الوقت</string>
+    <string name="section_notification_app_label">تفضيلات الإشعارات</string>
+    <string name="section_notification_app_option_enabled">تمكين تذكير عند الانتهاء</string>
+    <string name="section_notification_app_option">الدقائق بعد التي ستتلقى تذكيرًا عند انتهاء الوقت (إذا استمريت في استخدام التطبيق)</string>
+    <string name="section_disclaimer_label">متنوع</string>
+    <string name="section_disclaimer_license_option">رخصة الاستخدام</string>
+    <string name="section_disclaimer_privacy_option">الخصوصية</string>
+    <string name="section_disclaimer_reset_option">إعادة ضبط التفضيلات</string>
+
+    <!-- التاريخ -->
+    <string name="yesterday">أمس</string>
+    <string name="history_label">اختر التطبيق</string>
+    <string name="history_weekly_chart_label">هذا الأسبوع</string>
+    <string name="history_last7days_chart_label">الأيام السابقة</string>
+    <string name="history_monthly_chart_label">مخطط الشهر</string>
+    <string name="history_stats_label">الإحصائيات</string>
+    <string name="history_stats_label_total_usage">المجموع هذا الأسبوع</string>
+    <string name="history_stats_label_avg_usage">المتوسط هذا الأسبوع</string>
+    <string name="history_stats_label_difference_from_yesterday">بالمقارنة مع الأمس</string>
+    <string name="history_stats_label_difference_from_last_week">بالمقارنة مع الأسبوع الماضي</string>
+    <string name="history_apps_empty_caring_message">العودة والوصول إلى لوحة القيادة لتحديد التطبيقات التي ترغب في مراقبتها</string>
+
+    <!-- المتغيرات -->
+    <string name="now">اليوم</string>
+    <string-array name="days">
+        <item>الأحد</item>
+        <item>الاثنين</item>
+        <item>الثلاثاء</item>
+        <item>الأربعاء</item>
+        <item>الخميس</item>
+        <item>الجمعة</item>
+        <item>السبت</item>
+    </string-array>
+</resources>

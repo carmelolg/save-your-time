@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Save Your Time</string>
+    <string name="title_home">Inicio</string>
+    <string name="title_dashboard">Panel de control</string>
+    <string name="title_notifications">Notificaciones</string>
+    <string name="title_settings">Ajustes</string>
+    <string name="title_preferences">Preferencias</string>
+    <string name="title_history_dashboard">Historial</string>
+    <string name="back_label">Volver</string>
+    <string name="forward_label">Adelante</string>
+    <string name="list_of_permission">La lista de permisos requeridos:\n\n<li>Acceso a datos de uso</li></string>
+    <string name="close_app_message">Presiona nuevamente hacia atrás para cerrar la aplicación.</string>
+    <string name="delete">eliminar</string>
+
+
+    <!-- DASHBOARD -->
+    <string name="time_exceeded">Exced.</string>
+    <string name="application_label">Aplicación</string>
+    <string name="time_usage_label">Usado</string>
+    <string name="time_remaining_label">Restante</string>
+    <string name="apps_empty_caring_message">"Verás tus estadísticas aquí.\nHaz clic en panel de control para elegir las aplicaciones a monitorear."</string>
+    <string name="label_table">Tabla resumen</string>
+    <string name="label_chart">Gráfico de tendencia</string>
+
+
+    <!--  AJUSTES -->
+    <string name="dialog_reset_title">¿Estás seguro?</string>
+    <string name="dialog_reset_description">Si apruebas, se eliminarán todas tus preferencias.</string>
+    <string name="control_panel_total_label">Uso diario total</string>
+
+    <!-- START ACTIVITY -->
+    <string name="privacy_disclaimer">No exportamos ningún tipo de dato personal o de uso fuera de la memoria interna del teléfono. Ninguna tercera parte interactúa con los datos adquiridos por la aplicación.</string>
+    <string name="allow_button">Permitir</string>
+    <string name="start_disclaimer">Para que la aplicación funcione correctamente, se requiere acceso a los datos de uso</string>
+    <string name="allow_button_notification">Activar notificaciones</string>
+    <string name="start_disclaimer_notification">Para que la aplicación funcione correctamente, se requiere activar las notificaciones básicas</string>
+
+    <!-- NOTIFICACIONES -->
+
+    <string name="warn_title_notify_app">Es hora de apagar</string>
+    <string name="warn_description_notify_app">Límite diario superado en</string>
+    <string name="warn_description_notify_app_recheck">¡Sigues usando la aplicación! Límite diario superado en</string>
+    <string name="notification_channel_name">Notificaciones básicas</string>
+    <string name="notification_channel_description">Notificaciones sobre el tiempo dedicado a las aplicaciones</string>
+    <string name="notification_service_title">Save Your Time activo</string>
+    <string name="notification_service_description">Haz clic aquí para ver los detalles</string>
+    <string name="notification_service_channel_description">Notificación mostrada cuando el servicio está activo</string>
+    <string name="notification_service_channel_name">Notificaciones de servicio</string>
+
+    <!-- PREFERENCIAS -->
+    <string name="section_block_app_label">Preferencias de bloqueo</string>
+    <string name="section_block_app_label_stay_tuned">¡Función aún no activa!</string>
+    <string name="section_block_app_option">Bloquear aplicaciones cuando expire el tiempo</string>
+    <string name="section_notification_app_label">Preferencias de notificación</string>
+    <string name="section_notification_app_option_enabled">Activar recordatorio al vencimiento</string>
+    <string name="section_notification_app_option">Minutos después de los cuales recibirás el recordatorio al vencimiento (si continúas usando la aplicación)</string>
+    <string name="section_disclaimer_label">Varios</string>
+    <string name="section_disclaimer_license_option">Licencia de uso</string>
+    <string name="section_disclaimer_privacy_option">Privacidad</string>
+    <string name="section_disclaimer_reset_option">Restablecer preferencias</string>
+
+    <!-- HISTORIAL -->
+    <string name="yesterday">Ayer</string>
+    <string name="history_label">Selecciona la aplicación</string>
+    <string name="history_weekly_chart_label">Esta semana</string>
+    <string name="history_last7days_chart_label">Últimos 7 días</string>
+    <string name="history_monthly_chart_label">Gráfico mensual</string>
+    <string name="history_stats_label">Estadísticas</string>
+    <string name="history_stats_label_total_usage">Total esta semana</string>
+    <string name="history_stats_label_avg_usage">Promedio de esta semana</string>
+    <string name="history_stats_label_difference_from_yesterday">Comparado con ayer</string>
+    <string name="history_stats_label_difference_from_last_week">Comparado con la semana pasada</string>
+    <string name="history_apps_empty_caring_message">Vuelve atrás e ingresa al panel de control para elegir las aplicaciones a monitorear</string>
+
+    <!-- VARIABLES -->
+    <string name="now">HOY</string>
+    <string-array name="days">
+        <item>Domingo</item>
+        <item>Lunes</item>
+        <item>Martes</item>
+        <item>Miércoles</item>
+        <item>Jueves</item>
+        <item>Viernes</item>
+        <item>Sábado</item>
+    </string-array>
+</resources>
