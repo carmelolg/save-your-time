@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:padding="@dimen/margin_default"
         android:text="@string/start_disclaimer"
-        android:textColor="?android:colorPrimary"
+        android:textColor="?attr/SYTColorPrimary"
         android:textSize="@dimen/text_size_start_activity"></TextView>
 
 
@@ -25,8 +25,8 @@
         android:layout_below="@id/disclaimer"
         android:layout_marginLeft="@dimen/margin_default"
         android:layout_marginRight="@dimen/margin_default"
-        android:backgroundTint="?android:colorPrimary"
-        android:textColor="?android:colorAccent"
+        android:backgroundTint="?attr/SYTPanelBackgroundColor"
+        android:textColor="?attr/SYTPanelTextColor"
         android:padding="@dimen/margin_default"
         android:text="@string/allow_button" />
 
@@ -36,7 +36,7 @@
         android:layout_height="wrap_content"
         android:padding="@dimen/margin_default"
         android:text="@string/start_disclaimer_notification"
-        android:textColor="?android:colorPrimary"
+        android:textColor="?attr/SYTColorPrimary"
         android:textSize="@dimen/text_size_start_activity"
         ></TextView>
 
@@ -48,8 +48,8 @@
         android:layout_below="@id/disclaimer_notification"
         android:layout_marginLeft="@dimen/margin_default"
         android:layout_marginRight="@dimen/margin_default"
-        android:backgroundTint="?android:colorPrimary"
-        android:textColor="?android:colorAccent"
+        android:backgroundTint="?attr/SYTPanelBackgroundColor"
+        android:textColor="?attr/SYTPanelTextColor"
         android:padding="@dimen/margin_default"
         android:text="@string/allow_button_notification"/>
 
@@ -60,7 +60,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@id/privacy_disclaimer"
         android:text="@string/privacy_disclaimer_prefix"
-        android:textColor="?android:colorPrimary"
+        android:textColor="?attr/SYTColorPrimary"
         android:textSize="@dimen/text_size_default"
         android:textStyle="bold"
         android:textAlignment="center"
@@ -71,7 +71,7 @@
         android:layout_height="wrap_content"
         android:padding="@dimen/margin_default"
         android:text="@string/privacy_disclaimer"
-        android:textColor="?android:colorPrimary"
+        android:textColor="?attr/SYTColorPrimary"
         android:textSize="@dimen/text_size_default"
         android:layout_gravity="bottom"
         android:layout_alignParentBottom="true"

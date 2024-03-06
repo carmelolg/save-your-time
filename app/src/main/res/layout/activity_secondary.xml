@@ -15,8 +15,6 @@
         android:layout_height="wrap_content"
         android:indeterminate="true"
         android:progress="0"
-        android:progressBackgroundTint="@color/tertiary"
-        android:progressTint="@color/tertiary"
         android:theme="@style/Theme.SaveYourTime.ProgressBar"
         android:visibility="invisible"
         android:layout_centerInParent="true"
@@ -36,7 +34,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/app_bar_size"
         android:layout_alignParentBottom="false"
-        android:background="?android:attr/windowBackground"
+        android:background="?attr/SYTBackgroundColor"
         app:menu="@menu/left_nav_menu" />
 
 </RelativeLayout>

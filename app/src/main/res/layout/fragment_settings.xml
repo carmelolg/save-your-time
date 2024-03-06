@@ -6,10 +6,6 @@
     android:layout_height="wrap_content"
     tools:context=".ui.settings.SettingsFragment">
 
-    <!--
-    android:backgroundTint="?android:colorPrimary"
-        app:tint="@color/white"
-    -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/resetFab"
         android:layout_width="wrap_content"
@@ -18,8 +14,8 @@
         android:layout_alignParentBottom="true"
         android:clickable="true"
         android:contentDescription="@string/delete"
-        app:tint="?android:colorAccent"
-        app:backgroundTint="?android:colorPrimary"
+        app:tint="?attr/SYTFloatingButtonForeground"
+        app:backgroundTint="?attr/SYTFloatingButtonBackground"
         android:src="@drawable/ic_remove"
         app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
         app:useCompatPadding="true" />

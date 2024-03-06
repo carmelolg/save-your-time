@@ -72,9 +72,11 @@
     <string name="license_url" translatable="false">https://raw.githubusercontent.com/carmelolg/save-your-time/master/LICENSE</string>
 
     <!-- HISTORY -->
+    <string name="yesterday">Yesterday</string>
     <string name="history_label">Choose the application</string>
     <string name="history_monthly_chart_label">Monthly trend</string>
     <string name="history_weekly_chart_label">Weekly Trend Chart</string>
+    <string name="history_last7days_chart_label">Last 7 Days Trend Chart</string>
     <string name="history_stats_label">Statistics</string>
     <string name="history_stats_label_total_usage">Total Weekly Usage</string>
     <string name="history_stats_label_avg_usage">Usage average</string>
@@ -82,5 +84,16 @@
     <string name="history_stats_label_difference_from_last_week">From Last Week</string>
     <string name="history_apps_empty_caring_message">Go back and access the control panel to choose the applications to monitor</string>
 
+    <!-- VARIABLES -->
+    <string name="now">TODAY</string>
+    <string-array name="days">
+        <item>Sunday</item>
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thursday</item>
+        <item>Friday</item>
+        <item>Saturday</item>
+    </string-array>
 
 </resources>

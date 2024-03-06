@@ -1,15 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <!-- Default color -->
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="red">#FF0000</color>
+    <color name="n_black_default">#121316</color>
+
+    <!-- day theme -->
+    <color name="first">#19323C</color>
+    <color name="second">#324A5F</color>
+    <color name="third">#FFD275</color>
+    <color name="fourth">#F2545B</color>
+    <color name="fifth">#A93F55</color>
 
 
-    <color name="primary">#192655</color>
-    <color name="secondary">#3876BF</color>
-    <color name="tertiary">#E1AA74</color>
-    <color name="text_primary">#FFFFFF</color>
-    <color name="text_secondary">#F3F0CA</color>
+    <!-- night theme -->
+    <color name="n_first">#283D3B</color>
+    <color name="n_second">#197278</color>
+    <color name="n_third">#EDDDD4</color>
+    <color name="n_fourth">#F2545B</color>
+    <color name="n_fifth">#A93F55</color>
 
     <!--
     prima prova
@@ -33,21 +44,14 @@
     <color name="fourth">#F56476</color>
     <color name="fifth">#E43F6F</color>
 
- -->
-    <!-- quarta prova -->
-    <color name="first">#19323C</color>
-    <color name="second">#324A5F</color>
-    <color name="third">#FFD275</color>
-    <color name="fourth">#F2545B</color>
-    <color name="fifth">#A93F55</color>
-
-
-    <!-- night theme -->
+    night theme backup
     <color name="n_first">#283D3B</color>
     <color name="n_second">#197278</color>
     <color name="n_third">#EDDDD4</color>
-    <color name="n_fourth">#C44536</color>
-    <color name="n_fifth">#772E25</color>
+    <color name="n_fourth">#F2545B</color>
+    <color name="n_fifth">#A93F55</color>
+
+ -->
 
 
 </resources>

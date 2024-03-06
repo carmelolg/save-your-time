@@ -4,6 +4,7 @@ import android.app.AppOpsManager
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.os.PowerManager
 import android.os.Process
 import android.provider.Settings
 import android.util.Log
@@ -45,12 +46,18 @@ class StartActivity : AbstractActivity() {
         initPage()
     }
 
-    private fun initPage(){
+    private fun initPage() {
         val appOps = getSystemService(APP_OPS_SERVICE) as AppOpsManager
         val mode = appOps.checkOpNoThrow(
             AppOpsManager.OPSTR_GET_USAGE_STATS,
             Process.myUid(), packageName
         )
+
+        val powerManager: PowerManager =
+            (applicationContext.getSystemService(POWER_SERVICE) as PowerManager);
+
+        val ignoreBatteryLifeOptimizationCheck =
+            powerManager.isIgnoringBatteryOptimizations(packageName)
 
         if (mode != AppOpsManager.MODE_ALLOWED) {
 
@@ -67,7 +74,11 @@ class StartActivity : AbstractActivity() {
                 launcher.launch(intent)
             }
 
-        } else if(!isNotificationChannelEnabled(this, resources.getString(R.string.notification_channel_id))){
+        } else if (!isNotificationChannelEnabled(
+                this,
+                resources.getString(R.string.notification_channel_id)
+            )
+        ) {
 
             Log.d("SYT Permission", "Channel Notification ID not Allowed")
 
@@ -79,11 +90,21 @@ class StartActivity : AbstractActivity() {
             binding.allowButtonNotification.setOnClickListener {
                 val intent = Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS)
                     .putExtra(Settings.EXTRA_APP_PACKAGE, packageName)
-                    //.putExtra(Settings.EXTRA_CHANNEL_ID, resources.getString(R.string.notification_channel_id))
+                //.putExtra(Settings.EXTRA_CHANNEL_ID, resources.getString(R.string.notification_channel_id))
                 launcher.launch(intent)
             }
 
-        } else if(isAllCheckPassed()) {
+        } else if (!ignoreBatteryLifeOptimizationCheck) {
+            binding.allowButton.visibility = View.INVISIBLE
+            binding.disclaimer.visibility = View.INVISIBLE
+            binding.allowButtonNotification.visibility = View.INVISIBLE
+            binding.disclaimerNotification.visibility = View.INVISIBLE
+
+            val intent = Intent(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS)
+                .setData(Uri.parse("package:$packageName"))
+            launcher.launch(intent)
+
+        } else if (isAllCheckPassed()) {
             Log.d("SYT Permission", "Allowed")
             startMainActivity()
         }

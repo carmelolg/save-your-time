@@ -150,6 +150,7 @@ class SYTBackgroundService : Service(), EventListener {
      * @param start millis of start time of the range @default today's midnight
      * @param end millis of end time of the range @default tomorrow's midnight
      * @return the total usage in minutes
+     * TODO substitute with UtilService.getUsageInMinutesByPackage()
      */
     private fun getUsageInMinutesByPackage(
         packageName: String,

@@ -81,7 +81,7 @@ class HomeService @Inject constructor() {
         secondCol.setTextAppearance(R.style.Theme_SaveYourTime_Table_Row)
         val timeRemaining = app.notifyTime - time
         if (timeRemaining <= 0) {
-            context?.let { thirdCol.setTextColor(it.getColor(R.color.fifth)) }
+            context.let { thirdCol.setTextColor(it.getColor(R.color.fifth)) }
         } else {
             thirdCol.text = "$timeRemaining min"
             thirdCol.setTextAppearance(R.style.Theme_SaveYourTime_Table_Row)

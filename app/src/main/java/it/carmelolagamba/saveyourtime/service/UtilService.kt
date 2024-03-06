@@ -3,8 +3,10 @@ package it.carmelolagamba.saveyourtime.service
 import android.app.usage.UsageEvents
 import android.app.usage.UsageStatsManager
 import android.content.Context
+import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.util.Calendar
+import java.util.Locale
 import javax.inject.Inject
 
 /**
@@ -24,26 +26,96 @@ class UtilService @Inject constructor() {
         SATURDAY,
     }
 
+    /**
+     * @param weekday the current day expressed in Weekday object
+     * @return the previous day from the weekday
+     */
+    fun prev(weekday: Weekday): Weekday {
+        return if (weekday == Weekday.SUNDAY) {
+            Weekday.SATURDAY
+        } else {
+            Weekday.entries[weekday.ordinal - 1]
+        }
+    }
+
+    /**
+     * @param weekday the current day expressed in Weekday object
+     * @return the next day from the weekday
+     */
+    fun next(weekday: Weekday): Weekday {
+        return if (weekday == Weekday.SATURDAY) {
+            Weekday.SUNDAY
+        } else {
+            Weekday.entries[weekday.ordinal + 1]
+        }
+    }
+
+    /**
+     * @param weekday the current day expressed in Weekday object
+     * @param offset the integer that represent how much days you want to go in back
+     * @return the prev day from the weekday
+     */
+    fun prev(weekday: Weekday, offset: Int): Weekday {
+        var currentElement = weekday
+        var tmpElement: Weekday
+        for (i in 1..offset) {
+            tmpElement = prev(currentElement)
+            currentElement = tmpElement
+        }
+        return currentElement
+    }
+
+    /**
+     * @param weekday the current day expressed in Weekday object
+     * @param offset the integer that represent how much days you want to go in ahead
+     * @return the next day from the weekday
+     */
+    fun next(weekday: Weekday, offset: Int): Weekday {
+        var currentElement = weekday
+        var tmpElement: Weekday
+        for (i in 1..offset) {
+            tmpElement = next(currentElement)
+            currentElement = tmpElement
+        }
+        return currentElement
+    }
+
+    /**
+     * Builder for TimeParams object
+     */
     class TimeParams {
         var week: Int = 0
         var tomorrow: Boolean = false
         var weekday: Weekday = Weekday.NO_DAY
 
+        /**
+         * @param week 0 if you want use this week, -1 the previous week, +1 the next week and so on
+         */
         fun week(week: Int): TimeParams {
             this.week = week
             return this
         }
 
+        /**
+         * @param tomorrow true if you want to perform tomorrow midnight
+         */
         fun tomorrow(tomorrow: Boolean): TimeParams {
             this.tomorrow = tomorrow
             return this
         }
 
+        /**
+         * @param weekday add Weekday param for calculate time of the chose weekday
+         */
         fun weekday(weekday: Weekday): TimeParams {
             this.weekday = weekday
             return this
         }
 
+        /**
+         * Build the TimeParams object
+         * @return TimeParams objects
+         */
         fun build(): TimeParams {
             return this
         }
@@ -80,6 +152,21 @@ class UtilService @Inject constructor() {
     }
 
     /**
+     * @return the millis value of yesterday midnight
+     */
+    fun yesterdayMidnightMillis(): Long {
+        val tomorrow: Calendar = Calendar.getInstance()
+        tomorrow.set(Calendar.HOUR_OF_DAY, 0)
+        tomorrow.set(Calendar.MINUTE, 0)
+        tomorrow.set(Calendar.SECOND, 0)
+        tomorrow.set(Calendar.MILLISECOND, 0)
+
+        tomorrow.add(Calendar.DAY_OF_YEAR, -1)
+
+        return tomorrow.timeInMillis
+    }
+
+    /**
      * @return true if current time is between 0:00 and 0:20 (current time in local GMT)
      */
     fun isNearMidnight(): Boolean {
@@ -91,6 +178,10 @@ class UtilService @Inject constructor() {
         return now - midnight <= 20 * 60 * 1000
     }
 
+    /**
+     * Calculate the midnight by TimeParams
+     * @return the midnight in millis
+     */
     fun getMidnight(timeParams: TimeParams? = null): Long {
         val midnight: Calendar = Calendar.getInstance()
 
@@ -115,6 +206,9 @@ class UtilService @Inject constructor() {
         return midnight.timeInMillis
     }
 
+    /**
+     * @return the today Weekday value
+     */
     fun getCurrentDay(): Weekday {
         return Weekday.valueOf(LocalDate.now().dayOfWeek.name)
     }
@@ -175,6 +269,20 @@ class UtilService @Inject constructor() {
         }
 
         return (totalUsage / 1000 / 60).toInt()
+    }
+
+
+    /**
+     * Return a date with the pattern dd/M from today
+     * @param daysAgo how much day you want go back?
+     * @return the string date format
+     */
+    fun getDateFromToday(offset: Int): String {
+        val calendar = Calendar.getInstance()
+        calendar.add(Calendar.DAY_OF_YEAR, offset)
+
+        val pattern = "dd/MM"
+        return SimpleDateFormat(pattern, Locale.getDefault()).format(calendar.time)
     }
 
 }

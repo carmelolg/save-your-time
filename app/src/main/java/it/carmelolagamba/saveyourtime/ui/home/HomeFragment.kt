@@ -7,15 +7,14 @@ import android.view.ViewGroup
 import android.widget.TableLayout
 import androidx.fragment.app.Fragment
 import com.patrykandpatrick.vico.core.axis.AxisPosition
-import com.patrykandpatrick.vico.core.axis.formatter.AxisValueFormatter
 import com.patrykandpatrick.vico.core.axis.horizontal.HorizontalAxis
-import com.patrykandpatrick.vico.core.entry.entryModelOf
-import com.patrykandpatrick.vico.core.entry.entryOf
 import dagger.hilt.android.AndroidEntryPoint
 import it.carmelolagamba.saveyourtime.databinding.FragmentHomeBinding
 import it.carmelolagamba.saveyourtime.persistence.App
 import it.carmelolagamba.saveyourtime.service.AppService
+import it.carmelolagamba.saveyourtime.service.ChartService
 import it.carmelolagamba.saveyourtime.service.HomeService
+import it.carmelolagamba.saveyourtime.service.UtilService
 import javax.inject.Inject
 
 
@@ -33,6 +32,12 @@ class HomeFragment : Fragment() /*AbstractFragment()*/ {
 
     @Inject
     lateinit var homeService: HomeService
+
+    @Inject
+    lateinit var chartService: ChartService
+
+    @Inject
+    lateinit var utilService: UtilService
 
     private var apps: List<App> = mutableListOf()
 
@@ -79,12 +84,6 @@ class HomeFragment : Fragment() /*AbstractFragment()*/ {
             binding.caringImage.visibility = View.INVISIBLE
             binding.containerCaring.visibility = View.GONE
 
-            /** Building VICO graph main object */
-            var chartData = mutableMapOf<Float, Pair<Float, String>>()
-
-            /** This index is used in order to formatting graph's axis better */
-            var index = 1F
-
             val usageTable: TableLayout = binding.usageTable
             usageTable.removeAllViews()
 
@@ -92,6 +91,9 @@ class HomeFragment : Fragment() /*AbstractFragment()*/ {
             usageTable.addView(homeService.createTableHeader(requireContext(), resources), 0)
 
             apps.forEach { app ->
+
+                /** Update current usage */
+                app.todayUsage = utilService.getUsageInMinutesByPackage(requireContext(), app.packageName)
 
                 /** Create a row in table for the selected application */
                 usageTable.addView(
@@ -101,41 +103,15 @@ class HomeFragment : Fragment() /*AbstractFragment()*/ {
                         app
                     )
                 )
-
-                /** Add app in graph view */
-                chartData[index] = Pair(
-                    (app.todayUsage).toFloat(),
-                    app.name
-                )
-                index++
             }
 
+            /** Building VICO graph main object */
+            val chartData = chartService.buildChartData(apps)
+            val chartEntryModel = chartService.buildChartEntryModel(chartData)
+
             /** Build the custom axis formatter */
-            chartData = chartData.toList().sortedByDescending { it.second.first }
-                .toMap() as MutableMap<Float, Pair<Float, String>>
-            val xChartValues = chartData.keys.associateBy { it }
-            val chartEntryModel =
-                entryModelOf(xChartValues.keys.zip(chartData.values) { k, v ->
-                    entryOf(
-                        k,
-                        v.first
-                    )
-                })
-
-            val yAxisValueFormatter =
-                AxisValueFormatter<AxisPosition.Horizontal.Bottom> { value, _ ->
-
-                    if (chartData[value] == null) {
-                        ""
-                    } else {
-                        chartData[value]!!.second
-                    }
-                }
-
             (binding.chartView.bottomAxis as? HorizontalAxis<AxisPosition.Horizontal.Bottom>)?.valueFormatter =
-                yAxisValueFormatter
-
-            /** End build the custom axis formatter */
+                chartService.buildDefaultYAxisFormatter(chartData)
 
             /** Set VICO graph view */
             binding.chartView.setModel(chartEntryModel)

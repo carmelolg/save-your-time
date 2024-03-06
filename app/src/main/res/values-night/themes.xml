@@ -5,26 +5,55 @@
         <item name="toolbarStyle">@style/Theme.SaveYourTime.Toolbar</item>
 
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/n_third</item>
-        <item name="colorPrimaryVariant">@color/n_third</item>
-        <item name="colorOnPrimary">@color/text_primary</item>
+        <item name="colorPrimary">?attr/SYTColorTertiary</item>
+        <item name="colorPrimaryVariant">?attr/SYTColorTertiary</item>
+        <item name="colorOnPrimary">?attr/SYTBackgroundColor</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/white</item>
-        <item name="colorSecondaryVariant">@color/white</item>
-        <item name="colorOnSecondary">@color/text_primary</item>
+        <item name="colorSecondary">?attr/SYTColorTertiary</item>
+        <item name="colorSecondaryVariant">?attr/SYTColorTertiary</item>
+        <item name="colorOnSecondary">?attr/SYTBackgroundColor</item>
 
         <!-- Status bar color. -->
         <item name="android:statusBarColor">@color/black</item>
         <!-- Customize your theme here. -->
 
-        <item name="android:colorPrimary">@color/n_third</item>
-        <item name="android:colorSecondary">@color/white</item>
-        <item name="android:colorAccent">@color/white</item>
-        <item name="android:colorActivatedHighlight">@color/n_third</item>
-        <item name="android:colorBackground">@color/black</item>
-        <item name="android:colorBackgroundFloating">@android:color/white</item>
-        <item name="android:colorBackgroundCacheHint">@color/n_second</item>
-        <item name="android:colorPrimaryDark">@color/white</item>
+
+        <item name="SYTPanelBackgroundColor">@color/n_first</item>
+        <item name="SYTPanelTextColor">@color/white</item>
+        <item name="SYTChartBarColor">@color/n_fourth</item>
+        <item name="SYTChartSecondBarColor">@color/n_third</item>
+        <item name="SYTColorPrimary">@color/n_third</item>
+        <item name="SYTColorOnPrimary">@color/n_black_default</item>
+        <item name="SYTColorSecondary">@color/n_third</item>
+        <item name="SYTColorOnSecondary">@color/n_black_default</item>
+        <item name="SYTColorTertiary">@color/n_third</item>
+        <item name="SYTFloatingButtonBackground">@color/n_first</item>
+        <item name="SYTFloatingButtonForeground">@color/white</item>
+        <item name="SYTHistoryStatsPanelBackgroundColor">@color/n_fourth</item>
+        <item name="SYTHistoryStatsPanelTextColor">@color/white</item>
+        <item name="SYTDividerColor">@color/n_first</item>
+        <item name="SYTHighlightColor">@color/n_fifth</item>
+        <item name="SYTBackgroundColor">@color/n_black_default</item>
+        <item name="SYTProgressBarColor">?attr/SYTColorTertiary</item>
+        <!--
+        <item name="SYTPanelBackgroundColor">@color/n_first</item>
+        <item name="SYTPanelTextColor">@color/n_third</item>
+        <item name="SYTChartBarColor">@color/n_fourth</item>
+        <item name="SYTChartSecondBarColor">@color/n_third</item>
+        <item name="SYTColorPrimary">@color/n_third</item>
+        <item name="SYTColorOnPrimary">@color/n_third</item>
+        <item name="SYTColorSecondary">@color/n_third</item>
+        <item name="SYTColorOnSecondary">@color/black</item>
+        <item name="SYTColorTertiary">@color/n_fourth</item>
+        <item name="SYTFloatingButtonBackground">@color/n_second</item>
+        <item name="SYTFloatingButtonForeground">@color/n_third</item>
+        <item name="SYTHistoryStatsPanelBackgroundColor">@color/n_fourth</item>
+        <item name="SYTHistoryStatsPanelTextColor">@color/n_third</item>
+        <item name="SYTDividerColor">@color/n_third</item>
+        <item name="SYTHighlightColor">@color/n_fifth</item>
+        <item name="SYTBackgroundColor">@color/n_black_default</item>
+        <item name="SYTProgressBarColor">?attr/SYTColorTertiary</item>
+    -->
 
     </style>
 
@@ -37,13 +66,13 @@
     </style>
 
     <style name="Theme.SaveYourTime.Chart.Column1" parent="@style/Theme.SaveYourTime.Chart.ColumnStyle">
-        <item name="color">@color/n_fifth</item>
+        <item name="color">?attr/SYTChartBarColor</item>
         <item name="thickness">12dp</item>
     </style>
 
 
     <style name="Theme.SaveYourTime.Chart.Column2" parent="@style/Theme.SaveYourTime.Chart.ColumnStyle">
-        <item name="color">@color/n_third</item>
+        <item name="color">?attr/SYTChartSecondBarColor</item>
         <item name="thickness">12dp</item>
     </style>
 
@@ -53,12 +82,12 @@
     </style>
 
     <style name="Theme.SaveYourTime.ProgressBar">
-        <item name="colorAccent">@color/n_fourth</item>
+        <item name="colorAccent">?attr/SYTProgressBarColor</item>
     </style>
 
 
     <style name="Theme.SaveYourTime.Toolbar">
-        <item name="titleTextColor">@color/text_primary</item>
+        <item name="titleTextColor">?attr/SYTColorOnPrimary</item>
     </style>
 
     <style name="Theme.SaveYourTime.Table">

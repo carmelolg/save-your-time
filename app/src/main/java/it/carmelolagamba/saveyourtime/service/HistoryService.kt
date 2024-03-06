@@ -66,4 +66,61 @@ class HistoryService @Inject constructor() {
 
     }
 
+    /**
+     * @param context the application context
+     * @param packageName the package name of the app
+     * @param currentWeekMap the data about this week
+     * @param lastWeekMap the data about last week
+     * @return a map with the last seven days usage (key = the index, value = Pair(first = the day label, second = the usage in minutes))
+     */
+    fun getLast7DaysUsage(
+        context: Context,
+        packageName: String,
+        currentWeekMap: Map<String, Int> = getWeeklyDetails(context, packageName),
+        lastWeekMap: Map<String, Int> = getWeeklyDetails(context, packageName, -1)
+    ): Map<Int, Pair<String, Int>> {
+
+        val last7DaysMap = mutableMapOf<Int, Pair<String, Int>>()
+        val currentDay = utilService.getCurrentDay()
+        val currentDayIndex = currentDay.ordinal
+
+        last7DaysMap[7] = Pair(
+            currentDay.name,
+            currentWeekMap[currentDay.name]!!
+        )
+
+        for (i in 1..6) {
+
+            val prev = utilService.prev(currentDay, i)
+
+            if (prev.ordinal == 1) {
+                // Manage sunday
+                last7DaysMap[7 - i] = Pair(prev.name, lastWeekMap[prev.name]!!)
+            } else if (prev.ordinal <= currentDayIndex) {
+                last7DaysMap[7 - i] = Pair(prev.name, currentWeekMap[prev.name]!!)
+            } else {
+                last7DaysMap[7 - i] = Pair(prev.name, lastWeekMap[prev.name]!!)
+            }
+        }
+
+        return last7DaysMap
+    }
+
+    /**
+     * @param context the application context
+     * @param packageName the package name of the app
+     * @return the yesterday usage of a specified app by package name
+     */
+    fun getYesterdayUsage(context: Context, packageName: String): Int {
+        val yesterdayMidnight = utilService.yesterdayMidnightMillis()
+        val todayMidnight = utilService.todayMidnightMillis()
+
+        return utilService.getUsageInMinutesByPackage(
+            context,
+            packageName,
+            yesterdayMidnight,
+            todayMidnight
+        )
+    }
+
 }

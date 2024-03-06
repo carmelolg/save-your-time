@@ -1,6 +1,5 @@
 package it.carmelolagamba.saveyourtime.ui.history
 
-import android.R
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,17 +8,16 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import com.patrykandpatrick.vico.core.axis.AxisPosition
-import com.patrykandpatrick.vico.core.axis.formatter.AxisValueFormatter
 import com.patrykandpatrick.vico.core.axis.horizontal.HorizontalAxis
-import com.patrykandpatrick.vico.core.entry.entryModelOf
-import com.patrykandpatrick.vico.core.entry.entryOf
 import dagger.hilt.android.AndroidEntryPoint
 import it.carmelolagamba.saveyourtime.databinding.FragmentHistoryDashboardBinding
 import it.carmelolagamba.saveyourtime.persistence.App
 import it.carmelolagamba.saveyourtime.service.AppService
+import it.carmelolagamba.saveyourtime.service.ChartService
 import it.carmelolagamba.saveyourtime.service.HistoryService
 import it.carmelolagamba.saveyourtime.service.UtilService
 import javax.inject.Inject
+import android.R as AndroidR
 
 
 /**
@@ -40,8 +38,13 @@ class HistoryFragment : Fragment() /*AbstractFragment()*/, AdapterView.OnItemSel
     @Inject
     lateinit var historyService: HistoryService
 
+    @Inject
+    lateinit var chartService: ChartService
+
     private var apps: List<App> = mutableListOf()
     private var weeklyMap: Map<String, Int> = mutableMapOf()
+    private var lastWeeklyMap: Map<String, Int> = mutableMapOf()
+    private var last7DaysMap: Map<Int, Pair<String, Int>> = mutableMapOf()
     private var packageName: String? = null
     private val binding get() = _binding!!
 
@@ -63,7 +66,7 @@ class HistoryFragment : Fragment() /*AbstractFragment()*/, AdapterView.OnItemSel
         retrieveApps()
 
         val adapter: ArrayAdapter<String> = ArrayAdapter<String>(
-            requireContext(), R.layout.simple_spinner_dropdown_item, apps.map { it.name }
+            requireContext(), AndroidR.layout.simple_spinner_dropdown_item, apps.map { it.name }
         )
 
         binding.appHistoryChoice.adapter = adapter
@@ -85,52 +88,31 @@ class HistoryFragment : Fragment() /*AbstractFragment()*/, AdapterView.OnItemSel
         _binding = null
     }
 
-    private fun refreshChart() {
+    private fun refreshCharts() {
+
+        if (last7DaysMap.isNotEmpty()) {
+
+            /** Building VICO graph main object */
+            val chartData = chartService.buildChartDataWithOrder(requireContext(), last7DaysMap)
+            val chartEntryModel = chartService.buildChartEntryModel(chartData)
+
+            (binding.lastWeekChart.bottomAxis as? HorizontalAxis<AxisPosition.Horizontal.Bottom>)?.valueFormatter =
+                chartService.buildDefaultYAxisFormatter(chartData)
+
+            /** Set VICO graph view */
+            binding.lastWeekChart.setModel(chartEntryModel)
+
+        }
 
         if (weeklyMap.isNotEmpty()) {
 
             /** Building VICO graph main object */
-            var chartData = mutableMapOf<Float, Pair<Float, String>>()
-
-            /** This index is used in order to formatting graph's axis better */
-            var index = 1F
-
-            weeklyMap.forEach { (day, usage) ->
-
-                /** Add app in graph view */
-                chartData[index] = Pair(
-                    usage.toFloat(),
-                    day
-                )
-                index++
-            }
-
-            /** Build the custom axis formatter */
-            chartData = chartData.toList().sortedByDescending { it.second.first }
-                .toMap() as MutableMap<Float, Pair<Float, String>>
-            val xChartValues = chartData.keys.associateBy { it }
-            val chartEntryModel =
-                entryModelOf(xChartValues.keys.zip(chartData.values) { k, v ->
-                    entryOf(
-                        k,
-                        v.first
-                    )
-                })
-
-            val yAxisValueFormatter =
-                AxisValueFormatter<AxisPosition.Horizontal.Bottom> { value, _ ->
-
-                    if (chartData[value] == null) {
-                        ""
-                    } else {
-                        chartData[value]!!.second
-                    }
-                }
+            val chartData = chartService.buildChartData(requireContext(), weeklyMap)
+            val chartEntryModel = chartService.buildChartEntryModel(chartData)
 
             (binding.weeklyChart.bottomAxis as? HorizontalAxis<AxisPosition.Horizontal.Bottom>)?.valueFormatter =
-                yAxisValueFormatter
+                chartService.buildDefaultYAxisFormatter(chartData)
 
-            /** End build the custom axis formatter */
 
             /** Set VICO graph view */
             binding.weeklyChart.setModel(chartEntryModel)
@@ -142,15 +124,21 @@ class HistoryFragment : Fragment() /*AbstractFragment()*/, AdapterView.OnItemSel
 
         /** Retrieve usage data for this week and last week */
         weeklyMap = historyService.getWeeklyDetails(requireContext(), packageName)
-        val lastWeeklyMap = historyService.getWeeklyDetails(requireContext(), packageName, -1)
+        lastWeeklyMap = historyService.getWeeklyDetails(requireContext(), packageName, -1)
+        last7DaysMap = historyService.getLast7DaysUsage(
+            requireContext(),
+            packageName,
+            weeklyMap,
+            lastWeeklyMap
+        )
 
         /** Calculate weekly usage */
         val currentDay = utilService.getCurrentDay()
         var isToday = false
-        var yesterdayUsage = 0
+        var yesterdayUsage = historyService.getYesterdayUsage(requireContext(), packageName)
         var totalWeekUsage = 0
         var todayUsage = 0
-        var countDays = 0
+        var countDays = 1
         weeklyMap.forEach { (day, usage) ->
             totalWeekUsage += usage
             if (day == currentDay.name) {
@@ -158,10 +146,10 @@ class HistoryFragment : Fragment() /*AbstractFragment()*/, AdapterView.OnItemSel
                 isToday = true
             }
             if (!isToday) {
-                yesterdayUsage = usage
                 countDays++
             }
         }
+
 
         val weeklyAvg = totalWeekUsage / countDays
         val comparedToYesterdayInPercentage: Int = if (yesterdayUsage > 0) {
@@ -198,6 +186,14 @@ class HistoryFragment : Fragment() /*AbstractFragment()*/, AdapterView.OnItemSel
             binding.containerWeekly.visibility = View.GONE
         }
 
+        val last7DayTotalUsage = last7DaysMap.values.sumOf { it.second }
+
+        if (last7DayTotalUsage > 0) {
+            binding.containerLastWeek.visibility = View.VISIBLE
+        } else {
+            binding.containerLastWeek.visibility = View.GONE
+        }
+
         binding.totalAvgUsage.text = "$weeklyAvg min"
         binding.totalWeeklyUsage.text = "${weeklyMap.values.sumOf { it }} min"
 
@@ -216,7 +212,7 @@ class HistoryFragment : Fragment() /*AbstractFragment()*/, AdapterView.OnItemSel
         binding.differenceFromLastWeek.text = "$prefixLastWeek $comparedToLastWeekInPercentage %"
         binding.differenceFromYesterday.text = "$prefixYesterday $comparedToYesterdayInPercentage %"
 
-        refreshChart()
+        refreshCharts()
     }
 
     private fun retrieveApps() {

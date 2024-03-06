@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <attr name="SYTPanelBackgroundColor" format="reference" />
+    <attr name="SYTPanelTextColor" format="reference" />
+    <attr name="SYTChartBarColor" format="reference" />
+    <attr name="SYTChartSecondBarColor" format="reference" />
+    <attr name="SYTColorPrimary" format="reference" />
+    <attr name="SYTColorOnPrimary" format="reference" />
+    <attr name="SYTColorSecondary" format="reference" />
+    <attr name="SYTColorOnSecondary" format="reference" />
+    <attr name="SYTColorTertiary" format="reference" />
+    <attr name="SYTFloatingButtonBackground" format="reference" />
+    <attr name="SYTFloatingButtonForeground" format="reference" />
+    <attr name="SYTHistoryStatsPanelBackgroundColor" format="reference" />
+    <attr name="SYTHistoryStatsPanelTextColor" format="reference" />
+    <attr name="SYTDividerColor" format="reference" />
+    <attr name="SYTHighlightColor" format="reference" />
+    <attr name="SYTBackgroundColor" format="reference" />
+    <attr name="SYTProgressBarColor" format="reference" />
+
+</resources>
