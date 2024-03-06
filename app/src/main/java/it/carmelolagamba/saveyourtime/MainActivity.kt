@@ -59,6 +59,7 @@ class MainActivity : AbstractActivity() {
         navView.findViewById<View>(R.id.navigation_to_right).setOnClickListener {
             val history = Intent(this, SecondaryActivity::class.java)
             startActivity(history)
+            finish()
         }
 
 

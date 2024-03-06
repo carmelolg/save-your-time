@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Carmelo La Gamba on Save Your Time</title>
+    <link>http://localhost:1313/save-your-time/</link>
+    <description>Recent content in Carmelo La Gamba on Save Your Time</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <atom:link href="http://localhost:1313/save-your-time/index.xml" rel="self" type="application/rss+xml" />
+  </channel>
+</rss>

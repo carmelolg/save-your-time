@@ -48,6 +48,7 @@ class SecondaryActivity : AbstractActivity() {
         navView.findViewById<View>(R.id.navigation_to_left).setOnClickListener {
             val main = Intent(this, MainActivity::class.java)
             startActivity(main)
+            finish()
         }
 
         /** Appbar not used setupActionBarWithNavController(navController, appBarConfiguration) */

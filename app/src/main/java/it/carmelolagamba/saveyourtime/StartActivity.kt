@@ -107,6 +107,7 @@ class StartActivity : AbstractActivity() {
         } else if (isAllCheckPassed()) {
             Log.d("SYT Permission", "Allowed")
             startMainActivity()
+            finish()
         }
     }
 
