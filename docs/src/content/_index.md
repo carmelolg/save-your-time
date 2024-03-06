@@ -1,10 +1,10 @@
 +++
-title = "Carmelo La Gamba"
+title = "Save Your Time"
 +++
 
 Save Your Time ti aiuterà a monitorare il tempo speso sul tuo smartphone in maniera semplice e non invadente.
 
-{{< figure class="avatar" src="/logo.png" >}}
+{{< figure class="avatar" src="./logo.png" >}}
 
 # Come funziona
 
@@ -63,7 +63,7 @@ Come ampiamente spiegato nel paragrafo <span style="color: #A93F55"> Privacy</sp
 
 # Screenshots
 
-{{< figure class="" src="/screen_home.png" width="180px" alt="home">}}
-{{< figure class="" src="/screen_control_plane.png" width="180px" alt="home">}}
-{{< figure class="" src="/screen_history.png" width="180px" alt="home">}}
-{{< figure class="" src="/screen_preferences.png" width="180px" alt="home">}}
+{{< figure class="" src="./screen_home.png" width="180px" alt="home">}}
+{{< figure class="" src="./screen_control_plane.png" width="180px" alt="home">}}
+{{< figure class="" src="./screen_history.png" width="180px" alt="home">}}
+{{< figure class="" src="./screen_preferences.png" width="180px" alt="home">}}

@@ -3,5 +3,7 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>http://localhost:1313/save-your-time/</loc>
+  </url><url>
+    <loc>http://localhost:1313/save-your-time/license/</loc>
   </url>
 </urlset>
