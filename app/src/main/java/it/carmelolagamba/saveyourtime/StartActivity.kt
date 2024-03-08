@@ -16,6 +16,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import dagger.hilt.android.AndroidEntryPoint
 import it.carmelolagamba.saveyourtime.databinding.ActivityStartBinding
 import it.carmelolagamba.saveyourtime.service.AppService
+import it.carmelolagamba.saveyourtime.service.worker.SYTBackgroundService
 import javax.inject.Inject
 
 
@@ -36,6 +37,8 @@ class StartActivity : AbstractActivity() {
 
         binding = ActivityStartBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        SYTBackgroundService.startService(this)
 
         initPage()
     }
