@@ -42,7 +42,7 @@ enableEmoji = true
 #    weight = 1
   [[menu.main]]
     name = "Play Store"
-    url = "https://#"
+    url = "https://play.google.com/store/apps/details?id=it.carmelolagamba.saveyourtime&pcampaignid=web_share"
     weight = 2
   [[menu.main]]
     name = "License & Privacy"
