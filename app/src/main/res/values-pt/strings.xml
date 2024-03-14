@@ -8,7 +8,7 @@
     <string name="title_preferences">Preferências</string>
     <string name="title_history_dashboard">Histórico</string>
     <string name="back_label">Voltar</string>
-    <string name="forward_label">Avançar</string>
+    <string name="forward_label">Outro</string>
     <string name="list_of_permission">A lista das permissões necessárias:\n\n<li>Acesso aos dados de uso</li></string>
     <string name="close_app_message">Pressione novamente Voltar para fechar o aplicativo.</string>
     <string name="delete">Apagar</string>
@@ -35,6 +35,8 @@
     <string name="start_disclaimer">Para funcionar corretamente, o aplicativo precisa acessar os dados de uso.</string>
     <string name="allow_button_notification">Ativar notificações</string>
     <string name="start_disclaimer_notification">Para funcionar corretamente, as notificações básicas devem ser ativadas.</string>
+    <string name="allow_button_alarms">Ativar alarmes</string>
+    <string name="start_disclaimer_alarms">Para funcionar corretamente, o aplicativo requer a ativação de alarmes.</string>
 
     <!-- NOTIFICAÇÕES -->
 
@@ -54,7 +56,8 @@
     <string name="section_block_app_option">Bloquear aplicativos quando o tempo acabar</string>
     <string name="section_notification_app_label">Preferências de notificação</string>
     <string name="section_notification_app_option_enabled">Ativar lembrete na expiração</string>
-    <string name="section_notification_app_option">Minutos após os quais você receberá um lembrete na expiração (se continuar usando o aplicativo)</string>
+    <string name="section_notification_app_option">Minutos após os quais você receberá um lembrete na expiração</string>
+    <string name="section_notification_app_option_info">Quando você atingir o limite de tempo, o aplicativo irá notificá-lo automaticamente com um único aviso. Se você habilitar esta opção e continuar a usar seus aplicativos após o tempo expirar, continuará a receber notificações.</string>
     <string name="section_disclaimer_label">Vários</string>
     <string name="section_disclaimer_license_option">Licença de uso</string>
     <string name="section_disclaimer_privacy_option">Privacidade</string>

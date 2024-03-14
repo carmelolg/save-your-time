@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,12 +12,17 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import com.skydoves.balloon.ArrowPositionRules
+import com.skydoves.balloon.Balloon
+import com.skydoves.balloon.BalloonAnimation
+import com.skydoves.balloon.BalloonSizeSpec
 import dagger.hilt.android.AndroidEntryPoint
 import it.carmelolagamba.saveyourtime.R
 import it.carmelolagamba.saveyourtime.databinding.FragmentPreferencesBinding
 import it.carmelolagamba.saveyourtime.service.PreferencesService
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+
 
 /**
  * @author carmelolg
@@ -30,6 +36,7 @@ class PreferencesFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     @Inject
     lateinit var preferencesService: PreferencesService
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -98,6 +105,33 @@ class PreferencesFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
         binding.licenseButton.setOnClickListener {
             openBrowser(resources.getString(R.string.license_url))
+        }
+
+        val balloon = Balloon.Builder(requireContext())
+            .setWidthRatio(1.0f)
+            .setHeight(BalloonSizeSpec.WRAP)
+            .setText(requireContext().resources.getText(R.string.section_notification_app_option_info))
+            .setTextColorResource(R.color.white)
+            .setTextSize(15f)
+            .setTextGravity(Gravity.START)
+            .setIconDrawableResource(R.drawable.ic_info)
+            .setIconColor(resources.getColor(R.color.white, requireContext().theme))
+            .setArrowPositionRules(ArrowPositionRules.ALIGN_ANCHOR)
+            .setArrowSize(10)
+            .setArrowPosition(0.5f)
+            .setPadding(12)
+            .setCornerRadius(8f)
+            .setBackgroundColorResource(R.color.fourth)
+            .setBalloonAnimation(BalloonAnimation.FADE)
+            .setLifecycleOwner(this)
+            .build()
+
+        binding.infoIcon.setOnClickListener {
+            balloon.showAlignBottom(binding.infoIcon)
+        }
+
+        balloon.setOnBalloonClickListener {
+            balloon.dismiss()
         }
 
         return root

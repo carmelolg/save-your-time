@@ -7,7 +7,7 @@
     <string name="title_preferences">Preferenze</string>
     <string name="title_history_dashboard">Storico</string>
     <string name="back_label">Indietro</string>
-    <string name="forward_label">Avanti</string>
+    <string name="forward_label">Altro</string>
     <string name="list_of_permission">La lista dei permessi richiesti:\n\n<li>Utilizzo accesso dati</li></string>
     <string name="close_app_message">Premi ancora indietro per chiudere l\'app.</string>
     <string name="delete">delete</string>
@@ -34,6 +34,8 @@
     <string name="start_disclaimer">Per funzionare correttamente l\'applicazione richiede l\'accesso ai dati di utilizzo</string>
     <string name="allow_button_notification">Abilita le notifiche</string>
     <string name="start_disclaimer_notification">Per funzionare correttamente l\'applicazione richiede di abilitare le notifiche base</string>
+    <string name="allow_button_alarms">Abilita gli allarmi</string>
+    <string name="start_disclaimer_alarms">Per funzionare correttamente l\'applicazione richiede di abilitare gli allarmi</string>
 
     <!-- NOTIFICATIONS -->
 
@@ -53,7 +55,8 @@
     <string name="section_block_app_option">Blocca le app quando scade il tempo</string>
     <string name="section_notification_app_label">Preferenze di notifica</string>
     <string name="section_notification_app_option_enabled">Abilita promemoria alla scadenza</string>
-    <string name="section_notification_app_option">I minuti dopo il quale riceverai il promemoria a tempo scaduto (se continuerai ad usare l\'app)</string>
+    <string name="section_notification_app_option">I minuti dopo il quale riceverai il promemoria a tempo scaduto</string>
+    <string name="section_notification_app_option_info">Quando raggiungi il limite di tempo, l\'applicazione ti avviserà automaticamente con una singola notifica. Se attivi questa opzione e continui a utilizzare le tue app dopo che il tempo è scaduto, continuerai a ricevere notifiche.</string>
     <string name="section_disclaimer_label">Varie</string>
     <string name="section_disclaimer_license_option">Licenza d\'uso</string>
     <string name="section_disclaimer_privacy_option">Privacy</string>

@@ -8,7 +8,7 @@
     <string name="title_preferences">التفضيلات</string>
     <string name="title_history_dashboard">سجل</string>
     <string name="back_label">رجوع</string>
-    <string name="forward_label">إلى الأمام</string>
+    <string name="forward_label">آخر</string>
     <string name="list_of_permission">قائمة الأذونات المطلوبة:\n\n<li>الوصول إلى بيانات الاستخدام</li></string>
     <string name="close_app_message">اضغط مرة أخرى على الزر للخروج من التطبيق.</string>
     <string name="delete">حذف</string>
@@ -35,6 +35,8 @@
     <string name="start_disclaimer">للعمل بشكل صحيح، يتطلب التطبيق الوصول إلى بيانات الاستخدام.</string>
     <string name="allow_button_notification">تمكين الإشعارات</string>
     <string name="start_disclaimer_notification">للعمل بشكل صحيح، يجب تمكين الإشعارات الأساسية.</string>
+    <string name="allow_button_alarms">تمكين التنبيهات</string>
+    <string name="start_disclaimer_alarms">لتعمل بشكل صحيح، يتطلب التطبيق تمكين التنبيهات.</string>
 
     <!-- الإشعارات -->
 
@@ -54,7 +56,8 @@
     <string name="section_block_app_option">حظر التطبيقات عند انتهاء الوقت</string>
     <string name="section_notification_app_label">تفضيلات الإشعارات</string>
     <string name="section_notification_app_option_enabled">تمكين تذكير عند الانتهاء</string>
-    <string name="section_notification_app_option">الدقائق بعد التي ستتلقى تذكيرًا عند انتهاء الوقت (إذا استمريت في استخدام التطبيق)</string>
+    <string name="section_notification_app_option">الدقائق بعد التي ستتلقى تذكيرًا عند انتهاء الوقت </string>
+    <string name="section_notification_app_option_info">عندما تصل إلى الحد الزمني، ستقوم التطبيق بإعلامك تلقائيًا بإشعار واحد. إذا قمت بتمكين هذا الخيار وواصلت استخدام تطبيقاتك بعد انتهاء الوقت، ستستمر في تلقي الإشعارات.</string>
     <string name="section_disclaimer_label">متنوع</string>
     <string name="section_disclaimer_license_option">رخصة الاستخدام</string>
     <string name="section_disclaimer_privacy_option">الخصوصية</string>

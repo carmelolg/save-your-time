@@ -1,8 +1,11 @@
 package it.carmelolagamba.saveyourtime
 
+import android.app.AlarmManager
 import android.app.AppOpsManager
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.os.PowerManager
 import android.os.Process
@@ -57,10 +60,13 @@ class StartActivity : AbstractActivity() {
         )
 
         val powerManager: PowerManager =
-            (applicationContext.getSystemService(POWER_SERVICE) as PowerManager);
+            applicationContext.getSystemService(POWER_SERVICE) as PowerManager
 
         val ignoreBatteryLifeOptimizationCheck =
             powerManager.isIgnoringBatteryOptimizations(packageName)
+
+        val alarmManager =
+            applicationContext.getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
         if (mode != AppOpsManager.MODE_ALLOWED) {
 
@@ -70,6 +76,8 @@ class StartActivity : AbstractActivity() {
             binding.disclaimer.visibility = View.VISIBLE
             binding.allowButtonNotification.visibility = View.INVISIBLE
             binding.disclaimerNotification.visibility = View.INVISIBLE
+            binding.allowButtonAlarms.visibility = View.INVISIBLE
+            binding.disclaimerAlarms.visibility = View.INVISIBLE
 
             binding.allowButton.setOnClickListener {
                 val intent = Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS)
@@ -78,8 +86,7 @@ class StartActivity : AbstractActivity() {
             }
 
         } else if (!isNotificationChannelEnabled(
-                this,
-                resources.getString(R.string.notification_channel_id)
+                this, resources.getString(R.string.notification_channel_id)
             )
         ) {
 
@@ -87,6 +94,8 @@ class StartActivity : AbstractActivity() {
 
             binding.allowButton.visibility = View.INVISIBLE
             binding.disclaimer.visibility = View.INVISIBLE
+            binding.allowButtonAlarms.visibility = View.INVISIBLE
+            binding.disclaimerAlarms.visibility = View.INVISIBLE
             binding.allowButtonNotification.visibility = View.VISIBLE
             binding.disclaimerNotification.visibility = View.VISIBLE
 
@@ -107,6 +116,17 @@ class StartActivity : AbstractActivity() {
                 .setData(Uri.parse("package:$packageName"))
             launcher.launch(intent)
 
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S && !alarmManager.canScheduleExactAlarms()) {
+            binding.allowButton.visibility = View.INVISIBLE
+            binding.disclaimer.visibility = View.INVISIBLE
+            binding.allowButtonNotification.visibility = View.INVISIBLE
+            binding.disclaimerNotification.visibility = View.INVISIBLE
+            binding.allowButtonAlarms.visibility = View.VISIBLE
+            binding.disclaimerAlarms.visibility = View.VISIBLE
+
+            binding.allowButtonAlarms.setOnClickListener {
+                launcher.launch(Intent(Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM).setData(Uri.parse("package:$packageName")))
+            }
         } else if (isAllCheckPassed()) {
             Log.d("SYT Permission", "Allowed")
             startMainActivity()

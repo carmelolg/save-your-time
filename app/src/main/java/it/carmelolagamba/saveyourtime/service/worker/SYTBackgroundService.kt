@@ -65,7 +65,7 @@ class SYTBackgroundService : Service(), EventListener {
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        createServiceTask()
+        createServiceTask(true)
 
         eventBroadcaster = EventNotifier.getInstance()
         eventBroadcaster.addListener(this)
@@ -76,23 +76,27 @@ class SYTBackgroundService : Service(), EventListener {
 
     override fun onDestroy() {
         Log.d("SYT", "Task killed")
-        startService(applicationContext)
-        createServiceTask()
+        //startService(applicationContext)
+        createServiceTask(false)
         super.onDestroy()
     }
 
     override fun onTaskRemoved(rootIntent: Intent?) {
         super.onTaskRemoved(rootIntent)
         Log.d("SYT", "Task removed")
-        startService(applicationContext)
-        createServiceTask()
+        //startService(applicationContext)
+        createServiceTask(false)
     }
 
     override fun onBind(intent: Intent?): IBinder? {
         return null
     }
 
-    private fun createServiceTask() {
+    /**
+     * Create a new background service
+     * @param silent true if notification has to be silent, false otherwise
+     */
+    private fun createServiceTask(silent: Boolean) {
 
         val notificationIntent = Intent(this, MainActivity::class.java)
 
@@ -116,6 +120,7 @@ class SYTBackgroundService : Service(), EventListener {
                 )
             )
             .setContentIntent(pendingIntent)
+            .setSilent(silent)
             .build()
 
         startForeground(1, notification)
@@ -210,9 +215,6 @@ class SYTBackgroundService : Service(), EventListener {
             start,
             end
         )
-
-        var singleEventUsage = 0L
-        var totalUsage = 0L
 
         while (usageEvents.hasNextEvent()) {
             val currentEvent: UsageEvents.Event = UsageEvents.Event()

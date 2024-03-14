@@ -17,8 +17,8 @@ android {
         applicationId = "it.carmelolagamba.saveyourtime"
         minSdk = 28
         targetSdk = 33
-        versionCode = 29
-        versionName = "1.2.1"
+        versionCode = 31
+        versionName = "1.2.3"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -105,6 +105,9 @@ dependencies {
     implementation("com.patrykandpatrick.vico:compose-m3:1.12.0")
     implementation("com.patrykandpatrick.vico:core:1.12.0")
     implementation("com.patrykandpatrick.vico:views:1.12.0")
+
+    // Ballon
+    implementation("com.github.skydoves:balloon:1.6.4")
 }
 
 buildscript {

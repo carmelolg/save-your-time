@@ -20,6 +20,7 @@ import java.util.concurrent.TimeUnit
 @HiltAndroidApp
 class SaveYourTimeApplication : Application() {
 
+
     override fun onCreate() {
         super.onCreate()
         context = applicationContext
@@ -43,6 +44,7 @@ class SaveYourTimeApplication : Application() {
             ).toLong(), TimeUnit.MINUTES
         ).setInputData(inputData.build()).build()
         WorkManager.getInstance(applicationContext).enqueue(notificationWorker)
+
 
     }
 

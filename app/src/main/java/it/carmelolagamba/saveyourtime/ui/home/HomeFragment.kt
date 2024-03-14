@@ -9,12 +9,16 @@ import androidx.fragment.app.Fragment
 import com.patrykandpatrick.vico.core.axis.AxisPosition
 import com.patrykandpatrick.vico.core.axis.horizontal.HorizontalAxis
 import dagger.hilt.android.AndroidEntryPoint
+import it.carmelolagamba.saveyourtime.R
 import it.carmelolagamba.saveyourtime.databinding.FragmentHomeBinding
 import it.carmelolagamba.saveyourtime.persistence.App
 import it.carmelolagamba.saveyourtime.service.AppService
 import it.carmelolagamba.saveyourtime.service.ChartService
 import it.carmelolagamba.saveyourtime.service.HomeService
 import it.carmelolagamba.saveyourtime.service.UtilService
+import it.carmelolagamba.saveyourtime.service.worker.SYTAlarmItem
+import it.carmelolagamba.saveyourtime.service.worker.SYTAlarmScheduler
+import it.carmelolagamba.saveyourtime.service.worker.SYTAlarmSchedulerImpl
 import javax.inject.Inject
 
 
@@ -41,6 +45,8 @@ class HomeFragment : Fragment() /*AbstractFragment()*/ {
 
     private var apps: List<App> = mutableListOf()
 
+    lateinit var alarmScheduler: SYTAlarmScheduler
+
     private val binding get() = _binding!!
 
     /**
@@ -56,6 +62,13 @@ class HomeFragment : Fragment() /*AbstractFragment()*/ {
 
         _binding = _binding ?: FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
+
+        alarmScheduler = SYTAlarmSchedulerImpl(requireContext())
+        alarmScheduler.schedule(
+            SYTAlarmItem(
+                resources.getText(R.string.notification_service_channel_name).toString()
+            )
+        )
 
         /**
         root.setOnTouchListener { _, event ->
@@ -93,7 +106,8 @@ class HomeFragment : Fragment() /*AbstractFragment()*/ {
             apps.forEach { app ->
 
                 /** Update current usage */
-                app.todayUsage = utilService.getUsageInMinutesByPackage(requireContext(), app.packageName)
+                app.todayUsage =
+                    utilService.getUsageInMinutesByPackage(requireContext(), app.packageName)
 
                 /** Create a row in table for the selected application */
                 usageTable.addView(

@@ -8,7 +8,7 @@
     <string name="title_preferences">Preferencias</string>
     <string name="title_history_dashboard">Historial</string>
     <string name="back_label">Volver</string>
-    <string name="forward_label">Adelante</string>
+    <string name="forward_label">Otro</string>
     <string name="list_of_permission">La lista de permisos requeridos:\n\n<li>Acceso a datos de uso</li></string>
     <string name="close_app_message">Presiona nuevamente hacia atrás para cerrar la aplicación.</string>
     <string name="delete">eliminar</string>
@@ -35,6 +35,8 @@
     <string name="start_disclaimer">Para que la aplicación funcione correctamente, se requiere acceso a los datos de uso</string>
     <string name="allow_button_notification">Activar notificaciones</string>
     <string name="start_disclaimer_notification">Para que la aplicación funcione correctamente, se requiere activar las notificaciones básicas</string>
+    <string name="allow_button_alarms">Activar alarmas</string>
+    <string name="start_disclaimer_alarms">Para funcionar correctamente, la aplicación requiere habilitar las alarmas.</string>
 
     <!-- NOTIFICACIONES -->
 
@@ -54,7 +56,8 @@
     <string name="section_block_app_option">Bloquear aplicaciones cuando expire el tiempo</string>
     <string name="section_notification_app_label">Preferencias de notificación</string>
     <string name="section_notification_app_option_enabled">Activar recordatorio al vencimiento</string>
-    <string name="section_notification_app_option">Minutos después de los cuales recibirás el recordatorio al vencimiento (si continúas usando la aplicación)</string>
+    <string name="section_notification_app_option">Minutos después de los cuales recibirás el recordatorio al vencimiento</string>
+    <string name="section_notification_app_option_info">Cuando alcances el límite de tiempo, la aplicación te avisará automáticamente con una sola notificación. Si activas esta opción y continúas usando tus aplicaciones después de que el tiempo haya expirado, seguirás recibiendo notificaciones.</string>
     <string name="section_disclaimer_label">Varios</string>
     <string name="section_disclaimer_license_option">Licencia de uso</string>
     <string name="section_disclaimer_privacy_option">Privacidad</string>

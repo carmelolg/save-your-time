@@ -53,6 +53,27 @@
         android:padding="@dimen/margin_default"
         android:text="@string/allow_button_notification"/>
 
+    <TextView
+        android:id="@+id/disclaimer_alarms"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/margin_default"
+        android:text="@string/start_disclaimer_alarms"
+        android:textColor="?attr/SYTColorPrimary"
+        android:textSize="@dimen/text_size_start_activity"></TextView>
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/allow_button_alarms"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/disclaimer_alarms"
+        android:layout_marginLeft="@dimen/margin_default"
+        android:layout_marginRight="@dimen/margin_default"
+        android:backgroundTint="?attr/SYTPanelBackgroundColor"
+        android:textColor="?attr/SYTPanelTextColor"
+        android:padding="@dimen/margin_default"
+        android:text="@string/allow_button_alarms" />
 
     <TextView
         android:id="@+id/privacy_disclaimer_prefix"

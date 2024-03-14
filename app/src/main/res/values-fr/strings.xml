@@ -8,7 +8,7 @@
     <string name="title_preferences">Préférences</string>
     <string name="title_history_dashboard">Historique</string>
     <string name="back_label">Retour</string>
-    <string name="forward_label">Avancer</string>
+    <string name="forward_label">Autre</string>
     <string name="list_of_permission">La liste des permissions requises :\n\n<li>Accès aux données d\'utilisation</li></string>
     <string name="close_app_message">Appuyez de nouveau sur retour pour fermer l\'application.</string>
     <string name="delete">supprimer</string>
@@ -35,6 +35,9 @@
     <string name="start_disclaimer">Pour que l\'application fonctionne correctement, l\'accès aux données d\'utilisation est nécessaire.</string>
     <string name="allow_button_notification">Activer les notifications</string>
     <string name="start_disclaimer_notification">Pour que l\'application fonctionne correctement, les notifications de base doivent être activées.</string>
+    <string name="allow_button_alarms">Activer les alarmes</string>
+    <string name="start_disclaimer_alarms">Pour fonctionner correctement, l\'application nécessite l\'activation des alarmes.</string>
+
 
     <!-- NOTIFICATIONS -->
 
@@ -54,7 +57,8 @@
     <string name="section_block_app_option">Bloquer les applications lorsque le temps est écoulé</string>
     <string name="section_notification_app_label">Préférences de notification</string>
     <string name="section_notification_app_option_enabled">Activer les rappels à l\'échéance</string>
-    <string name="section_notification_app_option">Minutes après lesquelles vous recevrez un rappel à l\'échéance (si vous continuez à utiliser l\'application)</string>
+    <string name="section_notification_app_option">Minutes après lesquelles vous recevrez un rappel à l\'échéance</string>
+    <string name="section_notification_app_option_info">Lorsque vous atteignez la limite de temps, l\'application vous avertira automatiquement avec une seule notification. Si vous activez cette option et continuez à utiliser vos applications après l\'expiration du temps, vous continuerez à recevoir des notifications.</string>
     <string name="section_disclaimer_label">Divers</string>
     <string name="section_disclaimer_license_option">Licence d\'utilisation</string>
     <string name="section_disclaimer_privacy_option">Confidentialité</string>

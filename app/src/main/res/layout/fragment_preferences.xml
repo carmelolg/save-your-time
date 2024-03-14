@@ -109,6 +109,13 @@
                             android:textColor="?attr/SYTColorPrimary"
                             android:textSize="@dimen/text_size_default" />
 
+                        <ImageView
+                            android:id="@+id/info_icon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/ic_info"
+                            app:tint="?attr/SYTColorSecondary" />
+
                         <Spinner
                             android:id="@+id/reminder_time_choice"
                             android:layout_width="0dp"

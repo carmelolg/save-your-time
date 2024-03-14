@@ -8,7 +8,7 @@
     <string name="title_preferences">設定</string>
     <string name="title_history_dashboard">履歴</string>
     <string name="back_label">戻る</string>
-    <string name="forward_label">進む</string>
+    <string name="forward_label">その他</string>
     <string name="list_of_permission">必要な権限のリスト:\n\n<li>データ使用アクセス</li></string>
     <string name="close_app_message">アプリを終了するにはもう一度戻るボタンを押してください。</string>
     <string name="delete">削除</string>
@@ -35,6 +35,8 @@
     <string name="start_disclaimer">アプリケーションを正常に機能させるには、使用データへのアクセスが必要です。</string>
     <string name="allow_button_notification">通知を有効にする</string>
     <string name="start_disclaimer_notification">アプリケーションを正常に機能させるには、基本通知を有効にする必要があります。</string>
+    <string name="allow_button_alarms">アラームを有効にする</string>
+    <string name="start_disclaimer_alarms">正常に機能するためには、アプリケーションでアラームを有効にする必要があります。</string>
 
     <!-- NOTIFICATIONS -->
 
@@ -55,6 +57,7 @@
     <string name="section_notification_app_label">通知設定</string>
     <string name="section_notification_app_option_enabled">期限切れのリマインダーを有効にする</string>
     <string name="section_notification_app_option">アプリを続けて使用した場合のリマインダーを受信するまでの分数</string>
+    <string name="section_notification_app_option_info">時間制限に達した場合、アプリケーションは自動的に単一の通知でお知らせします。このオプションを有効にし、時間が経過した後もアプリを使用し続けると、通知を受け続けます。</string>
     <string name="section_disclaimer_label">その他</string>
     <string name="section_disclaimer_license_option">ライセンス</string>
     <string name="section_disclaimer_privacy_option">プライバシー</string>

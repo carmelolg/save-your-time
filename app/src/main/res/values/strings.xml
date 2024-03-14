@@ -7,7 +7,7 @@
     <string name="title_preferences">Preferences</string>
     <string name="title_history_dashboard">History</string>
     <string name="back_label">Back</string>
-    <string name="forward_label">Forward</string>
+    <string name="forward_label">Other</string>
     <string name="list_of_permission">List of requested permissions:\n\n<li>Data Usage Access</li></string>
     <string name="close_app_message">Press back again to close the app.</string>
     <string name="delete">delete</string>
@@ -34,6 +34,9 @@
     <string name="start_disclaimer">To function properly, the application requires access to usage data.</string>
     <string name="allow_button_notification">Enable Notifications</string>
     <string name="start_disclaimer_notification">To function properly, the application requires enabling basic notifications.</string>
+    <string name="allow_button_alarms">Enable Alarms</string>
+    <string name="start_disclaimer_alarms">To function properly, the application requires enabling alarms.</string>
+
 
     <!-- NOTIFICATIONS -->
     <string name="warn_title_notify_app">Time to log off</string>
@@ -56,7 +59,8 @@
     <string name="section_block_app_option">Block apps when time expires</string>
     <string name="section_notification_app_label">Notification preferences</string>
     <string name="section_notification_app_option_enabled">Enable reminder at expiration</string>
-    <string name="section_notification_app_option">The minutes after which you will receive the reminder upon expiration (if you continue to use the app)</string>
+    <string name="section_notification_app_option">The minutes after which you will receive the reminder upon expiration</string>
+    <string name="section_notification_app_option_info">When you reach the time limit, the application will automatically notify you with a single notification. If you enable this option and continue to use your apps after the time has expired, you will continue to receive notifications.</string>
     <string name="section_disclaimer_label">Miscellaneous</string>
     <string name="section_disclaimer_license_option">License</string>
     <string name="section_disclaimer_privacy_option">Privacy</string>
