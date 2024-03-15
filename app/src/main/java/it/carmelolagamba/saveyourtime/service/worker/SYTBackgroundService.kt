@@ -121,6 +121,7 @@ class SYTBackgroundService : Service(), EventListener {
             )
             .setContentIntent(pendingIntent)
             .setSilent(silent)
+            .setDeleteIntent(pendingIntent)
             .build()
 
         startForeground(1, notification)

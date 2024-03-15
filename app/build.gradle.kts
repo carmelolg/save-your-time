@@ -17,7 +17,7 @@ android {
         applicationId = "it.carmelolagamba.saveyourtime"
         minSdk = 28
         targetSdk = 33
-        versionCode = 31
+        versionCode = 32
         versionName = "1.2.3"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"

@@ -108,7 +108,7 @@ class PreferencesFragment : Fragment(), AdapterView.OnItemSelectedListener {
         }
 
         val balloon = Balloon.Builder(requireContext())
-            .setWidthRatio(1.0f)
+            .setWidthRatio(0.9f)
             .setHeight(BalloonSizeSpec.WRAP)
             .setText(requireContext().resources.getText(R.string.section_notification_app_option_info))
             .setTextColorResource(R.color.white)
@@ -122,7 +122,7 @@ class PreferencesFragment : Fragment(), AdapterView.OnItemSelectedListener {
             .setPadding(12)
             .setCornerRadius(8f)
             .setBackgroundColorResource(R.color.fourth)
-            .setBalloonAnimation(BalloonAnimation.FADE)
+            .setBalloonAnimation(BalloonAnimation.OVERSHOOT)
             .setLifecycleOwner(this)
             .build()
 

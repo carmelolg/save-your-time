@@ -44,7 +44,7 @@
     <string name="warn_description_notify_app_recheck">Stai continuando ad usare l\'app! Limite giornaliero superato su</string>
     <string name="notification_channel_name">Notifiche base</string>
     <string name="notification_channel_description">Notifiche sul tempo speso sulle applicazioni</string>
-    <string name="notification_service_title">Save Your Time attivo</string>
+    <string name="notification_service_title">Save Your Time è attivo</string>
     <string name="notification_service_description">Clicca qui per i dettagli</string>
     <string name="notification_service_channel_description">Notifica mostrata quando il servizio è attivo</string>
     <string name="notification_service_channel_name">Notifiche di servizio</string>

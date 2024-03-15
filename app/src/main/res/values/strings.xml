@@ -48,7 +48,7 @@
     <string name="notification_channel_name">Basic Notifications</string>
     <string name="notification_channel_description">Notifications about time spent on applications</string>
     <string name="notification_service_channel_id" translatable="false">service_channel_id</string>
-    <string name="notification_service_title">Save Your Time Active</string>
+    <string name="notification_service_title">Save Your Time is running</string>
     <string name="notification_service_description">Click here for details</string>
     <string name="notification_service_channel_description">Notification shown when the service is active</string>
     <string name="notification_service_channel_name">Service Notifications</string>
