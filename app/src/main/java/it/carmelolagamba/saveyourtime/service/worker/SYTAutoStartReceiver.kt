@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit
  * @author carmelolg
  * @since version 1.0
  */
-class SYTReceiver : BroadcastReceiver() {
+class SYTAutoStartReceiver : BroadcastReceiver() {
 
     override fun onReceive(context: Context, intent: Intent?) {
         val message = intent?.getStringExtra("message") ?: return

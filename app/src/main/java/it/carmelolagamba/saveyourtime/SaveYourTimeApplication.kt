@@ -4,12 +4,14 @@ import android.app.Application
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
+import android.util.Log
 import androidx.core.content.ContextCompat
 import androidx.work.Data
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
 import androidx.work.WorkRequest
 import dagger.hilt.android.HiltAndroidApp
+import it.carmelolagamba.saveyourtime.service.worker.SYTBackgroundService
 import it.carmelolagamba.saveyourtime.service.worker.SYTWorker
 import java.util.concurrent.TimeUnit
 
@@ -34,6 +36,11 @@ class SaveYourTimeApplication : Application() {
     }
 
     private fun startWorker() {
+
+        Log.d("SYT", "Start worker at the beginning of application")
+        SYTBackgroundService.startService(context)
+
+        Thread.sleep(1500)
 
         WorkManager.getInstance(applicationContext).cancelAllWork()
         val inputData = Data.Builder()
