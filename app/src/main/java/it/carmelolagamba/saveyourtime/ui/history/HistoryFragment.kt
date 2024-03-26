@@ -187,11 +187,16 @@ class HistoryFragment : Fragment() /*AbstractFragment()*/, AdapterView.OnItemSel
         }
 
         val last7DayTotalUsage = last7DaysMap.values.sumOf { it.second }
+        val last7DayAvgUsage = last7DayTotalUsage / 7
 
         if (last7DayTotalUsage > 0) {
             binding.containerLastWeek.visibility = View.VISIBLE
+            binding.totalUsageContainerLast7.visibility = View.VISIBLE
+            binding.totalWeeklyUsageLast7.text = "$last7DayTotalUsage min"
+            binding.totalAvgUsageLast7.text = "$last7DayAvgUsage min"
         } else {
             binding.containerLastWeek.visibility = View.GONE
+            binding.totalUsageContainerLast7.visibility = View.GONE
         }
 
         binding.totalAvgUsage.text = "$weeklyAvg min"

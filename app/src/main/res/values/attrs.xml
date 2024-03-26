@@ -13,6 +13,7 @@
     <attr name="SYTFloatingButtonBackground" format="reference" />
     <attr name="SYTFloatingButtonForeground" format="reference" />
     <attr name="SYTHistoryStatsPanelBackgroundColor" format="reference" />
+    <attr name="SYTHistoryStatsPanelLightBackgroundColor" format="reference" />
     <attr name="SYTHistoryStatsPanelTextColor" format="reference" />
     <attr name="SYTDividerColor" format="reference" />
     <attr name="SYTHighlightColor" format="reference" />

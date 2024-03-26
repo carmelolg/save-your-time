@@ -28,6 +28,7 @@
         <item name="SYTColorTertiary">@color/third</item>
         <item name="SYTFloatingButtonBackground">@color/first</item>
         <item name="SYTFloatingButtonForeground">@color/white</item>
+        <item name="SYTHistoryStatsPanelLightBackgroundColor">@color/second</item>
         <item name="SYTHistoryStatsPanelBackgroundColor">@color/fourth</item>
         <item name="SYTHistoryStatsPanelTextColor">@color/white</item>
         <item name="SYTDividerColor">@color/first</item>

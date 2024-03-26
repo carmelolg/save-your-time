@@ -73,6 +73,8 @@
     <string name="history_stats_label_avg_usage">Media di questa settimana</string>
     <string name="history_stats_label_difference_from_yesterday">Rispetto a ieri</string>
     <string name="history_stats_label_difference_from_last_week">Rispetto alla scorsa settimana</string>
+    <string name="history_stats_label_total_usage_last7">Totale ultimi 7 giorni</string>
+    <string name="history_stats_label_avg_usage_last7">Media ultimi 7 giorni</string>
     <string name="history_apps_empty_caring_message">Ritorna indietro e accedi al pannello di controllo per scegliere le applicazioni da monitorare</string>
 
     <!-- VARIABLES -->

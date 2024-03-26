@@ -74,6 +74,8 @@
     <string name="history_stats_label_avg_usage">今週の平均</string>
     <string name="history_stats_label_difference_from_yesterday">昨日との差</string>
     <string name="history_stats_label_difference_from_last_week">先週との差</string>
+    <string name="history_stats_label_total_usage_last7">過去7日間の総利用時間</string>
+    <string name="history_stats_label_avg_usage_last7">過去7日間 - 平均利用時間</string>
     <string name="history_apps_empty_caring_message">戻ってコントロールパネルにアクセスし、モニタリングするアプリを選択してください</string>
 
     <!-- VARIABLES -->

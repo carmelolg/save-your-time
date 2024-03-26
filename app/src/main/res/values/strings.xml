@@ -86,6 +86,8 @@
     <string name="history_stats_label_avg_usage">Usage average</string>
     <string name="history_stats_label_difference_from_yesterday">From Yesterday</string>
     <string name="history_stats_label_difference_from_last_week">From Last Week</string>
+    <string name="history_stats_label_total_usage_last7">Total Last 7 Days Usage</string>
+    <string name="history_stats_label_avg_usage_last7">Last 7 Days - Usage average</string>
     <string name="history_apps_empty_caring_message">Go back and access the control panel to choose the applications to monitor</string>
 
     <!-- VARIABLES -->

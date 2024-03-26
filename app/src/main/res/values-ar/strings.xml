@@ -74,6 +74,8 @@
     <string name="history_stats_label_avg_usage">المتوسط هذا الأسبوع</string>
     <string name="history_stats_label_difference_from_yesterday">بالمقارنة مع الأمس</string>
     <string name="history_stats_label_difference_from_last_week">بالمقارنة مع الأسبوع الماضي</string>
+    <string name="history_stats_label_total_usage_last7">استخدام الأيام السابقة السبعة الكلي</string>
+    <string name="history_stats_label_avg_usage_last7">الأيام السبعة السابقة - متوسط الاستخدام</string>
     <string name="history_apps_empty_caring_message">العودة والوصول إلى لوحة القيادة لتحديد التطبيقات التي ترغب في مراقبتها</string>
 
     <!-- المتغيرات -->

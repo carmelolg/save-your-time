@@ -30,30 +30,12 @@
         <item name="SYTFloatingButtonBackground">@color/n_first</item>
         <item name="SYTFloatingButtonForeground">@color/white</item>
         <item name="SYTHistoryStatsPanelBackgroundColor">@color/n_fourth</item>
+        <item name="SYTHistoryStatsPanelLightBackgroundColor">@color/n_fourth</item>
         <item name="SYTHistoryStatsPanelTextColor">@color/white</item>
         <item name="SYTDividerColor">@color/n_first</item>
         <item name="SYTHighlightColor">@color/n_fifth</item>
         <item name="SYTBackgroundColor">@color/n_black_default</item>
         <item name="SYTProgressBarColor">?attr/SYTColorTertiary</item>
-        <!--
-        <item name="SYTPanelBackgroundColor">@color/n_first</item>
-        <item name="SYTPanelTextColor">@color/n_third</item>
-        <item name="SYTChartBarColor">@color/n_fourth</item>
-        <item name="SYTChartSecondBarColor">@color/n_third</item>
-        <item name="SYTColorPrimary">@color/n_third</item>
-        <item name="SYTColorOnPrimary">@color/n_third</item>
-        <item name="SYTColorSecondary">@color/n_third</item>
-        <item name="SYTColorOnSecondary">@color/black</item>
-        <item name="SYTColorTertiary">@color/n_fourth</item>
-        <item name="SYTFloatingButtonBackground">@color/n_second</item>
-        <item name="SYTFloatingButtonForeground">@color/n_third</item>
-        <item name="SYTHistoryStatsPanelBackgroundColor">@color/n_fourth</item>
-        <item name="SYTHistoryStatsPanelTextColor">@color/n_third</item>
-        <item name="SYTDividerColor">@color/n_third</item>
-        <item name="SYTHighlightColor">@color/n_fifth</item>
-        <item name="SYTBackgroundColor">@color/n_black_default</item>
-        <item name="SYTProgressBarColor">?attr/SYTColorTertiary</item>
-    -->
 
     </style>
 

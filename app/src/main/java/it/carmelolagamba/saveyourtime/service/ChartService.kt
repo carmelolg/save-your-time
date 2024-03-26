@@ -78,7 +78,7 @@ class ChartService @Inject constructor() {
 
     /**
      * @param map the map to render in charts. This map has the order in the key, the value is a Pair(first = label on y-axis, second = usage value)
-     * @return Return a Map. The key it's the y-axes on chart the value it's a Pair (value on chart, label on y-axes)
+     * @return Return a Map. The key it's the y-axes on chart, the value it's a Pair (value on chart, label on y-axes)
      */
     fun buildChartDataWithOrder(
         context: Context,

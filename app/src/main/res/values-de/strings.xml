@@ -74,6 +74,8 @@
     <string name="history_stats_label_avg_usage">Durchschnitt diese Woche</string>
     <string name="history_stats_label_difference_from_yesterday">Verglichen mit gestern</string>
     <string name="history_stats_label_difference_from_last_week">Verglichen mit letzter Woche</string>
+    <string name="history_stats_label_total_usage_last7">Gesamtnutzung der letzten 7 Tage</string>
+    <string name="history_stats_label_avg_usage_last7">Letzte 7 Tage - Durchschnittliche Nutzung</string>
     <string name="history_apps_empty_caring_message">Gehen Sie zurück und greifen Sie auf das Dashboard zu, um die zu überwachenden Anwendungen auszuwählen</string>
 
     <!-- VARIABLEN -->

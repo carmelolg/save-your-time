@@ -75,6 +75,8 @@
     <string name="history_stats_label_avg_usage">Moyenne cette semaine</string>
     <string name="history_stats_label_difference_from_yesterday">Comparé à hier</string>
     <string name="history_stats_label_difference_from_last_week">Comparé à la semaine dernière</string>
+    <string name="history_stats_label_total_usage_last7">Utilisation totale des 7 derniers jours</string>
+    <string name="history_stats_label_avg_usage_last7">7 derniers jours - Moyenne d\'utilisation</string>
     <string name="history_apps_empty_caring_message">Revenez en arrière et accédez au tableau de bord pour choisir les applications à surveiller</string>
 
     <!-- VARIABLES -->
