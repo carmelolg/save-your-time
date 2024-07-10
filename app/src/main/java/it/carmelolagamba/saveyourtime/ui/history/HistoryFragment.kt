@@ -135,7 +135,7 @@ class HistoryFragment : Fragment() /*AbstractFragment()*/, AdapterView.OnItemSel
         /** Calculate weekly usage */
         val currentDay = utilService.getCurrentDay()
         var isToday = false
-        var yesterdayUsage = historyService.getYesterdayUsage(requireContext(), packageName)
+        val yesterdayUsage = historyService.getYesterdayUsage(requireContext(), packageName)
         var totalWeekUsage = 0
         var todayUsage = 0
         var countDays = 1
