@@ -1,93 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/SYTBackgroundColor"
     tools:context=".ui.preferences.PreferencesFragment">
 
-    <LinearLayout
-        android:id="@+id/top_layout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/bottom_layout"
-        android:orientation="horizontal">
+    <ScrollView
+        android:id="@+id/scroll_container"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toTopOf="@id/bottom_layout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <ScrollView
+        <LinearLayout
+            android:id="@+id/container_preferences"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/spacing_medium">
 
-            <LinearLayout
-                android:id="@+id/container_preferences"
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/section_preferences_stop_app"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:weightSum="4">
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_medium"
+                android:visibility="gone"
+                app:cardCornerRadius="@dimen/card_corner_radius"
+                app:cardElevation="@dimen/card_elevation">
 
                 <LinearLayout
-                    android:id="@+id/section_preferences_stop_app"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:visibility="gone"
-                    android:weightSum="2">
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
                         android:background="?attr/SYTPanelBackgroundColor"
-                        android:padding="10dp"
+                        android:padding="@dimen/spacing_medium"
                         android:text="@string/section_block_app_label"
                         android:textColor="?attr/SYTPanelTextColor"
-                        android:textSize="@dimen/text_size_default" />
+                        android:textSize="@dimen/text_size_medium"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:padding="20dp"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/spacing_medium"
                         android:text="@string/section_block_app_label_stay_tuned"
                         android:textColor="?attr/SYTHighlightColor"
                         android:textSize="@dimen/text_size_low"
-                        android:textStyle="bold"
-
-                        />
+                        android:textStyle="bold" />
 
                     <Switch
                         android:id="@+id/stop_application"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:enabled="false"
-                        android:padding="20dp"
+                        android:padding="@dimen/spacing_medium"
                         android:text="@string/section_block_app_option"
                         android:textColor="?attr/SYTColorPrimary"
                         android:textSize="@dimen/text_size_default" />
                 </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/section_preferences_notification"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_medium"
+                app:cardCornerRadius="@dimen/card_corner_radius"
+                app:cardElevation="@dimen/card_elevation">
 
                 <LinearLayout
-                    android:id="@+id/section_preferences_notification"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
                     android:orientation="vertical">
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0"
                         android:background="?attr/SYTPanelBackgroundColor"
-                        android:padding="10dp"
+                        android:padding="@dimen/spacing_medium"
                         android:text="@string/section_notification_app_label"
                         android:textColor="?attr/SYTPanelTextColor"
-                        android:textSize="@dimen/text_size_default" />
+                        android:textSize="@dimen/text_size_medium"
+                        android:textStyle="bold" />
 
                     <Switch
                         android:id="@+id/enable_reminder"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="20dp"
+                        android:padding="@dimen/spacing_medium"
                         android:text="@string/section_notification_app_option_enabled"
                         android:textColor="?attr/SYTColorPrimary"
                         android:textSize="@dimen/text_size_default" />
@@ -95,10 +105,9 @@
                     <LinearLayout
                         android:id="@+id/reminder_time"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:padding="20dp">
+                        android:padding="@dimen/spacing_medium">
 
                         <TextView
                             android:layout_width="0dp"
@@ -112,7 +121,9 @@
                         <ImageView
                             android:id="@+id/info_icon"
                             android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
+                            android:contentDescription="@string/section_notification_app_option_info"
+                            android:padding="@dimen/spacing_small"
                             android:src="@drawable/ic_info"
                             app:tint="?attr/SYTColorSecondary" />
 
@@ -120,40 +131,45 @@
                             android:id="@+id/reminder_time_choice"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight="0.4"
+                            android:layout_weight="0.5"
                             android:backgroundTint="?attr/SYTColorPrimary"
                             android:clickable="false"
-                            android:padding="20dp"
+                            android:padding="@dimen/spacing_small"
                             android:spinnerMode="dropdown" />
                     </LinearLayout>
                 </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/section_disclaimer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_medium"
+                app:cardCornerRadius="@dimen/card_corner_radius"
+                app:cardElevation="@dimen/card_elevation">
 
                 <LinearLayout
-                    android:id="@+id/section_disclaimer"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="10dp"
-                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
                     android:orientation="vertical">
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0"
                         android:background="?attr/SYTPanelBackgroundColor"
-                        android:padding="10dp"
+                        android:padding="@dimen/spacing_medium"
                         android:text="@string/section_disclaimer_label"
                         android:textColor="?attr/SYTPanelTextColor"
-                        android:textSize="@dimen/text_size_default" />
+                        android:textSize="@dimen/text_size_medium"
+                        android:textStyle="bold" />
 
                     <LinearLayout
                         android:id="@+id/license_layout"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
                         android:gravity="center"
                         android:orientation="horizontal"
-                        android:padding="20dp">
+                        android:padding="@dimen/spacing_medium">
 
                         <TextView
                             android:layout_width="0dp"
@@ -171,8 +187,6 @@
                             android:clickable="true"
                             android:contentDescription="@string/section_disclaimer_license_option"
                             android:scaleType="centerInside"
-                            android:scaleX="1.25"
-                            android:scaleY="1.25"
                             android:src="@drawable/ic_link"
                             app:tint="?attr/SYTColorPrimary" />
                     </LinearLayout>
@@ -180,11 +194,10 @@
                     <LinearLayout
                         android:id="@+id/privacy_layout"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
                         android:gravity="center"
                         android:orientation="horizontal"
-                        android:padding="20dp">
+                        android:padding="@dimen/spacing_medium">
 
                         <TextView
                             android:layout_width="0dp"
@@ -201,8 +214,7 @@
                             android:background="?attr/SYTBackgroundColor"
                             android:clickable="true"
                             android:contentDescription="@string/section_disclaimer_privacy_option"
-                            android:scaleX="1.25"
-                            android:scaleY="1.25"
+                            android:scaleType="centerInside"
                             android:src="@drawable/ic_link"
                             app:tint="?attr/SYTColorPrimary" />
                     </LinearLayout>
@@ -210,11 +222,10 @@
                     <LinearLayout
                         android:id="@+id/reset_layout"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
                         android:gravity="center"
                         android:orientation="horizontal"
-                        android:padding="20dp">
+                        android:padding="@dimen/spacing_medium">
 
                         <TextView
                             android:layout_width="0dp"
@@ -231,27 +242,25 @@
                             android:background="?attr/SYTBackgroundColor"
                             android:clickable="true"
                             android:contentDescription="@string/section_disclaimer_privacy_option"
-                            android:scaleX="1.25"
-                            android:scaleY="1.25"
+                            android:scaleType="centerInside"
                             android:src="@drawable/ic_remove"
                             app:tint="?attr/SYTColorPrimary" />
                     </LinearLayout>
 
                 </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
 
-            </LinearLayout>
-        </ScrollView>
-    </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 
     <LinearLayout
         android:id="@+id/bottom_layout"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_alignParentBottom="true"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:background="@color/fourth"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
-
-    </LinearLayout>
-
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

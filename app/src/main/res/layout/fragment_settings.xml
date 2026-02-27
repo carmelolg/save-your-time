@@ -1,38 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/SYTBackgroundColor"
+    android:paddingHorizontal="4dp"
+    android:paddingVertical="8dp"
     tools:context=".ui.settings.SettingsFragment">
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+    <GridView
+        android:id="@+id/grid_list"
+        style="@android:style/Widget.Material.GridView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fastScrollEnabled="false"
+        android:fastScrollStyle="@style/Theme.SaveYourTime"
+        android:paddingStart="3dp"
+        android:paddingEnd="3dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        android:scrollIndicators="right"
+        android:scrollbarStyle="insideInset"
+        android:textAlignment="center"
+        android:textSize="@dimen/text_size_default"
+        android:clipToPadding="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/resetFab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:clickable="true"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
         android:contentDescription="@string/delete"
+        android:text="@string/delete"
+        app:icon="@drawable/ic_remove"
+        app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:tint="?attr/SYTFloatingButtonForeground"
         app:backgroundTint="?attr/SYTFloatingButtonBackground"
-        android:src="@drawable/ic_remove"
-        app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
         app:useCompatPadding="true" />
 
-        <GridView
-            android:id="@+id/grid_list"
-            style="@android:style/Widget.Material.GridView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fastScrollEnabled="false"
-            android:fastScrollStyle="@style/Theme.SaveYourTime"
-            android:scrollIndicators="right"
-            android:scrollbarStyle="insideInset"
-            android:textAlignment="center"
-            android:textSize="@dimen/text_size_default">
-
-
-        </GridView>
-
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

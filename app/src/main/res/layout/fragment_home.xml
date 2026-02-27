@@ -1,99 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/SYTBackgroundColor"
     tools:context=".ui.home.HomeFragment">
 
-    <LinearLayout
-        android:id="@+id/top_layout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/bottom_layout"
-        android:orientation="vertical">
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
-            android:id="@+id/container_caring"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:visibility="invisible">
-
-            <ImageView
-                android:id="@+id/caring_image"
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:layout_gravity="top|center"
-                android:layout_marginTop="20dp"
-                android:layout_weight="1"
-                android:adjustViewBounds="true"
-                android:padding="@dimen/margin_default"
-                android:src="@drawable/ic_arrow_up"
-                android:visibility="invisible" />
-
-            <TextView
-                android:id="@+id/caring_message"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:padding="@dimen/margin_default"
-                android:text="@string/apps_empty_caring_message"
-                android:textColor="?attr/SYTColorPrimary"
-                android:textSize="20sp"
-                android:visibility="invisible" />
-
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/container_top"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:padding="12dp">
 
             <LinearLayout
-                android:id="@+id/container_chart"
+                android:id="@+id/container_caring"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:visibility="invisible">
+
+                <ImageView
+                    android:id="@+id/caring_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:adjustViewBounds="true"
+                    android:padding="@dimen/margin_default"
+                    android:src="@drawable/ic_arrow_up"
+                    android:visibility="invisible" />
 
                 <TextView
-                    android:id="@+id/chart_label"
+                    android:id="@+id/caring_message"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="?attr/SYTPanelBackgroundColor"
-                    android:padding="@dimen/padding_default"
-                    android:text="@string/label_chart"
-                    android:textAlignment="center"
-                    android:textColor="?attr/SYTPanelTextColor"
-                    android:textSize="@dimen/text_size_default" />
-
-                <com.patrykandpatrick.vico.views.chart.ChartView
-                    android:id="@+id/chart_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:clickable="true"
-                    android:padding="10dp"
-                    app:chart="column"
-                    app:columnChartStyle="@style/Theme.SaveYourTime.Chart"
-                    app:showBottomAxis="true"
-                    app:showStartAxis="true" />
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:gravity="center"
+                    android:padding="@dimen/margin_default"
+                    android:text="@string/apps_empty_caring_message"
+                    android:textColor="?attr/SYTColorPrimary"
+                    android:textSize="20sp"
+                    android:visibility="invisible" />
 
             </LinearLayout>
 
-
-            <ScrollView
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/container_chart"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="4dp">
 
                 <LinearLayout
-                    android:id="@+id/container_table"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/chart_label"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/SYTPanelBackgroundColor"
+                        android:padding="16dp"
+                        android:text="@string/label_chart"
+                        android:textAlignment="center"
+                        android:textColor="?attr/SYTPanelTextColor"
+                        android:textSize="@dimen/text_size_medium"
+                        android:textStyle="bold" />
+
+                    <com.patrykandpatrick.vico.views.chart.ChartView
+                        android:id="@+id/chart_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="300dp"
+                        android:clickable="true"
+                        android:padding="16dp"
+                        app:chart="column"
+                        app:columnChartStyle="@style/Theme.SaveYourTime.Chart"
+                        app:showBottomAxis="true"
+                        app:showStartAxis="true" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/container_table"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="4dp">
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
@@ -101,38 +111,32 @@
                     <TextView
                         android:id="@+id/table_label"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:padding="@dimen/padding_default"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/SYTPanelBackgroundColor"
+                        android:padding="16dp"
                         android:text="@string/label_table"
                         android:textAlignment="center"
                         android:textColor="?attr/SYTPanelTextColor"
-                        android:textSize="@dimen/text_size_default"
-                        android:background="?attr/SYTPanelBackgroundColor"
+                        android:textSize="@dimen/text_size_medium"
+                        android:textStyle="bold"
                         android:visibility="visible" />
 
                     <TableLayout
                         android:id="@+id/usage_table"
-                        style="Theme.SaveYourTime.Table"
+                        style="@style/Theme.SaveYourTime.Table"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:padding="15dp"
+                        android:padding="16dp"
                         android:stretchColumns="*" />
+
                 </LinearLayout>
-            </ScrollView>
+
+            </com.google.android.material.card.MaterialCardView>
+
         </LinearLayout>
-    </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/bottom_layout"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginTop="3dp"
-        android:background="?attr/SYTColorPrimary"
-        android:gravity="center"
-        android:orientation="horizontal">
-    </LinearLayout>
+    </ScrollView>
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
 

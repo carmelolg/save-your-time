@@ -1,103 +1,167 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/SYTBackgroundColor"
     android:paddingTop="?attr/actionBarSize">
 
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/privacy_disclaimer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/disclaimer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/margin_default"
-        android:text="@string/start_disclaimer"
-        android:textColor="?attr/SYTColorPrimary"
-        android:textSize="@dimen/text_size_start_activity"></TextView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/spacing_medium">
 
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/spacing_medium"
+                app:cardCornerRadius="@dimen/card_corner_radius"
+                app:cardElevation="@dimen/card_elevation">
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/allow_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/disclaimer"
-        android:layout_marginLeft="@dimen/margin_default"
-        android:layout_marginRight="@dimen/margin_default"
-        android:backgroundTint="?attr/SYTPanelBackgroundColor"
-        android:textColor="?attr/SYTPanelTextColor"
-        android:padding="@dimen/margin_default"
-        android:text="@string/allow_button" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/spacing_medium">
 
-    <TextView
-        android:id="@+id/disclaimer_notification"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/margin_default"
-        android:text="@string/start_disclaimer_notification"
-        android:textColor="?attr/SYTColorPrimary"
-        android:textSize="@dimen/text_size_start_activity"
-        ></TextView>
+                    <TextView
+                        android:id="@+id/disclaimer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingVertical="@dimen/spacing_small"
+                        android:text="@string/start_disclaimer"
+                        android:textColor="?attr/SYTColorPrimary"
+                        android:textSize="@dimen/text_size_start_activity"
+                        android:textStyle="bold" />
 
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/allow_button"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_small"
+                        android:text="@string/allow_button"
+                        android:textColor="?attr/SYTPanelTextColor"
+                        app:backgroundTint="?attr/SYTPanelBackgroundColor"
+                        app:cornerRadius="@dimen/spacing_small" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/allow_button_notification"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/disclaimer_notification"
-        android:layout_marginLeft="@dimen/margin_default"
-        android:layout_marginRight="@dimen/margin_default"
-        android:backgroundTint="?attr/SYTPanelBackgroundColor"
-        android:textColor="?attr/SYTPanelTextColor"
-        android:padding="@dimen/margin_default"
-        android:text="@string/allow_button_notification"/>
+                </LinearLayout>
 
-    <TextView
-        android:id="@+id/disclaimer_alarms"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/margin_default"
-        android:text="@string/start_disclaimer_alarms"
-        android:textColor="?attr/SYTColorPrimary"
-        android:textSize="@dimen/text_size_start_activity"></TextView>
+            </com.google.android.material.card.MaterialCardView>
 
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/spacing_medium"
+                app:cardCornerRadius="@dimen/card_corner_radius"
+                app:cardElevation="@dimen/card_elevation">
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/allow_button_alarms"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/disclaimer_alarms"
-        android:layout_marginLeft="@dimen/margin_default"
-        android:layout_marginRight="@dimen/margin_default"
-        android:backgroundTint="?attr/SYTPanelBackgroundColor"
-        android:textColor="?attr/SYTPanelTextColor"
-        android:padding="@dimen/margin_default"
-        android:text="@string/allow_button_alarms" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/spacing_medium">
+
+                    <TextView
+                        android:id="@+id/disclaimer_notification"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingVertical="@dimen/spacing_small"
+                        android:text="@string/start_disclaimer_notification"
+                        android:textColor="?attr/SYTColorPrimary"
+                        android:textSize="@dimen/text_size_start_activity"
+                        android:textStyle="bold" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/allow_button_notification"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_small"
+                        android:text="@string/allow_button_notification"
+                        android:textColor="?attr/SYTPanelTextColor"
+                        app:backgroundTint="?attr/SYTPanelBackgroundColor"
+                        app:cornerRadius="@dimen/spacing_small" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/spacing_medium"
+                app:cardCornerRadius="@dimen/card_corner_radius"
+                app:cardElevation="@dimen/card_elevation">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/spacing_medium">
+
+                    <TextView
+                        android:id="@+id/disclaimer_alarms"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingVertical="@dimen/spacing_small"
+                        android:text="@string/start_disclaimer_alarms"
+                        android:textColor="?attr/SYTColorPrimary"
+                        android:textSize="@dimen/text_size_start_activity"
+                        android:textStyle="bold" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/allow_button_alarms"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_small"
+                        android:text="@string/allow_button_alarms"
+                        android:textColor="?attr/SYTPanelTextColor"
+                        app:backgroundTint="?attr/SYTPanelBackgroundColor"
+                        app:cornerRadius="@dimen/spacing_small" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+
+    </ScrollView>
 
     <TextView
         android:id="@+id/privacy_disclaimer_prefix"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_above="@id/privacy_disclaimer"
+        android:paddingVertical="@dimen/spacing_small"
         android:text="@string/privacy_disclaimer_prefix"
+        android:textAlignment="center"
         android:textColor="?attr/SYTColorPrimary"
         android:textSize="@dimen/text_size_default"
         android:textStyle="bold"
-        android:textAlignment="center"
-        ></TextView>
+        app:layout_constraintBottom_toTopOf="@id/privacy_disclaimer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <TextView
         android:id="@+id/privacy_disclaimer"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:padding="@dimen/margin_default"
+        android:padding="@dimen/spacing_medium"
         android:text="@string/privacy_disclaimer"
+        android:textAlignment="center"
         android:textColor="?attr/SYTColorPrimary"
         android:textSize="@dimen/text_size_default"
-        android:layout_gravity="bottom"
-        android:layout_alignParentBottom="true"
-        android:textAlignment="center"
-        ></TextView>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
-
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,6 +3,8 @@
     <style name="Theme.SaveYourTime" parent="Theme.MaterialComponents.DayNight.NoActionBar">
 
         <item name="toolbarStyle">@style/Theme.SaveYourTime.Toolbar</item>
+        <item name="shapeAppearanceSmallComponent">@style/Theme.SaveYourTime.ShapeAppearance.SmallComponent</item>
+        <item name="shapeAppearanceMediumComponent">@style/Theme.SaveYourTime.ShapeAppearance.MediumComponent</item>
 
         <!-- Primary brand color. -->
         <item name="colorPrimary">?attr/SYTColorPrimary</item>
@@ -36,11 +38,36 @@
         <item name="SYTBackgroundColor">@color/white</item>
         <item name="SYTProgressBarColor">?attr/SYTColorTertiary</item>
 
+        <!-- Material 3 Improvements -->
+        <item name="materialButtonOutlinedStyle">@style/Widget.SaveYourTime.Button.Outlined</item>
+        <item name="materialButtonStyle">@style/Widget.SaveYourTime.Button</item>
 
     </style>
 
+    <style name="Theme.SaveYourTime.ShapeAppearance">
+        <item name="cornerSize">4dp</item>
+    </style>
+
+    <style name="Theme.SaveYourTime.ShapeAppearance.SmallComponent">
+        <item name="cornerSize">8dp</item>
+    </style>
+
+    <style name="Theme.SaveYourTime.ShapeAppearance.MediumComponent">
+        <item name="cornerSize">12dp</item>
+    </style>
+
+    <style name="Widget.SaveYourTime.Button" parent="Widget.MaterialComponents.Button">
+        <item name="cornerRadius">8dp</item>
+        <item name="elevation">4dp</item>
+    </style>
+
+    <style name="Widget.SaveYourTime.Button.Outlined" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="cornerRadius">8dp</item>
+        <item name="strokeWidth">2dp</item>
+    </style>
+
     <style name="Theme.SaveYourTime.Chart.ColumnStyle.ShapeStyle">
-        <item name="cornerSize">5dp</item>
+        <item name="cornerSize">6dp</item>
     </style>
 
     <style name="Theme.SaveYourTime.Chart.ColumnStyle">
@@ -77,6 +104,7 @@
 
     <style name="Theme.SaveYourTime.Table.Header">
         <item name="android:textColor">@color/first</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
     <style name="Theme.SaveYourTime.Table.Row">

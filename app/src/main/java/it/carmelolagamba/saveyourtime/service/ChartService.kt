@@ -35,7 +35,7 @@ class ChartService @Inject constructor() {
         }
 
         chartData = chartData.toList().sortedByDescending { it.second.first }
-            .toMap() as MutableMap<Float, Pair<Float, String>>
+            .toMap().toMutableMap()
 
         return chartData
     }
@@ -71,7 +71,7 @@ class ChartService @Inject constructor() {
         }
 
         chartData = chartData.toList().sortedByDescending { it.second.first }
-            .toMap() as MutableMap<Float, Pair<Float, String>>
+            .toMap().toMutableMap()
 
         return chartData
     }
@@ -103,7 +103,7 @@ class ChartService @Inject constructor() {
         }
 
         return chartData.toList().sortedByDescending { it.first }
-            .toMap() as MutableMap<Float, Pair<Float, String>>
+            .toMap().toMutableMap()
     }
 
 
