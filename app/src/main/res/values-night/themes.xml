@@ -3,6 +3,8 @@
     <style name="Theme.SaveYourTime" parent="Theme.MaterialComponents.DayNight.NoActionBar">
 
         <item name="toolbarStyle">@style/Theme.SaveYourTime.Toolbar</item>
+        <item name="shapeAppearanceSmallComponent">@style/Theme.SaveYourTime.ShapeAppearance.SmallComponent</item>
+        <item name="shapeAppearanceMediumComponent">@style/Theme.SaveYourTime.ShapeAppearance.MediumComponent</item>
 
         <!-- Primary brand color. -->
         <item name="colorPrimary">?attr/SYTColorTertiary</item>
@@ -17,30 +19,55 @@
         <item name="android:statusBarColor">@color/black</item>
         <!-- Customize your theme here. -->
 
-
         <item name="SYTPanelBackgroundColor">@color/n_first</item>
-        <item name="SYTPanelTextColor">@color/white</item>
+        <item name="SYTPanelTextColor">@color/n_third</item>
         <item name="SYTChartBarColor">@color/n_fourth</item>
         <item name="SYTChartSecondBarColor">@color/n_third</item>
         <item name="SYTColorPrimary">@color/n_third</item>
         <item name="SYTColorOnPrimary">@color/n_black_default</item>
-        <item name="SYTColorSecondary">@color/n_third</item>
-        <item name="SYTColorOnSecondary">@color/n_black_default</item>
+        <item name="SYTColorSecondary">@color/n_second</item>
+        <item name="SYTColorOnSecondary">@color/n_third</item>
         <item name="SYTColorTertiary">@color/n_third</item>
-        <item name="SYTFloatingButtonBackground">@color/n_first</item>
-        <item name="SYTFloatingButtonForeground">@color/white</item>
-        <item name="SYTHistoryStatsPanelBackgroundColor">@color/n_fourth</item>
-        <item name="SYTHistoryStatsPanelLightBackgroundColor">@color/n_fourth</item>
-        <item name="SYTHistoryStatsPanelTextColor">@color/white</item>
-        <item name="SYTDividerColor">@color/n_first</item>
+        <item name="SYTFloatingButtonBackground">@color/n_second</item>
+        <item name="SYTFloatingButtonForeground">@color/n_black_default</item>
+        <item name="SYTHistoryStatsPanelBackgroundColor">@color/n_first</item>
+        <item name="SYTHistoryStatsPanelLightBackgroundColor">@color/n_second</item>
+        <item name="SYTHistoryStatsPanelTextColor">@color/n_third</item>
+        <item name="SYTDividerColor">@color/n_second</item>
         <item name="SYTHighlightColor">@color/n_fifth</item>
         <item name="SYTBackgroundColor">@color/n_black_default</item>
         <item name="SYTProgressBarColor">?attr/SYTColorTertiary</item>
 
+        <!-- Material 3 Improvements -->
+        <item name="materialButtonOutlinedStyle">@style/Widget.SaveYourTime.Button.Outlined</item>
+        <item name="materialButtonStyle">@style/Widget.SaveYourTime.Button</item>
+
+    </style>
+
+    <style name="Theme.SaveYourTime.ShapeAppearance">
+        <item name="cornerSize">4dp</item>
+    </style>
+
+    <style name="Theme.SaveYourTime.ShapeAppearance.SmallComponent">
+        <item name="cornerSize">8dp</item>
+    </style>
+
+    <style name="Theme.SaveYourTime.ShapeAppearance.MediumComponent">
+        <item name="cornerSize">12dp</item>
+    </style>
+
+    <style name="Widget.SaveYourTime.Button" parent="Widget.MaterialComponents.Button">
+        <item name="cornerRadius">8dp</item>
+        <item name="elevation">4dp</item>
+    </style>
+
+    <style name="Widget.SaveYourTime.Button.Outlined" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="cornerRadius">8dp</item>
+        <item name="strokeWidth">2dp</item>
     </style>
 
     <style name="Theme.SaveYourTime.Chart.ColumnStyle.ShapeStyle">
-        <item name="cornerSize">5dp</item>
+        <item name="cornerSize">6dp</item>
     </style>
 
     <style name="Theme.SaveYourTime.Chart.ColumnStyle">
@@ -51,7 +78,6 @@
         <item name="color">?attr/SYTChartBarColor</item>
         <item name="thickness">12dp</item>
     </style>
-
 
     <style name="Theme.SaveYourTime.Chart.Column2" parent="@style/Theme.SaveYourTime.Chart.ColumnStyle">
         <item name="color">?attr/SYTChartSecondBarColor</item>
@@ -67,7 +93,6 @@
         <item name="colorAccent">?attr/SYTProgressBarColor</item>
     </style>
 
-
     <style name="Theme.SaveYourTime.Toolbar">
         <item name="titleTextColor">?attr/SYTColorOnPrimary</item>
     </style>
@@ -77,10 +102,11 @@
 
     <style name="Theme.SaveYourTime.Table.Header">
         <item name="android:textColor">@color/n_third</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
     <style name="Theme.SaveYourTime.Table.Row">
-        <item name="android:textColor">@color/white</item>
+        <item name="android:textColor">@color/n_third</item>
     </style>
 
 </resources>

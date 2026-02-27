@@ -11,7 +11,7 @@ plugins {
 
 android {
     namespace = "it.carmelolagamba.saveyourtime"
-    compileSdk = 34
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "it.carmelolagamba.saveyourtime"
@@ -38,11 +38,14 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_21
-        targetCompatibility = JavaVersion.VERSION_21
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "21"
+        jvmTarget = "17"
+    }
+    testOptions {
+        unitTests.isReturnDefaultValues = true
     }
 }
 
@@ -51,29 +54,41 @@ dependencies {
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.work:work-runtime-ktx:2.7.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("androidx.fragment:fragment-ktx:1.6.1")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    implementation("androidx.fragment:fragment-ktx:1.8.9")
+    implementation("androidx.constraintlayout:constraintlayout:2.2.1")
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.2")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
-    implementation("androidx.navigation:navigation-fragment-ktx:2.5.3")
-    implementation("androidx.navigation:navigation-ui-ktx:2.5.3")
-    implementation("com.google.android.material:material:1.10.0")
-    implementation("androidx.hilt:hilt-common:1.1.0")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.10.0")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.10.0")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.9.7")
+    implementation("androidx.navigation:navigation-ui-ktx:2.9.7")
+    implementation("com.google.android.material:material:1.13.0")
+    implementation("androidx.hilt:hilt-common:1.3.0")
     testImplementation("junit:junit:4.13.2")
+    testImplementation("org.mockito:mockito-core:5.8.0")
+    testImplementation("org.mockito.kotlin:mockito-kotlin:5.2.1")
+    testImplementation("org.mockito:mockito-inline:5.2.0")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
+    testImplementation("androidx.arch.core:core-testing:2.2.0")
+    testImplementation("org.robolectric:robolectric:4.11.1")
+    testImplementation("androidx.test:core:1.5.0")
+    testImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    androidTestImplementation("androidx.test:runner:1.5.2")
+    androidTestImplementation("androidx.test:rules:1.5.0")
+    androidTestImplementation("androidx.test:core:1.5.0")
 
     // Dependency Injection
-    implementation("com.google.dagger:hilt-android:2.48.1")
-    kapt("com.google.dagger:hilt-compiler:2.48.1")
-    androidTestImplementation("com.google.dagger:hilt-android-testing:2.48.1")
-    kaptAndroidTest("com.google.dagger:hilt-compiler:2.48.1")
-    testImplementation("com.google.dagger:hilt-android-testing:2.48.1")
-    kaptTest("com.google.dagger:hilt-compiler:2.48.1")
+    val hiltVersion = "2.51.1"
+    implementation("com.google.dagger:hilt-android:${hiltVersion}")
+    kapt("com.google.dagger:hilt-compiler:${hiltVersion}")
+    androidTestImplementation("com.google.dagger:hilt-android-testing:${hiltVersion}")
+    kaptAndroidTest("com.google.dagger:hilt-compiler:${hiltVersion}")
+    testImplementation("com.google.dagger:hilt-android-testing:${hiltVersion}")
+    kaptTest("com.google.dagger:hilt-compiler:${hiltVersion}")
 
     // SQL Lite & Room
-    val roomVersion = "2.6.0"
+    val roomVersion = "2.6.1"
 
     implementation("androidx.room:room-runtime:$roomVersion")
     annotationProcessor("androidx.room:room-compiler:$roomVersion")
@@ -95,6 +110,7 @@ dependencies {
 
     // optional - Test helpers
     testImplementation("androidx.room:room-testing:$roomVersion")
+    androidTestImplementation("androidx.room:room-testing:$roomVersion")
 
     // optional - Paging 3 Integration
     implementation("androidx.room:room-paging:$roomVersion")
@@ -116,9 +132,6 @@ buildscript {
         maven{
             url = uri("https://jitpack.io")
         }
-    }
-    dependencies {
-        classpath("com.google.dagger:hilt-android-gradle-plugin:2.48.1")
     }
 }
 

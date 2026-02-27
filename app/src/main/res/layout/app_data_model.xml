@@ -1,68 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="2dp">
+    android:layout_height="wrap_content"
+    android:layout_marginStart="4dp"
+    android:layout_marginEnd="4dp"
+    android:layout_marginTop="6dp"
+    android:layout_marginBottom="6dp"
+    app:cardElevation="4dp"
+    app:cardCornerRadius="12dp"
+    app:cardBackgroundColor="?attr/SYTBackgroundColor"
+    app:strokeColor="?attr/SYTColorPrimary"
+    app:strokeWidth="1dp">
 
-
-    <ImageView
-        android:id="@+id/app_icon"
-        android:layout_width="@dimen/image_size_default"
-        android:layout_height="@dimen/image_size_default"
-        android:focusable="false"
-        android:focusableInTouchMode="false"
-        android:layout_centerVertical="true"
-        android:clickable="false"
-        />
-
-    <TextView
-        android:id="@+id/app_name"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_width="220dp"
-        android:scrollHorizontally="false"
-        android:layout_alignParentStart="true"
-        android:layout_centerVertical="true"
-        android:textColor="?attr/SYTColorPrimary"
-        android:textSize="@dimen/text_size_default"
-        android:layout_toEndOf="@id/app_icon"
-        android:layout_toLeftOf="@id/notify_time"
-        android:layout_marginLeft="@dimen/margin_from_image_default"
-        />
+        android:padding="16dp">
 
-    <EditText
-        android:id="@+id/notify_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toLeftOf="@id/min_label"
-        android:textColor="?attr/SYTColorSecondary"
-        android:backgroundTint="?attr/SYTColorSecondary"
-        android:gravity="center"
-        android:ems="2"
-        android:inputType="time" />
+        <ImageView
+            android:id="@+id/app_icon"
+            android:layout_width="@dimen/image_size_default"
+            android:layout_height="@dimen/image_size_default"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:clickable="false" />
 
-    <TextView
-        android:id="@+id/min_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:focusable="false"
-        android:focusableInTouchMode="false"
-        android:clickable="false"
-        android:textColor="?attr/SYTColorPrimary"
-        android:textSize="@dimen/text_size_default"
-        android:layout_toLeftOf="@id/app_checked"
-        android:text=" min"
-        />
+        <TextView
+            android:id="@+id/app_name"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/app_icon"
+            android:layout_toLeftOf="@id/notify_time"
+            android:layout_alignParentStart="false"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/margin_from_image_default"
+            android:scrollHorizontally="false"
+            android:textColor="?attr/SYTColorPrimary"
+            android:textSize="@dimen/text_size_default"
+            android:textStyle="bold" />
 
-    <CheckBox
-        android:id="@+id/app_checked"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="visible"
-        />
+        <EditText
+            android:id="@+id/notify_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/min_label"
+            android:layout_centerVertical="true"
+            android:ems="2"
+            android:gravity="center"
+            android:inputType="time"
+            android:textColor="?attr/SYTColorSecondary"
+            android:textSize="@dimen/text_size_default"
+            android:backgroundTint="?attr/SYTColorSecondary" />
 
-</RelativeLayout>
+        <TextView
+            android:id="@+id/min_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/app_checked"
+            android:layout_centerVertical="true"
+            android:text=" min"
+            android:textColor="?attr/SYTColorPrimary"
+            android:textSize="@dimen/text_size_default"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:clickable="false"
+            android:layout_marginLeft="4dp" />
+
+        <CheckBox
+            android:id="@+id/app_checked"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:visibility="visible" />
+
+    </RelativeLayout>
+
+</com.google.android.material.card.MaterialCardView>
+
