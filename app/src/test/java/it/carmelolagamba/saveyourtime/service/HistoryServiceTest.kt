@@ -1,9 +1,12 @@
 package it.carmelolagamba.saveyourtime.service
 
+import android.content.Context
 import it.carmelolagamba.saveyourtime.service.UtilService.Weekday
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
+import org.mockito.ArgumentMatchers.anyLong
+import org.mockito.ArgumentMatchers.anyString
 import org.mockito.Mockito
 import org.mockito.Mockito.`when`
 
@@ -219,6 +222,114 @@ class HistoryServiceTest {
         assertEquals(7, result.size)
         result.values.forEach { pair ->
             assertEquals(0, pair.second)
+        }
+    }
+
+    // ========== getYesterdayUsage tests ==========
+
+    @Test
+    fun `getYesterdayUsage should return usage from mocked utilService`() {
+        val mockContext = Mockito.mock(Context::class.java)
+        `when`(mockUtilService.yesterdayMidnightMillis()).thenReturn(1000L)
+        `when`(mockUtilService.todayMidnightMillis()).thenReturn(86401000L)
+        `when`(
+            mockUtilService.getUsageInMinutesByPackage(mockContext, "com.test", 1000L, 86401000L)
+        ).thenReturn(45)
+
+        val result = historyService.getYesterdayUsage(mockContext, "com.test")
+
+        assertEquals(45, result)
+    }
+
+    @Test
+    fun `getYesterdayUsage should return zero when no usage`() {
+        val mockContext = Mockito.mock(Context::class.java)
+        `when`(mockUtilService.yesterdayMidnightMillis()).thenReturn(1000L)
+        `when`(mockUtilService.todayMidnightMillis()).thenReturn(86401000L)
+        `when`(
+            mockUtilService.getUsageInMinutesByPackage(mockContext, "com.test", 1000L, 86401000L)
+        ).thenReturn(0)
+
+        val result = historyService.getYesterdayUsage(mockContext, "com.test")
+
+        assertEquals(0, result)
+    }
+
+    @Test
+    fun `getYesterdayUsage should use yesterday and today midnight as range`() {
+        val mockContext = Mockito.mock(Context::class.java)
+        val yesterdayMillis = 1000L
+        val todayMillis = 86401000L
+        `when`(mockUtilService.yesterdayMidnightMillis()).thenReturn(yesterdayMillis)
+        `when`(mockUtilService.todayMidnightMillis()).thenReturn(todayMillis)
+        `when`(
+            mockUtilService.getUsageInMinutesByPackage(
+                mockContext, "com.package", yesterdayMillis, todayMillis
+            )
+        ).thenReturn(120)
+
+        val result = historyService.getYesterdayUsage(mockContext, "com.package")
+
+        assertEquals(120, result)
+        Mockito.verify(mockUtilService).yesterdayMidnightMillis()
+        Mockito.verify(mockUtilService).todayMidnightMillis()
+        Mockito.verify(mockUtilService).getUsageInMinutesByPackage(
+            mockContext, "com.package", yesterdayMillis, todayMillis
+        )
+    }
+
+    // ========== getWeeklyDetails tests ==========
+
+    @Test
+    fun `getWeeklyDetails should return map with 7 day entries`() {
+        val mockContext = Mockito.mock(Context::class.java)
+        `when`(mockUtilService.getMidnight(Mockito.any())).thenReturn(1000L)
+        `when`(
+            mockUtilService.getUsageInMinutesByPackage(
+                Mockito.any(Context::class.java), anyString(), anyLong(), anyLong()
+            )
+        ).thenReturn(10)
+
+        val result = historyService.getWeeklyDetails(mockContext, "com.test")
+
+        assertEquals(7, result.size)
+    }
+
+    @Test
+    fun `getWeeklyDetails should contain all weekday keys`() {
+        val mockContext = Mockito.mock(Context::class.java)
+        `when`(mockUtilService.getMidnight(Mockito.any())).thenReturn(1000L)
+        `when`(
+            mockUtilService.getUsageInMinutesByPackage(
+                Mockito.any(Context::class.java), anyString(), anyLong(), anyLong()
+            )
+        ).thenReturn(0)
+
+        val result = historyService.getWeeklyDetails(mockContext, "com.test")
+
+        assertTrue(result.containsKey("MONDAY"))
+        assertTrue(result.containsKey("TUESDAY"))
+        assertTrue(result.containsKey("WEDNESDAY"))
+        assertTrue(result.containsKey("THURSDAY"))
+        assertTrue(result.containsKey("FRIDAY"))
+        assertTrue(result.containsKey("SATURDAY"))
+        assertTrue(result.containsKey("SUNDAY"))
+    }
+
+    @Test
+    fun `getWeeklyDetails should return correct usage values`() {
+        val mockContext = Mockito.mock(Context::class.java)
+        `when`(mockUtilService.getMidnight(Mockito.any())).thenReturn(1000L)
+        `when`(
+            mockUtilService.getUsageInMinutesByPackage(
+                Mockito.any(Context::class.java), anyString(), anyLong(), anyLong()
+            )
+        ).thenReturn(30)
+
+        val result = historyService.getWeeklyDetails(mockContext, "com.test")
+
+        result.values.forEach { usage ->
+            assertEquals(30, usage)
         }
     }
 }

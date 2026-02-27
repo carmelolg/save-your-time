@@ -1,10 +1,13 @@
 package it.carmelolagamba.saveyourtime.service
 
+import android.content.Context
+import android.content.res.Resources
 import it.carmelolagamba.saveyourtime.persistence.App
 import it.carmelolagamba.saveyourtime.service.UtilService.Weekday
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
+import org.mockito.ArgumentMatchers.anyInt
 import org.mockito.Mockito
 import org.mockito.Mockito.`when`
 
@@ -215,6 +218,174 @@ class ChartServiceTest {
         assertNotNull(model)
         assertNotNull(formatter)
         assertEquals(3, chartData.size)
+    }
+
+    // ========== buildChartData(context, map) tests ==========
+
+    @Test
+    fun `buildChartData with context and map should return correct size`() {
+        val mockContext = Mockito.mock(Context::class.java)
+        val mockResources = Mockito.mock(Resources::class.java)
+        `when`(mockContext.resources).thenReturn(mockResources)
+        `when`(mockResources.getText(anyInt())).thenReturn("Now")
+        `when`(mockUtilService.getCurrentDay()).thenReturn(Weekday.THURSDAY)
+        `when`(mockUtilService.getDateFromToday(anyInt())).thenReturn("27/02")
+
+        val map = mapOf("MONDAY" to 10, "TUESDAY" to 20)
+        val result = chartService.buildChartData(mockContext, map)
+
+        assertEquals(2, result.size)
+    }
+
+    @Test
+    fun `buildChartData with context uses Now label for current day`() {
+        val mockContext = Mockito.mock(Context::class.java)
+        val mockResources = Mockito.mock(Resources::class.java)
+        `when`(mockContext.resources).thenReturn(mockResources)
+        `when`(mockResources.getText(anyInt())).thenReturn("Now")
+        `when`(mockUtilService.getCurrentDay()).thenReturn(Weekday.MONDAY)
+        `when`(mockUtilService.getDateFromToday(anyInt())).thenReturn("27/02")
+
+        val map = mapOf("MONDAY" to 30)
+        val result = chartService.buildChartData(mockContext, map)
+
+        assertEquals(1, result.size)
+        assertEquals(30f, result.values.first().first)
+        assertEquals("Now", result.values.first().second)
+    }
+
+    @Test
+    fun `buildChartData with context uses date label for non-current day`() {
+        val mockContext = Mockito.mock(Context::class.java)
+        val mockResources = Mockito.mock(Resources::class.java)
+        `when`(mockContext.resources).thenReturn(mockResources)
+        `when`(mockResources.getText(anyInt())).thenReturn("Now")
+        `when`(mockUtilService.getCurrentDay()).thenReturn(Weekday.THURSDAY)
+        `when`(mockUtilService.getDateFromToday(0)).thenReturn("24/02")
+
+        val map = mapOf("MONDAY" to 15)
+        val result = chartService.buildChartData(mockContext, map)
+
+        assertEquals(1, result.size)
+        assertEquals(15f, result.values.first().first)
+        assertEquals("24/02", result.values.first().second)
+    }
+
+    @Test
+    fun `buildChartData with context and empty map returns empty result`() {
+        val mockContext = Mockito.mock(Context::class.java)
+        val mockResources = Mockito.mock(Resources::class.java)
+        `when`(mockContext.resources).thenReturn(mockResources)
+        `when`(mockUtilService.getCurrentDay()).thenReturn(Weekday.MONDAY)
+
+        val result = chartService.buildChartData(mockContext, emptyMap())
+
+        assertTrue(result.isEmpty())
+    }
+
+    @Test
+    fun `buildChartData with context sorts by usage descending`() {
+        val mockContext = Mockito.mock(Context::class.java)
+        val mockResources = Mockito.mock(Resources::class.java)
+        `when`(mockContext.resources).thenReturn(mockResources)
+        `when`(mockResources.getText(anyInt())).thenReturn("Now")
+        `when`(mockUtilService.getCurrentDay()).thenReturn(Weekday.SATURDAY)
+        `when`(mockUtilService.getDateFromToday(anyInt())).thenReturn("27/02")
+
+        val map = mapOf("MONDAY" to 10, "TUESDAY" to 50, "WEDNESDAY" to 30)
+        val result = chartService.buildChartData(mockContext, map)
+
+        val values = result.values.toList()
+        assertEquals(3, values.size)
+        assertTrue(values[0].first >= values[1].first)
+        assertTrue(values[1].first >= values[2].first)
+    }
+
+    // ========== buildChartDataWithOrder tests ==========
+
+    @Test
+    fun `buildChartDataWithOrder should return correct size`() {
+        val mockContext = Mockito.mock(Context::class.java)
+        val mockResources = Mockito.mock(Resources::class.java)
+        `when`(mockContext.resources).thenReturn(mockResources)
+        `when`(mockResources.getText(anyInt())).thenReturn("Now")
+        `when`(mockUtilService.getCurrentDay()).thenReturn(Weekday.THURSDAY)
+        `when`(mockUtilService.getDateFromToday(anyInt())).thenReturn("27/02")
+
+        val map = mapOf(
+            1 to Pair("FRIDAY", 10),
+            7 to Pair("THURSDAY", 40)
+        )
+        val result = chartService.buildChartDataWithOrder(mockContext, map)
+
+        assertEquals(2, result.size)
+    }
+
+    @Test
+    fun `buildChartDataWithOrder uses Now label for current day`() {
+        val mockContext = Mockito.mock(Context::class.java)
+        val mockResources = Mockito.mock(Resources::class.java)
+        `when`(mockContext.resources).thenReturn(mockResources)
+        `when`(mockResources.getText(anyInt())).thenReturn("Now")
+        `when`(mockUtilService.getCurrentDay()).thenReturn(Weekday.THURSDAY)
+        `when`(mockUtilService.getDateFromToday(anyInt())).thenReturn("27/02")
+
+        val map = mapOf(7 to Pair("THURSDAY", 40))
+        val result = chartService.buildChartDataWithOrder(mockContext, map)
+
+        assertEquals(1, result.size)
+        assertEquals(40f, result.values.first().first)
+        assertEquals("Now", result.values.first().second)
+    }
+
+    @Test
+    fun `buildChartDataWithOrder uses date label for non-current day`() {
+        val mockContext = Mockito.mock(Context::class.java)
+        val mockResources = Mockito.mock(Resources::class.java)
+        `when`(mockContext.resources).thenReturn(mockResources)
+        `when`(mockResources.getText(anyInt())).thenReturn("Now")
+        `when`(mockUtilService.getCurrentDay()).thenReturn(Weekday.THURSDAY)
+        `when`(mockUtilService.getDateFromToday(-6)).thenReturn("21/02")
+
+        val map = mapOf(1 to Pair("FRIDAY", 10))
+        val result = chartService.buildChartDataWithOrder(mockContext, map)
+
+        assertEquals(1, result.size)
+        assertEquals(10f, result.values.first().first)
+        assertEquals("21/02", result.values.first().second)
+    }
+
+    @Test
+    fun `buildChartDataWithOrder with empty map returns empty result`() {
+        val mockContext = Mockito.mock(Context::class.java)
+        `when`(mockUtilService.getCurrentDay()).thenReturn(Weekday.MONDAY)
+
+        val result = chartService.buildChartDataWithOrder(mockContext, emptyMap())
+
+        assertTrue(result.isEmpty())
+    }
+
+    @Test
+    fun `buildChartDataWithOrder sorts by key descending`() {
+        val mockContext = Mockito.mock(Context::class.java)
+        val mockResources = Mockito.mock(Resources::class.java)
+        `when`(mockContext.resources).thenReturn(mockResources)
+        `when`(mockResources.getText(anyInt())).thenReturn("Now")
+        `when`(mockUtilService.getCurrentDay()).thenReturn(Weekday.SATURDAY)
+        `when`(mockUtilService.getDateFromToday(anyInt())).thenReturn("27/02")
+
+        val map = mapOf(
+            1 to Pair("FRIDAY", 10),
+            3 to Pair("SUNDAY", 30),
+            7 to Pair("THURSDAY", 40)
+        )
+        val result = chartService.buildChartDataWithOrder(mockContext, map)
+
+        val keys = result.keys.toList()
+        assertEquals(3, keys.size)
+        // Should be sorted descending by key
+        assertTrue(keys[0] >= keys[1])
+        assertTrue(keys[1] >= keys[2])
     }
 }
 
